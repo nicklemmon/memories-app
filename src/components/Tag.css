@@ -1,0 +1,13 @@
+.Tag {
+  display: inline-flex;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  background-color: var(--white);
+  border: 1px solid var(--dark-gray);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-sm);
+}
+
+.Tag + .Tag {
+  margin-left: var(--spacing-sm);
+}

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700');
+@import '../../node_modules/reset-css/reset.css';
+
+:root {
+  --offset: var(--header-footer-height) * 2;
+}
+
+.Layout {
+  height: 100%;
+}
+
+.Layout-main {
+  justify-self: flex-start;
+  min-height: calc(100vh - var(--offset));
+}
+
+.Layout-footer {
+  justify-self: flex-end;
+}

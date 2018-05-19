@@ -1,0 +1,29 @@
+.Header {
+  position: relative; /* allows use of z-index and allows absolute positioning within */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  z-index: var(--z-index-xl);
+  width: 100%;
+  font-family: var(--font-family-primary);
+  height: var(--header-footer-height);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--purple);
+  border-bottom: 1px solid var(--dark-purple);
+  box-shadow: var(--box-shadow-sm);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.Header-brand {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.Header-nav {
+  justify-self: end;
+}

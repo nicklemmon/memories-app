@@ -1,0 +1,80 @@
+.Header-Nav {
+  position: relative;
+  z-index: var(--z-index-xl);
+}
+
+.HeaderNav-button {
+  float: right;
+  border: 0;
+  border-radius: var(--border-radius);
+  background: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color var(--anim-speed) var(--anim-easing);
+}
+
+.HeaderNav-button:hover,
+.HeaderNav-button:focus {
+  background-color: rgba(0, 0, 0, 0.125);
+}
+
+.HeaderNav-buttonIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.HeaderNav-list {
+  position: absolute;
+  top: calc(var(--spacing-xl) - var(--spacing-md));
+  right: var(--spacing-md);
+  width: calc(100% - var(--spacing-lg));
+  padding: var(--spacing-sm) 0;
+  background: var(--white);
+  box-shadow: var(--box-shadow-xl);
+  border-radius: var(--border-radius);
+  visibility: hidden;
+  opacity: 0;
+  transform-origin: top right;
+  transform: scaleY(0.75) scaleX(0.9) translateZ(0);
+  transition: transform var(--anim-speed) var(--anim-easing),
+              opacity var(--anim-speed) var(--anim-easing),
+              visibility var(--anim-speed) var(--anim-easing);
+}
+
+.HeaderNav-list.isOpen {
+  visibility: visible;
+  opacity: 1;
+  transform: scaleY(1) scaleX(1) translateZ(0);
+}
+
+@media (min-width: 736px) {
+  .HeaderNav-list {
+    width: 300px;
+  }
+}
+
+.HeaderNav-item {
+  display: flex;
+  padding: var(--spacing-md);
+  color: var(--purple);
+  text-decoration: none;
+  -webkit-tap-highlight-color: none;
+  outline-offset: -3px;
+  transition: background-color var(--anim-speed) var(--anim-easing);
+}
+
+.HeaderNav-item:hover,
+.HeaderNav-item:focus {
+  background-color: rgba(var(--purple), 0.1);
+}
+
+.HeaderNav-item:hover .HeaderNav-itemIcon,
+.HeaderNav-item:focus .HeaderNav-itemIcon {
+  opacity: 0.85;
+}
+
+.HeaderNav-itemIcon {
+  opacity: 0.5;
+  margin-right: var(--spacing-sm);
+  transition: opacity var(--anim-speed) var(--anim-easing);
+}

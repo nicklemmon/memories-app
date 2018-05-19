@@ -1,0 +1,20 @@
+.Footer {
+  padding: var(--section-padding);
+  display: flex;
+  align-items: center;
+  height: var(--header-footer-height);
+  background-color: var(--darker-gray);
+  color: var(--white);
+  font-family: var(--font-family-primary);
+}
+
+.Footer a {
+  color: var(--white);
+}
+
+@media (min-width: 736px) {
+  .Footer {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+  }
+}

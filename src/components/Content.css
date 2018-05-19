@@ -1,0 +1,25 @@
+.Content {
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--section-padding);
+}
+
+.Content--xs {
+  max-width: var(--breakpoint-xs);
+}
+
+.Content--sm {
+  max-width: var(--breakpoint-sm);
+}
+
+.Content--md {
+  max-width: var(--breakpoint-md);
+}
+
+.Content--lg {
+  max-width: var(--breakpoint-lg);
+}
+
+.Content--xl {
+  max-width: var(--breakpoing-xl);
+}

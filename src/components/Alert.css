@@ -1,0 +1,77 @@
+.Alert {
+  border: 2px solid var(--light-gray);
+  border-bottom: 2px solid var(--light-gray);
+  box-shadow: var(--box-shadow-sm);
+  color: var(--dark-gray);
+  display: grid;
+  grid-template-columns: 3rem auto;
+}
+
+.Alert + * {
+  margin-top: var(--spacing-sm);
+}
+
+.Alert:focus {
+  outline: 0;
+}
+
+.Alert-icon {
+  color: var(--white);
+  width: 1.75rem;
+  height: auto;
+  padding: 0.125rem;
+  border-radius: 50%;
+}
+
+/* Alert types */
+.Alert--error {
+  border-color: var(--error);
+}
+
+.Alert--error .Alert-icon {
+  background-color: var(--error);
+}
+
+.Alert--success {
+  border-color: var(--success);
+}
+
+.Alert--success .Alert-icon {
+  background-color: var(--success);
+}
+
+.Alert--attention {
+  border-color: var(--attention);
+}
+
+.Alert--attention .Alert-icon {
+  color: var(--attention);
+  border-radius: 0;
+}
+
+.Alert--info {
+  border-color: var(--info);
+}
+
+.Alert--info .Alert-icon {
+  background-color: var(--info);
+}
+
+.Alert-pre,
+.Alert-content {
+  padding: var(--spacing-md) var(--spacing-sm);
+}
+
+.Alert-pre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  line-height: 1.33;
+}

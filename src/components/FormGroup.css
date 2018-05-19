@@ -1,0 +1,32 @@
+* + .FormGroup {
+  margin-top: var(--spacing-xl);
+}
+
+.FormGroup + .FormGroup {
+  margin-top: var(--spacing-md);
+}
+
+.FormGroup-label {
+  display: block;
+  color: var(--dark-gray);
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.05rem;
+}
+
+.FormGroup-input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  background-color: var(--white);
+  border: 0;
+  border-bottom: 2px solid var(--purple);
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.125);
+  transition: border-color var(--anim-speed) var(--anim-easing),
+              transform var(--anim-speed) cubic-bezier(0.31,-0.85, 0.32, 2.04);
+}
+
+.FormGroup-input:focus {
+  transform: scale(1.0125);
+  outline: none;
+}

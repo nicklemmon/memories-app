@@ -1,0 +1,65 @@
+.Button {
+  position: relative; /* allows absolute positioning within */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  outline: none;
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  font-size: var(--font-size-md);
+  border-radius: var(--border-radius);
+  border: 1px solid currentColor;
+  box-shadow: var(--box-shadow-sm);
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+  transition: background-color var(--anim-speed) var(--anim-easing),
+              box-shadow var(--anim-speed) var(--anim-easing);
+}
+
+.Button:hover,
+.Button:focus {
+  box-shadow: 0 0.1rem 0.125rem rgba(0, 0, 0, 0.15);
+}
+
+.Button:focus {
+  outline-offset: -3px;
+}
+
+.Button + .Button {
+  margin: var(--spacing-md) 0 0 0;
+}
+
+@media (min-width: 480px) {
+  .Button {
+    width: auto;
+  }
+
+  .Button + .Button {
+    margin: 0 0 0 var(--spacing-md);
+  }
+}
+
+.Button--primary {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border-color: var(--dark-blue);
+}
+
+.Button--primary:hover {
+  background-color: var(--darker-blue); /* temporary until color functions can be figured out */
+}
+
+.Button--secondary {
+  background-color: var(--white);
+  color: var(--dark-blue);
+  border-color: var(--dark-blue);
+}
+
+.Button--secondary:hover {
+  background-color: var(--dark-white); /* temporary until color functions can be figured out */
+}
