@@ -23,8 +23,6 @@ class FormLogIn extends React.Component {
     console.log( 'submit!' )
   }
 
-
-
   render() {
     return (
       <FormWrapper
