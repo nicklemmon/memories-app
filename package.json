@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -28,5 +29,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2"
   }
 }

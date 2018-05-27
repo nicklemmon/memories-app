@@ -66,8 +66,6 @@ class FormAddMemory extends React.Component {
     let hasAlert
     let alertType
     let alertContent
-    
-    console.log( this.state.successAdd )
 
     if ( this.state.successAdd ) {
       hasAlert = true

@@ -9,6 +9,7 @@ const router = express.Router()
 const port = 3001
 
 const Memory = require( './src/model/memories.js' )
+const User = require( './src/model/users.js' )
 
 // DB config
 mongoose.connect( `mongodb://${process.env.REACT_APP_MLAB_USERNAME}:${process.env.REACT_APP_MLAB_PASSWORD}@${process.env.REACT_APP_MLAB_DB_ADDRESS}` )
@@ -50,7 +51,7 @@ router.route( '/memories' )
     memory.save( function( err ) {
       if ( err ) res.send( err )
 
-      res.json( { message: 'Comment successfully added!' } )
+      res.json( { message: 'Memory successfully added!' } )
     })
   })
 
@@ -65,6 +66,26 @@ router.route( '/memories/:id' )
     })
   })
 
+router.route( '/users' )
+  .get( function( req, res ) {
+    User.find( function( err, users ) {
+      if ( err ) res.send( err )
+
+      res.json( users )
+    })
+  })
+  .post( function( req, res ) {
+    user.email = req.body.email
+    user.password = req.body.password
+    user.signUpDate = req.body.signUpDate
+
+    memory.save( function( err ) {
+      if ( err ) res.send( err )
+
+      res.json( { message: 'User has been added' } )
+    })
+  })
+  
 // Use our router configuration when we call /api
 app.use( '/api', router )
 
