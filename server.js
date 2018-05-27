@@ -75,6 +75,7 @@ router.route( '/users' )
     })
   })
   .post( function( req, res ) {
+    user.name = req.body.name
     user.email = req.body.email
     user.password = req.body.password
     user.signUpDate = req.body.signUpDate
