@@ -10,6 +10,7 @@ import NotFoundPage from '../pages/404.jsx'
 import MemoriesPage from '../pages/memories.jsx'
 import AddMemoryPage from '../pages/addmemory.jsx'
 import LoginPage from '../pages/login.jsx'
+import SignupPage from '../pages/signup.jsx'
 
 import './DefaultLayout.css'
 
@@ -34,6 +35,8 @@ class DefaultLayout extends React.Component {
             <Route exact path='/' component={ IndexPage }/>
 
             <Route path='/memories' component={ MemoriesPage }/>
+
+            <Route path='/signup' component={ SignupPage }/>
 
             <Route path='/login' component={ LoginPage }/>
 
