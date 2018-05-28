@@ -20,13 +20,12 @@
   font-size: var(--font-size-md);
   background-color: var(--white);
   border: 0;
-  border-bottom: 2px solid var(--purple);
+  border-bottom: 2px solid var(--gray);
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.125);
-  transition: border-color var(--anim-speed) var(--anim-easing),
-              transform var(--anim-speed) cubic-bezier(0.31,-0.85, 0.32, 2.04);
+  transition: border-color var(--anim-speed) var(--anim-easing);
 }
 
 .FormGroup-input:focus {
-  transform: scale(1.0125);
+  border-color: var(--purple);
   outline: none;
 }
