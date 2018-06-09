@@ -51,7 +51,7 @@
 }
 
 .Button--primary:hover {
-  background-color: var(--darker-blue); /* temporary until color functions can be figured out */
+  background-color: var(--darker-blue);
 }
 
 .Button--secondary {
@@ -61,5 +61,5 @@
 }
 
 .Button--secondary:hover {
-  background-color: var(--dark-white); /* temporary until color functions can be figured out */
+  background-color: var(--dark-white);
 }
