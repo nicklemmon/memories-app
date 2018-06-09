@@ -12,14 +12,6 @@
   max-width: var(--breakpoint-sm);
 }
 
-.Modal.is-open {
-  display: block;
-}
-
-.Modal.is-closed {
-  display: none;
-}
-
 .Modal-heading {
   font-size: var(--font-size-lg);
   font-weight: 700;
@@ -53,13 +45,4 @@
   height: 200%; /* HACK - fixes overlay height defect */
   background-color: rgba(0, 0, 0, 0.75);
   z-index: var(--z-index-xl);
-}
-
-.Modal-overlay.is-visible {
-  display: block;
-  pointer-events: none;
-}
-
-.Modal-overlay.is-invisible {
-  display: none;
 }

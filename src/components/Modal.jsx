@@ -43,8 +43,6 @@ class Modal extends React.Component {
     const id = this.props.id
     const heading = this.props.heading
     const isOpen = this.state.isOpen
-    const classNames = `Modal ${ isOpen ? 'is-open' : 'is-closed'}`
-    const overlayClassNames = `Modal-overlay ${ isOpen ? 'is-visible' : 'is-invisible'}`
     
     if ( isOpen ) {
       this.preventPageScroll()
@@ -52,24 +50,27 @@ class Modal extends React.Component {
       this.enablePageScroll()
     }
 
-    console.log( `Modal isOpen --> ${isOpen}`)
     return (
       <React.Fragment>
-        <div className={ classNames } id={ id } aria-labelledby={`${id}-heading`}>
-          <div className='Modal-content'>
-            <div className='Modal-heading' id={`${id}-heading`}>{ heading }</div>
+        { isOpen &&
+          <div className='Modal' id={ id } aria-labelledby={`${id}-heading`}>
+            <div className='Modal-content'>
+              <div className='Modal-heading' id={`${id}-heading`}>{ heading }</div>
 
-            { this.props.children }
+              { this.props.children }
 
-            <button className='Modal-close' aria-label='Close dialog' onClick={ this.close }>
-              <span aria-hidden='true'>
-                <FaClose/>
-              </span>
-            </button>
+              <button className='Modal-close' aria-label='Close dialog' onClick={ this.close }>
+                <span aria-hidden='true'>
+                  <FaClose/>
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div className={ overlayClassNames }/>
+        }
+        
+        { isOpen &&
+          <div className='Modal-overlay'/>
+        }
       </React.Fragment>
     )
   }
