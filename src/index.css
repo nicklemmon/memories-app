@@ -53,11 +53,13 @@
   --breakpoint-xl: 1690px;
   
   /* Z-index */
+  --z-index-xxs: -15;
   --z-index-xs: -10;
   --z-index-sm: -5;
   --z-index-md: 0;
   --z-index-lg: 5;
   --z-index-xl: 10;
+  --z-index-xxl: 15;
   
   /* Box-shadow */
   --box-shadow-sm: 0 0.25rem 0.5rem -0.25rem rgba(0, 0, 0, 0.33);

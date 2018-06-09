@@ -75,12 +75,14 @@ router.route( '/users' )
     })
   })
   .post( function( req, res ) {
+    const user = new User()
+
     user.name = req.body.name
     user.email = req.body.email
     user.password = req.body.password
     user.signUpDate = req.body.signUpDate
 
-    memory.save( function( err ) {
+    user.save( function( err ) {
       if ( err ) res.send( err )
 
       res.json( { message: 'User has been added' } )

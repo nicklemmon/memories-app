@@ -74,20 +74,15 @@ class FormSignup extends React.Component {
 
     if ( this.state.successMsg ) {
       alertType = 'success'
-      alertContent = 'Success! You are registered.'
-    }
-
-    if ( this.state.errorMsg ) {
-      alertType = 'error'
-      alertContent = 'Something went wrong :(. Try again.'
+      alertContent = 'Success! User added.'
     }
 
     return(
       <FormWrapper
         handleSubmit={ this.handleSubmit }
-        hasAlert={ this.state.hasAlert }
-        alertType={ this.state.alertType }
-        alertContent={ this.state.alertContent }
+        hasAlert={ hasAlert }
+        alertType={ alertType }
+        alertContent={ alertContent }
       >
         <FormGroup
           label='Name'
