@@ -5,10 +5,6 @@ import PageHeading from '../components/PageHeading.jsx'
 import FormAddMemory from '../components/FormAddMemory.jsx'
 
 class AddMemoryPage extends React.Component {
-  constructor( props ) {
-    super( props )
-  }
-
   render() {
     return (
       <div>

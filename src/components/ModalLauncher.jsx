@@ -48,16 +48,12 @@ class ModalButton extends React.Component {
     const primaryButtonCloses = this.props.primaryButtonCloses
 
     if ( primaryButtonCloses ) this.close()
-
-    this.props.primaryButtonOnClick
   }
   
   secondaryButtonHandleClick( e ) {
     const secondaryButtonCloses = this.props.secondaryButtonCloses
 
     if ( secondaryButtonCloses ) this.close()
-
-    this.props.secondaryButtonOnClick
   }
 
   render() {
