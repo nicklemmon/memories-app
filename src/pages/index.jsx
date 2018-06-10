@@ -18,6 +18,14 @@ const IndexPage = () => (
         alignment='center'
       />
 
+      <ModalLauncher
+        launcherContent={ <Button role='presentation' type='primary' content='Herro' /> }
+        id='demo'
+        heading='A thingy opened!'
+      >
+        <p>Herro.</p>
+      </ModalLauncher>
+
       <MemoryGrid/>
     </Content>
   </div>

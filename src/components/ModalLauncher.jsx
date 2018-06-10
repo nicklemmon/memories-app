@@ -61,6 +61,7 @@ class ModalButton extends React.Component {
   }
 
   render() {
+    const launcherContent = this.props.launcherContent
     const id = this.props.id
     const heading = this.props.heading
     const hasCTAs = this.props.hasCTAs
@@ -73,7 +74,14 @@ class ModalButton extends React.Component {
 
     return (
       <React.Fragment>
-        <button onClick={ this.open }>Open Modal</button>
+        <button
+          className='Modal-button'
+          aria-modal='dialog'
+          title='Opens a dialog'
+          onClick={ this.open }
+        >
+          { launcherContent }
+        </button>
 
         { isOpen &&
           <Modal

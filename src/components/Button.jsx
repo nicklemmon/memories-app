@@ -11,6 +11,8 @@ class Button extends React.Component {
     const content = this.props.content
     const fullWidth = this.props.fullWidth
     const styles = { width: fullWidth ? '100%' : '' }
+    const role = this.props.role
+    const tabIndex = this.props.tabIndex
 
     return (
       <React.Fragment>
@@ -19,6 +21,8 @@ class Button extends React.Component {
             className={ classNames } 
             style={ styles }
             to={ linkTo }
+            role={ role }
+            tabIndex={ tabIndex }
           >
             { content }
           </NavLink>
@@ -27,6 +31,8 @@ class Button extends React.Component {
             className={ classNames } 
             style={ styles }
             onClick={ this.props.onClick }
+            role={ role }
+            tabIndex={ tabIndex }
           >
             { content }
           </button>

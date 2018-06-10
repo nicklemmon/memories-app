@@ -12,6 +12,12 @@
   max-width: var(--breakpoint-sm);
 }
 
+.Modal-button {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
 .Modal-heading {
   font-size: var(--font-size-lg);
   font-weight: 700;
