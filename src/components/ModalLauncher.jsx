@@ -61,7 +61,7 @@ class ModalButton extends React.Component {
   }
 
   render() {
-    const launcherContent = this.props.launcherContent
+    const content = this.props.content
     const id = this.props.id
     const heading = this.props.heading
     const hasCTAs = this.props.hasCTAs
@@ -80,7 +80,7 @@ class ModalButton extends React.Component {
           title='Opens a dialog'
           onClick={ this.open }
         >
-          { launcherContent }
+          { content }
         </button>
 
         { isOpen &&
