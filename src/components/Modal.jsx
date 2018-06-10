@@ -16,7 +16,6 @@ class Modal extends React.Component {
   render() {
     const id = this.props.id
     const heading = this.props.heading
-    const modalRef = this.props.modalRef
 
     return (
       <div className='Modal' id={ id } aria-labelledby={ `${id}-heading` } tabIndex='-1' ref={ this.modal }>
