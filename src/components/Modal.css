@@ -1,6 +1,6 @@
 .Modal {
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* https://stackoverflow.com/questions/38675321/how-to-make-modal-in-the-center-of-screen-due-to-absolute-position */
