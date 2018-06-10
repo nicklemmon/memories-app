@@ -5,10 +5,6 @@ import PageHeading from '../components/PageHeading.jsx'
 import FormSignup from '../components/FormSignup.jsx'
 
 class SignupPage extends React.Component {
-  constructor( props ) {
-    super( props )
-  }
-
   render() {
     return (
       <div>

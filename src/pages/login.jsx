@@ -5,10 +5,6 @@ import PageHeading from '../components/PageHeading.jsx'
 import FormLogIn from '../components/FormLogIn.jsx'
 
 class LoginPage extends React.Component {
-  constructor( props ) {
-    super( props )
-  }
-
   render() {
     return (
       <div>
