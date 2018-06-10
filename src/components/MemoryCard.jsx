@@ -3,7 +3,6 @@ import FaTrash from 'react-icons/lib/fa/trash'
 
 import Card from './Card.jsx'
 import Tag from './Tag.jsx'
-import Modal from './Modal.jsx'
 import User from '../data/user.json'
 
 import './MemoryCard.css'
