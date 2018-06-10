@@ -38,33 +38,37 @@ class Alert extends React.Component {
     const classNames = `Alert Alert--${type} ${this.props.classNames}`
 
     return (
-      <div 
-        className={ classNames } 
-        role='alert' 
-        tabIndex='-1'
-      >
-        <div className='Alert-pre'>
-          { type === 'error' &&
-            <FaExclamationCircle className='Alert-icon'/>
-          }
+      <React.Fragment>
+        { !isHidden &&
+          <div 
+            className={ classNames } 
+            role='alert' 
+            tabIndex='-1'
+          >
+            <div className='Alert-pre'>
+              { type === 'error' &&
+                <FaExclamationCircle className='Alert-icon'/>
+              }
 
-          { type === 'success' &&
-            <FaCheckCircle className='Alert-icon'/>
-          }
+              { type === 'success' &&
+                <FaCheckCircle className='Alert-icon'/>
+              }
 
-          { type === 'attention' &&
-            <FaExclamationTriangle className='Alert-icon'/>
-          }
+              { type === 'attention' &&
+                <FaExclamationTriangle className='Alert-icon'/>
+              }
 
-          { type === 'info' &&
-            <FaInfoCircle className='Alert-icon'/>
-          }
-        </div>
+              { type === 'info' &&
+                <FaInfoCircle className='Alert-icon'/>
+              }
+            </div>
 
-        <div className='Alert-content'>
-          { content }
-        </div>
-      </div>
+            <div className='Alert-content'>
+              { content }
+            </div>
+          </div>
+        }
+     </React.Fragment>
     )
   }
 }
