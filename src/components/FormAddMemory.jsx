@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-import Alert from '../components/Alert.jsx'
 import FormWrapper from '../components/FormWrapper.jsx'
 import FormGroup from '../components/FormGroup.jsx'
 import ButtonWrapper from '../components/ButtonWrapper.jsx'
