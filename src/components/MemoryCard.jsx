@@ -3,6 +3,7 @@ import FaTrash from 'react-icons/lib/fa/trash'
 
 import Card from './Card.jsx'
 import Tag from './Tag.jsx'
+import ModalLauncher from './ModalLauncher.jsx'
 import User from '../data/user.json'
 
 import './MemoryCard.css'
@@ -48,12 +49,27 @@ class MemoryCard extends React.Component {
 
 
         { User.isLoggedIn === true &&
-          <button 
-            className='MemoryCard-delete'
-            onClick={ handleDelete }
+          // <button 
+          //   className='MemoryCard-delete'
+          //   onClick={ handleDelete }
+          // >
+          //   <FaTrash className='MemoryCard-trash'/>
+          // </button>
+
+          <ModalLauncher
+            classNames='MemoryCard-delete'
+            content={ <FaTrash className='MemoryCard-trash'/> }
+            id='delete-memory'
+            heading={ `Delete "${title}"?` }
+            hasCTAs={ true }
+            primaryButtonContent='Delete'
+            primaryButtonOnClick={ handleDelete }
+            primaryButtonCloses={ true }
+            secondaryButtonContent='Cancel'
+            secondaryButtonCloses={ true }
           >
-            <FaTrash className='MemoryCard-trash'/>
-          </button>
+            <p>Are you sure you want to delete this memory?</p>
+          </ModalLauncher>
         }
       </Card>
     )

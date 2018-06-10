@@ -46,17 +46,25 @@ class ModalButton extends React.Component {
 
   primaryButtonHandleClick( e ) {
     const primaryButtonCloses = this.props.primaryButtonCloses
+    const primaryButtonOnClick = this.props.primaryButtonOnClick
 
     if ( primaryButtonCloses ) this.close()
+
+    if ( primaryButtonOnClick ) primaryButtonOnClick.call()
   }
   
   secondaryButtonHandleClick( e ) {
     const secondaryButtonCloses = this.props.secondaryButtonCloses
+    const secondaryButtonOnClick = this.props.secondaryButtonOnClick
 
     if ( secondaryButtonCloses ) this.close()
+
+    if ( secondaryButtonOnClick ) secondaryButtonOnClick.call()
+    
   }
 
   render() {
+    const classNames = `Modal-button ${this.props.classNames}`
     const content = this.props.content
     const id = this.props.id
     const heading = this.props.heading
@@ -71,7 +79,7 @@ class ModalButton extends React.Component {
     return (
       <React.Fragment>
         <button
-          className='Modal-button'
+          className={ classNames }
           aria-modal='dialog'
           title='Opens a dialog'
           onClick={ this.open }
