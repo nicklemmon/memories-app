@@ -4,8 +4,6 @@ import Hero from '../components/Hero.jsx'
 import Content from '../components/Content.jsx'
 import Heading from '../components/Heading.jsx'
 import MemoryGrid from '../components/MemoryGrid.jsx'
-import ModalLauncher from '../components/ModalLauncher'
-import Button from '../components/Button.jsx'
 
 const IndexPage = () => (
   <div>
