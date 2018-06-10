@@ -18,18 +18,6 @@ const IndexPage = () => (
         alignment='center'
       />
 
-      <ModalLauncher
-        id='boo'
-        heading='Herro'
-        hasCTAs={ true }
-        primaryButtonContent='Continue'
-        primaryButtonCloses={ true }
-        secondaryButtonContent='Cancel'
-        secondaryButtonCloses={ true }
-      >
-        <p>Boo!</p>
-      </ModalLauncher>
-
       <MemoryGrid/>
     </Content>
   </div>
