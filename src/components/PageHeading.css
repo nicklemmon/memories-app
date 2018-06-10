@@ -5,6 +5,10 @@
   color: var(--white);
 }
 
+.PageHeading:focus {
+  outline: none; /* focusing element for screen readers only - no need to show visual indicator */
+}
+
 .PageHeading-heading {
   position: relative; /* allows use of z-index */
   z-index: var(--z-index-lg);

@@ -6,11 +6,21 @@ import backgroundImage from '../images/cityscape.jpg'
 import './PageHeading.css'
 
 class PageHeading extends React.Component {
+  constructor( props ) {
+    super( props )
+
+    this.pageheading = React.createRef()
+  }
+
+  componentDidMount() {
+    this.pageheading.current.focus()
+  }
+
   render() {
     const content = this.props.content
 
     return (
-      <div className='PageHeading'>
+      <div className='PageHeading' tabIndex='-1' ref={ this.pageheading }>
         <Heading
           classNames='PageHeading-heading'
           content={ content }
