@@ -13,7 +13,7 @@ class ModalButton extends React.Component {
       isOpen: false
     }
 
-    this.Modal = React.createRef()
+    this.modalElement = React.createRef()
 
     this.open = this.open.bind( this )
     this.close = this.close.bind( this )
@@ -87,6 +87,7 @@ class ModalButton extends React.Component {
           <Modal
             id={ id }
             heading={ heading }
+            modalRef={ this.modalElement }
           >
             { this.props.children }
 
