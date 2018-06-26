@@ -11,12 +11,18 @@ class Alert extends React.Component {
   constructor( props ) {
     super( props )
 
+    this.alertContent = React.createRef()
+
     this.state = {
       isHidden: false
     }
 
     this.show = this.show.bind( this )
     this.hide = this.hide.bind( this )
+  }
+
+  componentDidMount() {
+    this.alertContent.current.focus()
   }
 
   show() {
@@ -63,7 +69,7 @@ class Alert extends React.Component {
               }
             </div>
 
-            <div className='Alert-content'>
+            <div className='Alert-content' ref={ this.alertContent } tabIndex='-1'>
               { content }
             </div>
           </div>

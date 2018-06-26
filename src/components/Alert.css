@@ -11,10 +11,6 @@
   margin-top: var(--spacing-sm);
 }
 
-.Alert:focus {
-  outline: 0;
-}
-
 .Alert-icon {
   color: var(--white);
   width: 1.75rem;
@@ -74,4 +70,8 @@
   justify-content: center;
   font-weight: 700;
   line-height: 1.33;
+}
+
+.Alert-content:focus {
+  outline: 0; /* disable default focus styles as focusing is purely for sceen readers */
 }
