@@ -7,7 +7,7 @@ import FaCloud from 'react-icons/lib/fa/cloud'
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle'
 import enhanceWithClickOutside from 'react-click-outside'
 
-import User from '../data/user.json'
+import fakeAuth from '../functions/fakeAuth.js'
 
 import './HeaderNav.css'
 
@@ -68,16 +68,16 @@ class HeaderNav extends React.Component {
           role='navigation' 
           aria-label='site'
         >
-          { User.isLoggedIn === false &&
+          { !fakeAuth.isAuthenticated &&
             <NavLink 
-            to='login' 
+            to='signin' 
             className='HeaderNav-item'
             onKeyUp={ this.handleKeyup }
             onClick={ this.toggle }
             >
               <FaSignIn className='HeaderNav-itemIcon'/>
 
-              Log In
+              Sign In
             </NavLink>
           }
           
@@ -92,30 +92,30 @@ class HeaderNav extends React.Component {
             View Memories
           </NavLink>
 
-          { User.isLoggedIn === true &&
-            <div>
-              <NavLink 
-                to='addmemory' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaPlusCircle className='HeaderNav-itemIcon'/>
+          { fakeAuth.isAuthenticated &&
+            <NavLink 
+              to='addmemory' 
+              className='HeaderNav-item'
+              onKeyUp={ this.handleKeyup }
+              onClick={ this.toggle }
+            >
+              <FaPlusCircle className='HeaderNav-itemIcon'/>
 
-                Add Memory
-              </NavLink>
-            
-              <NavLink 
-                to='logout' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaSignOut className='HeaderNav-itemIcon'/>
+              Add Memory
+            </NavLink>
+          }
 
-                Log Out
-              </NavLink>
-            </div>
+          { fakeAuth.isAuthenticated &&
+            <NavLink 
+              to='logout' 
+              className='HeaderNav-item'
+              onKeyUp={ this.handleKeyup }
+              onClick={ this.toggle }
+            >
+              <FaSignOut className='HeaderNav-itemIcon'/>
+
+              Sign Out
+            </NavLink>
           }
         </div>
       </div>
