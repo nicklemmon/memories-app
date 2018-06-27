@@ -2,20 +2,20 @@ import React from 'react'
 
 import Content from '../components/Content.jsx'
 import PageHeading from '../components/PageHeading.jsx'
-import FormLogIn from '../components/FormLogIn.jsx'
+import FormSignin from '../components/FormSignin'
 
-class LoginPage extends React.Component {
+class SigninPage extends React.Component {
   render() {
     return (
       <div>
-        <PageHeading content='Log In'/>
+        <PageHeading content='Sign In'/>
 
         <Content>
-          <FormLogIn/>
+          <FormSignin/>
         </Content>
       </div>
     )
   }
 }
 
-export default LoginPage
+export default SigninPage
