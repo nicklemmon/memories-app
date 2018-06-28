@@ -21,8 +21,8 @@ class Hero extends React.Component {
           <ButtonWrapper classNames='Hero-buttonWrapper'>
             <Button 
               type='primary' 
-              content='Sign In'
-              linkTo='/signin'
+              content='Log In'
+              linkTo='/login'
             />
 
             <Button

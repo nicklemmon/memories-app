@@ -4,7 +4,7 @@ import FaTrash from 'react-icons/lib/fa/trash'
 import Card from './Card.jsx'
 import Tag from './Tag.jsx'
 import ModalLauncher from './ModalLauncher.jsx'
-import fakeAuth from '../functions/fakeAuth.js'
+import User from '../data/user.json'
 
 import './MemoryCard.css'
 
@@ -47,7 +47,15 @@ class MemoryCard extends React.Component {
       >
         <p>{ summary }</p>
 
-        { fakeAuth.isAuthenticated &&
+
+        { User.isLoggedIn === true &&
+          // <button 
+          //   className='MemoryCard-delete'
+          //   onClick={ handleDelete }
+          // >
+          //   <FaTrash className='MemoryCard-trash'/>
+          // </button>
+
           <ModalLauncher
             classNames='MemoryCard-delete'
             content={ <FaTrash className='MemoryCard-trash'/> }
