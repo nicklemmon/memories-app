@@ -6,7 +6,7 @@ import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Button from './Button.jsx'
 
-class FormLogIn extends React.Component {
+class FormLogin extends React.Component {
   constructor( props ) {
     super( props )
 
@@ -54,4 +54,4 @@ class FormLogIn extends React.Component {
   }
 }
 
-export default FormLogIn
+export default FormLogin

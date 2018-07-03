@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import Loading from '../components/Loading.jsx'
 
 import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
@@ -38,9 +39,15 @@ class DefaultLayout extends React.Component {
 
             <Route path='/signup' component={ SignupPage }/>
 
+            <Route path='/addmemory' component={ AddMemoryPage }/>
+
             <Route path='/login' component={ LoginPage }/>
 
-            <Route path='/addmemory' component={ AddMemoryPage }/>
+            <Route path="/callback" render={ ( props ) => {
+              // handleAuthentication( props );
+
+              return <Loading { ...props } /> 
+            }}/>
 
             <Route path='*' component={ NotFoundPage }/>
           </Switch>
