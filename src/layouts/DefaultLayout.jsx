@@ -10,13 +10,14 @@ import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
 import MemoriesPage from '../pages/memories.jsx'
 import AddMemoryPage from '../pages/addmemory.jsx'
-import LoginPage from '../pages/login.jsx'
 import SignupPage from '../pages/signup.jsx'
 
 import './DefaultLayout.css'
 
 class DefaultLayout extends React.Component {
   render() {
+    console.log( 'props on the DefaultLayout!', this.props.auth )
+
     return(
       <div className='Layout'>
         <Helmet
@@ -33,19 +34,19 @@ class DefaultLayout extends React.Component {
           { this.props.children }
 
           <Switch>
-            <Route exact path='/' component={ IndexPage }/>
+            <Route exact path='/' render = { () => {
+              return <IndexPage { ...this.props } />
+            }}/>
 
-            <Route path='/memories' component={ MemoriesPage }/>
+            <Route path='/memories' component={ MemoriesPage } { ...this.props }/>
 
-            <Route path='/signup' component={ SignupPage }/>
+            <Route path='/signup' component={ SignupPage } { ...this.props }/>
 
-            <Route path='/addmemory' component={ AddMemoryPage }/>
+            <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
 
-            <Route path='/login' component={ LoginPage }/>
+            {/* <Route path='/login' component={ LoginPage } { ...this.props }/> */}
 
             <Route path="/callback" render={ ( props ) => {
-              // handleAuthentication( props );
-
               return <Loading { ...props } /> 
             }}/>
 

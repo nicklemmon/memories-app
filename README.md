@@ -6,13 +6,13 @@ REACT_APP_MLAB_USERNAME = <someusername>
 REACT_APP_MLAB_PASSWORD = <somepassword>
 REACT_APP_MLAB_DB_ADDRESS = <gotosomedatabaseaddress>
 ```
-2. Create an `.auth0-variables.js` file inside `src/functions`
+2. Create an `.auth0.config.js` file inside `src/functions`
 ```javascript
-export const AUTH_CONFIG = {
-  domain: '<auth0-domain>',
-  clientId: '<client-id',
+export const AuthConfig = {
+  domain: 'nicklemmon.auth0.com',
+  clientId: 'rQ8hU5wWbRjyA1UUVB0gGt7yOz35SKfH',
   callbackUrl: 'http://localhost:3000/callback',
-  dbConnectionName: '<db-name>',
+  dbConnectionName: 'Username-Password-Authentication',
 }
 ```
 3. Run `npm install`,
