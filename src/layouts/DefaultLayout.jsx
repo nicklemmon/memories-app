@@ -10,14 +10,11 @@ import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
 import MemoriesPage from '../pages/memories.jsx'
 import AddMemoryPage from '../pages/addmemory.jsx'
-import SignupPage from '../pages/signup.jsx'
 
 import './DefaultLayout.css'
 
 class DefaultLayout extends React.Component {
   render() {
-    console.log( 'props on the DefaultLayout!', this.props.auth )
-
     return(
       <div className='Layout'>
         <Helmet
@@ -40,10 +37,10 @@ class DefaultLayout extends React.Component {
 
             <Route path='/memories' component={ MemoriesPage } { ...this.props }/>
 
-            <Route path='/signup' component={ SignupPage } { ...this.props }/>
-
-            <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
-
+            { this.props.auth.isAuthenticated() &&
+              <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
+            }
+            
             <Route path="/callback" render={ ( props ) => {
               return <Loading { ...props } /> 
             }}/>

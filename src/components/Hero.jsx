@@ -11,8 +11,6 @@ import './Hero.css'
 
 class Hero extends React.Component {
   render() {
-    console.log( 'props on the Hero!', this.props.auth )
-
     return (
       <div className='Hero'>
         <div className='Hero-wrapper'>
@@ -23,11 +21,13 @@ class Hero extends React.Component {
           />
 
           <ButtonWrapper classNames='Hero-buttonWrapper'>
-            <Button 
-              type='primary' 
-              content='Log In'
-              onClick={ this.props.auth.login }
-            />
+            { !this.props.auth.isAuthenticated() &&
+              <Button 
+                type='primary' 
+                content='Log In'
+                onClick={ this.props.auth.login }
+              />
+            }
 
             <Button
               type='secondary'
