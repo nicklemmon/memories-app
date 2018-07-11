@@ -44,8 +44,6 @@ class DefaultLayout extends React.Component {
 
             <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
 
-            {/* <Route path='/login' component={ LoginPage } { ...this.props }/> */}
-
             <Route path="/callback" render={ ( props ) => {
               return <Loading { ...props } /> 
             }}/>
