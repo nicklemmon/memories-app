@@ -57,6 +57,7 @@
   display: flex;
   padding: var(--spacing-md);
   color: var(--purple);
+  cursor: pointer;
   text-decoration: none;
   -webkit-tap-highlight-color: none;
   outline-offset: -3px;
