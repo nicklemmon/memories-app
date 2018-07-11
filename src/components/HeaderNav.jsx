@@ -68,7 +68,7 @@ class HeaderNav extends React.Component {
           role='navigation' 
           aria-label='site'
         >
-          { User.isLoggedIn === false &&
+          { !this.props.auth.isAuthenticated() &&
             <NavLink 
             to='login' 
             className='HeaderNav-item'
@@ -92,30 +92,30 @@ class HeaderNav extends React.Component {
             View Memories
           </NavLink>
 
-          { User.isLoggedIn === true &&
-            <div>
-              <NavLink 
-                to='addmemory' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaPlusCircle className='HeaderNav-itemIcon'/>
+          { this.props.auth.isAuthenticated() &&
+            <NavLink 
+              to='addmemory' 
+              className='HeaderNav-item'
+              onKeyUp={ this.handleKeyup }
+              onClick={ this.toggle }
+            >
+              <FaPlusCircle className='HeaderNav-itemIcon'/>
 
-                Add Memory
-              </NavLink>
+              Add Memory
+            </NavLink>
+          }
             
-              <NavLink 
-                to='logout' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaSignOut className='HeaderNav-itemIcon'/>
+          { this.props.auth.isAuthenticated() &&
+            <NavLink 
+              to='logout' 
+              className='HeaderNav-item'
+              onKeyUp={ this.handleKeyup }
+              onClick={ this.toggle }
+            >
+              <FaSignOut className='HeaderNav-itemIcon'/>
 
-                Log Out
-              </NavLink>
-            </div>
+              Log Out
+            </NavLink>
           }
         </div>
       </div>

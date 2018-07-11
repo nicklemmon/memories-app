@@ -79,6 +79,7 @@ class MemoryGrid extends React.Component {
                   date={ memories[memory].date }
                   tags={ memories[memory].tags }
                   handleDelete={ () => this.deleteMemory( memories[memory]._id ) }
+                  { ...this.props }
                 />
               )
             } )

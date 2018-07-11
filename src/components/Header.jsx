@@ -20,7 +20,7 @@ class Header extends React.Component {
           Eva's Memories
         </NavLink>
 
-        <HeaderNav className='Header-nav'/>
+        <HeaderNav className='Header-nav' { ...this.props }/>
       </header>
     )
   }

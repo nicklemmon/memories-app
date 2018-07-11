@@ -18,7 +18,7 @@ class IndexPage extends React.Component {
             alignment='center'
           />
 
-          <MemoryGrid/>
+          <MemoryGrid { ...this.props }/>
         </Content>
       </div>
     )

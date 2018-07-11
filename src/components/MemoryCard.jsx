@@ -28,6 +28,8 @@ class MemoryCard extends React.Component {
     let year = date.getFullYear()
     let formattedDate = `${month}/${day}/${year}`
 
+    console.log( this.props.auth.isAuthenticated() )
+
     return (
       <Card
         classNames='MemoryCard'
@@ -46,16 +48,8 @@ class MemoryCard extends React.Component {
         }
       >
         <p>{ summary }</p>
-
-
-        { User.isLoggedIn === true &&
-          // <button 
-          //   className='MemoryCard-delete'
-          //   onClick={ handleDelete }
-          // >
-          //   <FaTrash className='MemoryCard-trash'/>
-          // </button>
-
+        
+        { this.props.auth.isAuthenticated() &&
           <ModalLauncher
             classNames='MemoryCard-delete'
             content={ <FaTrash className='MemoryCard-trash'/> }

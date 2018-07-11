@@ -11,7 +11,7 @@ class MemoriesPage extends React.Component {
         <PageHeading content='Memories'/>
 
         <Content>
-          <MemoryGrid/>
+          <MemoryGrid { ...this.props }/>
         </Content>
       </div>
     )

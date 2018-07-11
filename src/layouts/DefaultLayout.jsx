@@ -10,6 +10,7 @@ import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
 import MemoriesPage from '../pages/memories.jsx'
 import AddMemoryPage from '../pages/addmemory.jsx'
+import CallbackPage from '../pages/callback.jsx'
 
 import './DefaultLayout.css'
 
@@ -25,7 +26,7 @@ class DefaultLayout extends React.Component {
           ]}
         />
         
-        <Header classNames='Layout-header'/>
+        <Header classNames='Layout-header' { ...this.props } />
 
         <main className='Layout-main'>
           { this.props.children }
@@ -35,14 +36,16 @@ class DefaultLayout extends React.Component {
               return <IndexPage { ...this.props } />
             }}/>
 
-            <Route path='/memories' component={ MemoriesPage } { ...this.props }/>
+            <Route path='/memories' render={ () => {
+              return <MemoriesPage { ...this.props } />
+            }}/>
 
             { this.props.auth.isAuthenticated() &&
               <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
             }
             
-            <Route path="/callback" render={ ( props ) => {
-              return <Loading { ...props } /> 
+            <Route path='/callback' render={ ( props ) => {
+              return <CallbackPage { ...props } /> 
             }}/>
 
             <Route path='*' component={ NotFoundPage }/>
