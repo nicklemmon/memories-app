@@ -29,6 +29,14 @@ class Hero extends React.Component {
               />
             }
 
+            { this.props.auth.isAuthenticated() &&
+              <Button
+                type='primary'
+                content='Add Memory'
+                linkTo='/addmemory'
+              />
+            }
+
             <Button
               type='secondary'
               content='View Memories'
