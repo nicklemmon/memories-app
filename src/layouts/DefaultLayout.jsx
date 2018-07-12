@@ -44,9 +44,11 @@ class DefaultLayout extends React.Component {
               <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
             }
             
-            <Route path='/callback' render={ ( props ) => {
-              return <CallbackPage { ...props } /> 
-            }}/>
+            { this.props.auth.isAuthenticated() &&
+              <Route path='/callback' render={ ( props ) => {
+                return <CallbackPage { ...props } /> 
+              }}/>
+            }
 
             <Route path='*' component={ NotFoundPage }/>
           </Switch>
