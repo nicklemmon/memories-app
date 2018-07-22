@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import MemoryCard from '../components/MemoryCard.jsx'
 import Alert from '../components/Alert.jsx'
+import Loading from '../components/Loading.jsx'
 
 import './MemoryGrid.css'
 
@@ -14,7 +15,8 @@ class MemoryGrid extends React.Component {
       memoriesURL: 'http://localhost:3001/api/memories',
       memories: [],
       successAdd: false,
-      successDelete: false
+      successDelete: false,
+      loading: false
     }
 
     this.getMemories = this.getMemories.bind( this )
@@ -28,10 +30,15 @@ class MemoryGrid extends React.Component {
   }
 
   updateMemories() {
-    this.getMemories()
-      .then( res => {
-        this.setState( { memories: res.data } )
-      })
+    this.setState( { loading: true }, () => {
+      this.getMemories()
+        .then( res => {
+          this.setState( {
+            loading: false,
+            memories: res.data,
+          })
+        })
+    })
   }
 
   deleteMemory( memoryID ) {
@@ -51,10 +58,11 @@ class MemoryGrid extends React.Component {
 
   render() {
     const memories = this.state.memories
+    const loading = this.state.loading
 
     return (
       <div>
-        { memories.length === 0 &&
+        { ( memories.length === 0 && !loading ) &&
           <Alert
             type="attention"
             content="Sorry! No memories available. Please try again later."
@@ -68,23 +76,25 @@ class MemoryGrid extends React.Component {
           />
         }
         
-        <div className='MemoryGrid'>
-          {
-            Object.keys( memories ).map( memory => {
-              return (
-                <MemoryCard 
-                  key={ memories[memory]._id }
-                  title={ memories[memory].title }
-                  summary={ memories[memory].summary }
-                  date={ memories[memory].date }
-                  tags={ memories[memory].tags }
-                  handleDelete={ () => this.deleteMemory( memories[memory]._id ) }
-                  { ...this.props }
-                />
-              )
-            } )
-          }
-        </div>
+        { loading ? <Loading/> :
+          <div className='MemoryGrid'>
+            {
+              Object.keys( memories ).map( memory => {
+                return (
+                  <MemoryCard 
+                    key={ memories[memory]._id }
+                    title={ memories[memory].title }
+                    summary={ memories[memory].summary }
+                    date={ memories[memory].date }
+                    tags={ memories[memory].tags }
+                    handleDelete={ () => this.deleteMemory( memories[memory]._id ) }
+                    { ...this.props }
+                  />
+                )
+              } )
+            }
+          </div>
+        }
       </div>
     )
   }
