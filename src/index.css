@@ -93,14 +93,14 @@
   box-sizing: border-box;
 }
 
-html {
+:root {
   color: var(--darker-gray);
-  font-size: calc(16px + 0.33vw);
+  font-size: calc(15px + 0.33vw);
   font-family: var(--font-family-primary);
 }
 
 @media (min-width: 1690px) {
-  html {
+  :root {
     font-size: 20px;
   }
 }
