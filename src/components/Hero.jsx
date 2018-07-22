@@ -4,8 +4,6 @@ import Button from './Button.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Heading from './Heading.jsx'
 
-import Auth from '../functions/Auth.js'
-
 import backgroundImage from '../images/cityscape.jpg'
 import './Hero.css'
 
