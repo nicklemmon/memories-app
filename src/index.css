@@ -95,13 +95,13 @@
 
 html {
   color: var(--darker-gray);
-  font-size: calc(14px + 0.33vw);
+  font-size: calc(16px + 0.33vw);
   font-family: var(--font-family-primary);
 }
 
 @media (min-width: 1690px) {
   html {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 

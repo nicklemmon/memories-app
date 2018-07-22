@@ -7,8 +7,6 @@ import FaCloud from 'react-icons/lib/fa/cloud'
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle'
 import enhanceWithClickOutside from 'react-click-outside'
 
-import User from '../data/user.json'
-
 import './HeaderNav.css'
 
 class HeaderNav extends React.Component {
