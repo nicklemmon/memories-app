@@ -65,29 +65,6 @@ router.route( '/memories/:id' )
       res.json( { message: 'Memory has been deleted' } )
     })
   })
-
-router.route( '/users' )
-  .get( function( req, res ) {
-    User.find( function( err, users ) {
-      if ( err ) res.send( err )
-
-      res.json( users )
-    })
-  })
-  .post( function( req, res ) {
-    const user = new User()
-
-    user.name = req.body.name
-    user.email = req.body.email
-    user.password = req.body.password
-    user.signUpDate = req.body.signUpDate
-
-    user.save( function( err ) {
-      if ( err ) res.send( err )
-
-      res.json( { message: 'User has been added' } )
-    })
-  })
   
 // Use our router configuration when we call /api
 app.use( '/api', router )
