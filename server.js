@@ -9,7 +9,6 @@ const router = express.Router()
 const port = 3001
 
 const Memory = require( './src/model/memories.js' )
-const User = require( './src/model/users.js' )
 
 // DB config
 mongoose.connect( `mongodb://${process.env.REACT_APP_MLAB_USERNAME}:${process.env.REACT_APP_MLAB_PASSWORD}@${process.env.REACT_APP_MLAB_DB_ADDRESS}` )
