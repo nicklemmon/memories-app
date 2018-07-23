@@ -15,6 +15,7 @@ import './DefaultLayout.css'
 
 class DefaultLayout extends React.Component {
   render() {
+    console.log( this.props.auth.isAuthenticated() );
     return(
       <div className='Layout'>
         <Helmet
@@ -43,11 +44,9 @@ class DefaultLayout extends React.Component {
               <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
             }
             
-            { this.props.auth.isAuthenticated() &&
-              <Route path='/callback' render={ ( props ) => {
-                return <CallbackPage { ...props } /> 
-              }}/>
-            }
+            <Route path='/callback' render={ ( props ) => {
+              return <CallbackPage { ...props } /> 
+            }}/>
 
             <Route path='*' component={ NotFoundPage }/>
           </Switch>
