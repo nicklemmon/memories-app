@@ -6,6 +6,10 @@
   margin-top: var(--spacing-md);
 }
 
+.FormGroup-wrapper {
+  display: flex;
+}
+
 .FormGroup-label {
   display: block;
   color: var(--dark-gray);
@@ -15,6 +19,7 @@
 }
 
 .FormGroup-input {
+  display: inline-flex;
   width: 100%;
   padding: var(--spacing-sm);
   font-size: var(--font-size-md);
@@ -28,4 +33,9 @@
 .FormGroup-input:focus {
   border-color: var(--purple);
   outline: none;
+}
+
+.FormGroup-button {
+  flex: 0 40%;
+  margin-left: var(--spacing-sm);
 }

@@ -15,6 +15,11 @@ class FormAddMemory extends React.Component {
       date: '',
       summary: '',
       tags: '',
+      tagInputs: [
+        {
+          id: 'tag'
+        }
+      ],
       successAdd: false
     }
 
@@ -62,11 +67,16 @@ class FormAddMemory extends React.Component {
   }
 
   render() {
+    const {
+      tagInputs,
+      successAdd
+    } = this.state;
+
     let hasAlert
     let alertType
     let alertContent
 
-    if ( this.state.successAdd ) {
+    if ( successAdd ) {
       hasAlert = true
       alertType = 'success'
       alertContent = 'Success! Memory added.'
@@ -103,18 +113,26 @@ class FormAddMemory extends React.Component {
           value={ this.state.summary }
         />
 
-        <FormGroup
-          label='Tags'
-          type='text'
-          id='tags'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.tags }
-        />
+        { 
+          tagInputs.map( ( input, index ) => {
+            return (
+              <FormGroup
+                label={ `Tag ${index + 1}` }
+                type='text'
+                id={ `${input.id}-${index}` }
+                key={ `${input.id}-${index}` }
+                handleChange={ this.handleFormGroupChange }
+                value={ this.state.tags }
+                buttonContent='Add Tag'
+              />
+            );
+          })
+        }
 
         <ButtonWrapper>
           <Button
             type='primary'
-            content='Add'
+            content='Add Memory'
             onClick={ this.handleFormSubmit }
           />
 

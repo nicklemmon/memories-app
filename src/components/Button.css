@@ -44,6 +44,10 @@
   }
 }
 
+.Button--small {
+  padding: var(--spacing-md);
+}
+
 .Button--primary {
   background-color: var(--dark-blue);
   color: var(--white);
@@ -62,4 +66,16 @@
 
 .Button--secondary:hover {
   background-color: var(--dark-white);
+}
+
+.Button--tertiary {
+  background-color: var(--white);
+  color: var(--dark-blue);
+  border-color: var(--white);
+  box-shadow: none;
+}
+
+.Button--tertiary:hover {
+  background-color: var(--dark-white);
+  border-color: var(--dark-white);
 }

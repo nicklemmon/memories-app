@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Button from './Button.jsx';
+
 import './FormGroup.css'
 
 class FormGroup extends React.Component {
@@ -20,10 +22,15 @@ class FormGroup extends React.Component {
   }
 
   render() {
-    const id = this.props.id
-    const label = this.props.label
-    const type = this.props.type
-    const placeholder = this.props.placeholder
+    const {
+      id,
+      label,
+      type,
+      placeholder,
+      buttonContent,
+      buttonOnClick
+    } = this.props;
+    
     const classNames = `FormGroup-input FormGroup-input--${type} ${this.props.classNames}`
     
     return (
@@ -35,28 +42,38 @@ class FormGroup extends React.Component {
           { label }
         </label>
 
-        { type === 'textarea' ? (
-          <textarea
-            className={ classNames }
-            id={ id }
-            name={ id }
-            type={ type }
-            placeholder={ placeholder }
-            onChange={ this.props.handleChange || this.handleChange }
-            value={ this.props.value || this.state.value }
-          ></textarea>
-        ) : (
-          <input
-            className={ classNames }
-            id={ id }
-            name={ id }
-            type={ type }
-            placeholder={ placeholder }
-            onChange={ this.props.handleChange || this.handleChange }
-            value={ this.props.value || this.state.value }
-          />
-        )}
-        
+        <div className='FormGroup-wrapper'>
+          { type === 'textarea' ? (
+            <textarea
+              className={ classNames }
+              id={ id }
+              name={ id }
+              type={ type }
+              placeholder={ placeholder }
+              onChange={ this.props.handleChange || this.handleChange }
+              value={ this.props.value || this.state.value }
+            ></textarea>
+          ) : (
+            <input
+              className={ classNames }
+              id={ id }
+              name={ id }
+              type={ type }
+              placeholder={ placeholder }
+              onChange={ this.props.handleChange || this.handleChange }
+              value={ this.props.value || this.state.value }
+            />
+          )}
+          
+          { buttonContent &&
+            <Button
+              classNames='Button--small FormGroup-button'
+              type='tertiary'
+              onClick={ buttonOnClick }
+              content={ buttonContent }
+            />
+          }
+        </div>
       </div>
     )
   }
