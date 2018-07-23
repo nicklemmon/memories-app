@@ -14,7 +14,6 @@ class MemoryGrid extends React.Component {
     this.state = {
       memoriesURL: 'http://localhost:3001/api/memories',
       memories: [],
-      successAdd: false,
       successDelete: false,
       loading: false
     }
