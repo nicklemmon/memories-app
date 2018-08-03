@@ -45,6 +45,7 @@
 }
 
 .Button--small {
+  font-size: 0.85rem;
   padding: var(--spacing-md);
 }
 
