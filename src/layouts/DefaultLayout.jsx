@@ -15,7 +15,6 @@ import './DefaultLayout.css'
 
 class DefaultLayout extends React.Component {
   render() {
-    console.log( this.props.auth.isAuthenticated() );
     return(
       <div className='Layout'>
         <Helmet
