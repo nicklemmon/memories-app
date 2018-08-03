@@ -27,8 +27,6 @@ class MemoryCard extends React.Component {
     let year = date.getFullYear()
     let formattedDate = `${month}/${day}/${year}`
 
-    console.log( this.props.auth.isAuthenticated() )
-
     return (
       <Card
         classNames='MemoryCard'
