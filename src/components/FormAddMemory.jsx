@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 
-import FormWrapper from '../components/FormWrapper.jsx'
-import FormGroup from '../components/FormGroup.jsx'
-import ButtonWrapper from '../components/ButtonWrapper.jsx'
-import Button from '../components/Button.jsx'
+import FormWrapper from './FormWrapper.jsx'
+import FormGroup from './FormGroup.jsx'
+import ButtonWrapper from './ButtonWrapper.jsx'
+import Button from './Button.jsx'
+import AddComponentButton from './AddComponentButton.jsx'
 
 class FormAddMemory extends React.Component {
   constructor( props ) {
@@ -123,11 +124,12 @@ class FormAddMemory extends React.Component {
                 key={ `${input.id}-${index}` }
                 handleChange={ this.handleFormGroupChange }
                 value={ this.state.tags }
-                buttonContent='Add Tag'
               />
             );
           })
         }
+
+        <AddComponentButton content='Add Another Tag'/>
 
         <ButtonWrapper>
           <Button
