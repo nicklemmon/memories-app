@@ -5,7 +5,7 @@ import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Button from './Button.jsx'
-import AddComponentButton from './AddComponentButton.jsx'
+import Alert from './Alert.jsx'
 
 class FormAddMemory extends React.Component {
   constructor( props ) {
@@ -16,16 +16,15 @@ class FormAddMemory extends React.Component {
       date: '',
       summary: '',
       tags: '',
-      tagInputs: [
-        {
-          id: 'tag'
-        }
-      ],
+      tagInputs: 1,
+      tagMax: 3,
+      tagMaxReached: false,
       successAdd: false
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
     this.handleSubmit = this.handleSubmit.bind( this )
+    this.handleAddTagClick = this.handleAddTagClick.bind( this )
     this.resetForm = this.resetForm.bind( this )
     this.render = this.render.bind( this )
   }
@@ -67,20 +66,48 @@ class FormAddMemory extends React.Component {
       })
   }
 
+  handleAddTagClick( e ) {
+    e.preventDefault()
+
+    if ( this.state.tagInputs < this.state.tagMax ) {
+      this.setState({
+        tagInputs: this.state.tagInputs += 1
+      })
+    }
+
+    if ( this.state.tagInputs === 3 ) {
+      this.setState({ tagMaxReached: true })
+    }
+  }
+
   render() {
     const {
-      tagInputs,
+      tagMaxReached,
       successAdd
     } = this.state;
 
     let hasAlert
     let alertType
     let alertContent
+    let tagInputs = []
 
     if ( successAdd ) {
       hasAlert = true
       alertType = 'success'
       alertContent = 'Success! Memory added.'
+    }
+
+    for ( let i = 0; i < this.state.tagInputs; i++ ) {
+      tagInputs.push(
+        <FormGroup
+          label={ `Tag ${i + 1}` }
+          type='text'
+          id={ `tag-${i + 1}` }
+          key={ `tag-${i + 1}` }
+          handleChange={ this.handleFormGroupChange }
+          value={ this.state.tags }
+        />
+      )
     }
 
     return (
@@ -114,22 +141,22 @@ class FormAddMemory extends React.Component {
           value={ this.state.summary }
         />
 
-        { 
-          tagInputs.map( ( input, index ) => {
-            return (
-              <FormGroup
-                label={ `Tag ${index + 1}` }
-                type='text'
-                id={ `${input.id}-${index}` }
-                key={ `${input.id}-${index}` }
-                handleChange={ this.handleFormGroupChange }
-                value={ this.state.tags }
-              />
-            );
-          })
-        }
+        { tagInputs }
 
-        <AddComponentButton content='Add Another Tag'/>
+        <ButtonWrapper>
+          { tagMaxReached ?
+            <p>Maximum of 3 tags per memory.</p>
+
+            :
+
+            <Button
+              type='tertiary'
+              content='Add Another Tag'
+              onClick={ this.handleAddTagClick }
+              fullWidth={ true }
+            />
+          }
+        </ButtonWrapper>
 
         <ButtonWrapper>
           <Button
