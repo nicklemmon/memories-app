@@ -15,7 +15,7 @@ class FormAddMemory extends React.Component {
       title: '',
       date: '',
       summary: '',
-      tags: '',
+      tags: [],
       tagInputs: 1,
       tagMax: 3,
       tagMaxReached: false,
@@ -39,12 +39,20 @@ class FormAddMemory extends React.Component {
     })
   }
 
+  handleTagInputChange( e ) {
+    const value = e.target.value
+
+    this.setState({
+      tags: this.state.tags.push( value )
+    })
+  }
+
   resetForm() {
     this.setState({
       title: '',
       date: '',
       summary: '',
-      tags: ''
+      tags: []
     })
   }
 
