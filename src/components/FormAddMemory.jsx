@@ -182,12 +182,8 @@ class FormAddMemory extends React.Component {
           <Button
             type='primary'
             content='Add Memory'
+            fullWidth
             onClick={ this.handleFormSubmit }
-          />
-
-          <Button
-            type='secondary'
-            content='Cancel'
           />
         </ButtonWrapper>
       </FormWrapper>
