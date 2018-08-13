@@ -3,9 +3,9 @@ import axios from 'axios'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
+import FormGroupTagInput from './FormGroupTagInput.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Button from './Button.jsx'
-import Alert from './Alert.jsx'
 
 class FormAddMemory extends React.Component {
   constructor( props ) {
@@ -15,7 +15,7 @@ class FormAddMemory extends React.Component {
       title: '',
       date: '',
       summary: '',
-      tags: [],
+      tags: [{ name: ''}],
       tagInputs: 1,
       tagMax: 3,
       tagMaxReached: false,
@@ -23,6 +23,7 @@ class FormAddMemory extends React.Component {
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
+    this.handleFormGroupTagChange = this.handleFormGroupTagChange.bind( this )
     this.handleSubmit = this.handleSubmit.bind( this )
     this.handleAddTagClick = this.handleAddTagClick.bind( this )
     this.resetForm = this.resetForm.bind( this )
@@ -34,17 +35,19 @@ class FormAddMemory extends React.Component {
     const value = target.value
     const name = target.name
 
-    this.setState( {
+    this.setState({
       [name]: value
     })
   }
 
-  handleTagInputChange( e ) {
-    const value = e.target.value
+  handleFormGroupTagChange( e, index ) {
+    const newTags = this.state.tags.map( ( tag, sindex ) => {
+      if (index !== sindex) return tag
 
-    this.setState({
-      tags: this.state.tags.push( value )
-    })
+      return { ...tag, name: e.target.value }
+    });
+
+    this.setState({ tags: newTags })
   }
 
   resetForm() {
@@ -52,7 +55,7 @@ class FormAddMemory extends React.Component {
       title: '',
       date: '',
       summary: '',
-      tags: []
+      tags: [{ name: ''}]
     })
   }
 
@@ -77,19 +80,14 @@ class FormAddMemory extends React.Component {
   handleAddTagClick( e ) {
     e.preventDefault()
 
-    if ( this.state.tagInputs < this.state.tagMax ) {
-      this.setState({
-        tagInputs: this.state.tagInputs += 1
-      })
-    }
-
-    if ( this.state.tagInputs === 3 ) {
-      this.setState({ tagMaxReached: true })
-    }
+    this.setState({
+      tags: this.state.tags.concat( [ { name: '' } ] )
+    });
   }
 
   render() {
     const {
+      tags,
       tagMaxReached,
       successAdd
     } = this.state;
@@ -97,25 +95,11 @@ class FormAddMemory extends React.Component {
     let hasAlert
     let alertType
     let alertContent
-    let tagInputs = []
 
     if ( successAdd ) {
       hasAlert = true
       alertType = 'success'
       alertContent = 'Success! Memory added.'
-    }
-
-    for ( let i = 0; i < this.state.tagInputs; i++ ) {
-      tagInputs.push(
-        <FormGroup
-          label={ `Tag ${i + 1}` }
-          type='text'
-          id={ `tag-${i + 1}` }
-          key={ `tag-${i + 1}` }
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.tags }
-        />
-      )
     }
 
     return (
@@ -149,7 +133,17 @@ class FormAddMemory extends React.Component {
           value={ this.state.summary }
         />
 
-        { tagInputs }
+        { tags.map( ( tag, index ) => {
+            return(
+              <FormGroupTagInput
+                index={ index }
+                key={ `tag-input-${index}` }
+                handleChange={ ( e ) => this.handleFormGroupTagChange( e, index ) }
+                value={ tag.name }
+              />
+            )
+          })
+        }
 
         <ButtonWrapper>
           { tagMaxReached ?

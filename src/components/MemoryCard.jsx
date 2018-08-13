@@ -37,8 +37,8 @@ class MemoryCard extends React.Component {
           tags.map( ( tag, index ) => {
             return (
               <Tag
-                key={ index }
-                content={ tag }
+                key={ `tag-${tag.name}-${index}` }
+                content={ tag.name }
               />
             )
           } )
