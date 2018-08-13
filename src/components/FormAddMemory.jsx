@@ -16,7 +16,6 @@ class FormAddMemory extends React.Component {
       date: '',
       summary: '',
       tags: [{ name: ''}],
-      tagInputs: 1,
       tagMax: 3,
       tagMaxReached: false,
       successAdd: false
@@ -80,9 +79,14 @@ class FormAddMemory extends React.Component {
   handleAddTagClick( e ) {
     e.preventDefault()
 
+    // Show the tax max reached message when one below the tag max for a memory
     this.setState({
       tags: this.state.tags.concat( [ { name: '' } ] )
     });
+
+    if ( this.state.tags.length === this.state.tagMax - 1 ) {
+      this.setState({ tagMaxReached: true })
+    }
   }
 
   render() {
