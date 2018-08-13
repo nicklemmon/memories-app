@@ -49,7 +49,7 @@ class MemoryCard extends React.Component {
         { this.props.auth.isAuthenticated() &&
           <ModalLauncher
             classNames='MemoryCard-delete'
-            content={ <FaTrash className='MemoryCard-trash'/> }
+            content={ <FaTrash className='MemoryCard-trash' role='img' aria-label='Delete'/> }
             id='delete-memory'
             heading={ `Delete "${title}"?` }
             hasCTAs={ true }
