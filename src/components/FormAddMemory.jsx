@@ -25,6 +25,7 @@ class FormAddMemory extends React.Component {
     this.handleFormGroupTagChange = this.handleFormGroupTagChange.bind( this )
     this.handleSubmit = this.handleSubmit.bind( this )
     this.handleAddTagClick = this.handleAddTagClick.bind( this )
+    this.handleFormGroupTagDeleteClick = this.handleFormGroupTagDeleteClick.bind( this )
     this.resetForm = this.resetForm.bind( this )
     this.render = this.render.bind( this )
   }
@@ -40,8 +41,8 @@ class FormAddMemory extends React.Component {
   }
 
   handleFormGroupTagChange( e, index ) {
-    const newTags = this.state.tags.map( ( tag, sindex ) => {
-      if (index !== sindex) return tag
+    const newTags = this.state.tags.map( ( tag, subIndex  ) => {
+      if ( index !== subIndex ) return tag
 
       return { ...tag, name: e.target.value }
     });
@@ -86,6 +87,18 @@ class FormAddMemory extends React.Component {
 
     if ( this.state.tags.length === this.state.tagMax - 1 ) {
       this.setState({ tagMaxReached: true })
+    }
+  }
+
+  handleFormGroupTagDeleteClick( e, index ) {
+    e.preventDefault()
+
+    this.setState({
+      tags: this.state.tags.filter( ( tag, subIndex ) => index !== subIndex )
+    });
+
+    if ( this.state.tags.length < this.state.tagMax + 1 ) {
+      this.setState({ tagMaxReached: false })
     }
   }
 
@@ -143,6 +156,7 @@ class FormAddMemory extends React.Component {
                 index={ index }
                 key={ `tag-input-${index}` }
                 handleChange={ ( e ) => this.handleFormGroupTagChange( e, index ) }
+                buttonOnClick={ ( e ) => this.handleFormGroupTagDeleteClick( e, index ) }
                 value={ tag.name }
               />
             )

@@ -7,6 +7,7 @@ class FormGroupTagInput extends React.Component {
     const { 
       index,
       handleChange,
+      buttonOnClick,
       value
     } = this.props
 
@@ -16,6 +17,8 @@ class FormGroupTagInput extends React.Component {
         type='text'
         id={ `tag-${index}` }
         handleChange={ handleChange }
+        buttonOnClick={ buttonOnClick }
+        buttonContent='Delete'
         value={ value }
       />
     )
