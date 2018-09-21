@@ -1,10 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import FaBars from 'react-icons/lib/fa/bars'
-import FaSignIn from 'react-icons/lib/fa/sign-in'
-import FaSignOut from 'react-icons/lib/fa/sign-out'
-import FaCloud from 'react-icons/lib/fa/cloud'
-import FaPlusCircle from 'react-icons/lib/fa/plus-circle'
+import {
+  FaBars,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaCloud,
+  FaPlusCircle
+} from 'react-icons/fa'
 import enhanceWithClickOutside from 'react-click-outside'
 
 import './HeaderNav.css'
@@ -73,7 +75,7 @@ class HeaderNav extends React.Component {
               onKeyUp={ this.handleKeyup }
               onClick={ this.props.auth.login }
             >
-                <FaSignIn className='HeaderNav-itemIcon'/>
+                <FaSignInAlt className='HeaderNav-itemIcon'/>
 
                 Log In
             </div>
@@ -110,7 +112,7 @@ class HeaderNav extends React.Component {
               onKeyUp={ this.handleKeyup }
               onClick={ this.props.auth.logout }
             >
-              <FaSignOut className='HeaderNav-itemIcon'/>
+              <FaSignOutAlt className='HeaderNav-itemIcon'/>
 
               Log Out
             </NavLink>

@@ -1,9 +1,11 @@
 import React from 'react'
 
-import FaCheckCircle from 'react-icons/lib/fa/check-circle'
-import FaExclamationCircle from 'react-icons/lib/fa/exclamation-circle'
-import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
-import FaInfoCircle from 'react-icons/lib/fa/info-circle'
+import {
+  FaCheckCircle,
+  FaExclamationCircle,
+  FaExclamationTriangle,
+  FaInfoCircle
+} from 'react-icons/fa'
 
 import './Alert.css'
 

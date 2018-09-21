@@ -1,5 +1,5 @@
 import React from 'react'
-import FaTrash from 'react-icons/lib/fa/trash'
+import { FaTrash } from 'react-icons/fa'
 
 import Card from './Card.jsx'
 import Tag from './Tag.jsx'

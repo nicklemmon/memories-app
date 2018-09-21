@@ -1,5 +1,5 @@
 import React from 'react'
-import FaClose from 'react-icons/lib/fa/close'
+import { FaTimes } from 'react-icons/fa'
 
 import Modal from './Modal.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
@@ -119,7 +119,7 @@ class ModalButton extends React.Component {
 
             <button className='Modal-close' aria-label='Close dialog' onClick={ this.close }>
               <span aria-hidden='true'>
-                <FaClose/>
+                <FaTimes/>
               </span>
             </button>
           </Modal>
