@@ -7,6 +7,7 @@
     "axios": "^0.18.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
+    "classnames": "^2.2.6",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "foreman": "^2.0.0",

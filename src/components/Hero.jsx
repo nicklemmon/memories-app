@@ -8,14 +8,24 @@ import backgroundImage from '../images/cityscape.jpg'
 import './Hero.css'
 
 class Hero extends React.Component {
+  constructor( props ) {
+    super( props )
+
+    this.hero = React.createRef()
+  }
+
+  componentDidMount() {
+    this.hero.current.focus()
+  }
+
   render() {
     return (
-      <div className='Hero'>
+      <div className='Hero' ref={ this.hero } tabIndex='-1'>
         <div className='Hero-wrapper'>
           <Heading
             level='1'
             content='Track memories, view memories.'
-            classNames='Hero-heading'
+            className='Hero-heading'
           />
 
           <ButtonWrapper classNames='Hero-buttonWrapper'>
