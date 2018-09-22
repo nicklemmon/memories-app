@@ -1,13 +1,18 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import './ButtonWrapper.css'
 
 class ButtonWrapper extends React.Component {
   render() {
-    const classNames = `ButtonWrapper ${this.props.classNames}`
+    const {
+      className,
+      children
+    } = this.props
+
     return (
-      <div className={ classNames }>
-        { this.props.children }
+      <div className={ classNames( 'ButtonWrapper', className ) }>
+        { children }
       </div>
     )
   }

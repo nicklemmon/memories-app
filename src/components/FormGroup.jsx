@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Button from './Button.jsx';
 
@@ -28,10 +29,11 @@ class FormGroup extends React.Component {
       type,
       placeholder,
       buttonContent,
-      buttonOnClick
-    } = this.props;
+      buttonOnClick,
+      className
+    } = this.props
     
-    const classNames = `FormGroup-input FormGroup-input--${type} ${this.props.classNames}`
+    const inputClassName = classNames( `FormGroup-input FormGroup-input--${type}`, className )
     
     return (
       <div className='FormGroup'>
@@ -45,7 +47,7 @@ class FormGroup extends React.Component {
         <div className='FormGroup-wrapper'>
           { type === 'textarea' ? (
             <textarea
-              className={ classNames }
+              className={ inputClassName }
               id={ id }
               name={ id }
               type={ type }
@@ -55,7 +57,7 @@ class FormGroup extends React.Component {
             ></textarea>
           ) : (
             <input
-              className={ classNames }
+              className={ inputClassName }
               id={ id }
               name={ id }
               type={ type }
@@ -67,7 +69,7 @@ class FormGroup extends React.Component {
           
           { buttonContent &&
             <Button
-              classNames='Button--small FormGroup-button'
+              className='Button--small FormGroup-button'
               type='tertiary'
               onClick={ buttonOnClick }
               content={ buttonContent }

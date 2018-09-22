@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
+import classNames from 'classnames'
 
 import './Footer.css'
 
-class Footer extends Component  {
+class Footer extends React.Component  {
   render() {
-    const classNames = `Footer ${this.props.classNames}`
+    const { className } = this.props
     const currentYear = ( new Date() ).getFullYear()
 
     return (
-      <footer className={ classNames }>
+      <footer className={ classNames( 'Footer', className ) }>
         <p>All rights reserved, <a href="http://nicklemmon.com">Nick Lemmon</a> { currentYear }</p>
       </footer>
     )

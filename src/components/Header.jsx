@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames'
 
 import './Header.css'
 
@@ -7,10 +8,10 @@ import HeaderNav from './HeaderNav.jsx'
 
 class Header extends React.Component {
   render() {
-    const classNames = `Header ${this.props.classNames}`
+    const { className } = this.props
 
     return (
-      <header className={ classNames }>
+      <header className={ classNames( 'Header', className ) }>
         <span className='Header-spacer' role='presentation'></span>
 
         <NavLink 

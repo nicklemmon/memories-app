@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import {
   FaCheckCircle,
@@ -40,18 +41,23 @@ class Alert extends React.Component {
   }
 
   render() {
-    const type = this.props.type
-    const content = this.props.content
+    const {
+      type,
+      content,
+      className,
+      ...props
+    } = this.props
+
     const isHidden = this.state.isHidden
-    const classNames = `Alert Alert--${type} ${this.props.classNames}`
 
     return (
       <React.Fragment>
         { !isHidden &&
           <div 
-            className={ classNames } 
+            className={ classNames( `Alert Alert--${type}`, className ) } 
             role='alert' 
             tabIndex='-1'
+            { ...props }
           >
             <div className='Alert-pre'>
               { type === 'error' &&

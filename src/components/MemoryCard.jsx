@@ -1,5 +1,6 @@
 import React from 'react'
-import { FaTrash } from 'react-icons/fa'
+import classNames from 'classnames'
+import { FaTrashAlt } from 'react-icons/fa'
 
 import Card from './Card.jsx'
 import Tag from './Tag.jsx'
@@ -9,11 +10,15 @@ import './MemoryCard.css'
 
 class MemoryCard extends React.Component {
   render() {
-    const title = this.props.title
-    const tags = this.props.tags
+    const {
+      title,
+      tags,
+      summary,
+      handleDelete,
+      className
+    } = this.props
+    
     const dateStr = this.props.date || new Date()
-    const summary = this.props.summary
-    const handleDelete = this.props.handleDelete
     const date = new Date( dateStr )
 
     let day = date.getDay()
@@ -29,7 +34,7 @@ class MemoryCard extends React.Component {
 
     return (
       <Card
-        classNames='MemoryCard'
+        className={ classNames( 'MemoryCard', className ) }
         headingContent={ title }
         headingLevel='3'
         metaContent={ formattedDate }
@@ -48,8 +53,8 @@ class MemoryCard extends React.Component {
         
         { this.props.auth.isAuthenticated() &&
           <ModalLauncher
-            classNames='MemoryCard-delete'
-            content={ <FaTrash className='MemoryCard-trash' role='img' aria-label='Delete'/> }
+            className='MemoryCard-delete'
+            content={ <FaTrashAlt className='MemoryCard-trash' role='img' aria-label='Delete'/> }
             id='delete-memory'
             heading={ `Delete "${title}"?` }
             hasCTAs={ true }

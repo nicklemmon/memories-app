@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { FaTimes } from 'react-icons/fa'
 
 import Modal from './Modal.jsx'
@@ -60,26 +61,27 @@ class ModalButton extends React.Component {
     if ( secondaryButtonCloses ) this.close()
 
     if ( secondaryButtonOnClick ) secondaryButtonOnClick.call()
-    
   }
 
   render() {
-    const classNames = `Modal-button ${this.props.classNames}`
-    const content = this.props.content
-    const id = this.props.id
-    const heading = this.props.heading
-    const hasCTAs = this.props.hasCTAs
-    const primaryButtonContent = this.props.primaryButtonContent
-    const primaryButtonLinkTo = this.props.primaryButtonLinkTo
-    const secondaryButtonContent = this.props.secondaryButtonContent
-    const secondaryButtonLinkTo = this.props.secondaryButtonLinkTo
+    const {
+      className,
+      content,
+      id,
+      heading,
+      hasCTAs,
+      primaryButtonContent,
+      primaryButtonLinkTo,
+      secondaryButtonContent,
+      secondaryButtonLinkTo
+    } = this.props
 
     const isOpen = this.state.isOpen
 
     return (
       <React.Fragment>
         <button
-          className={ classNames }
+          className={ classNames( 'Modal-button', className ) }
           aria-modal='dialog'
           title='Opens a dialog'
           onClick={ this.open }

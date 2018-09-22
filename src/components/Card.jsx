@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Heading from './Heading.jsx'
 import Alert from './Alert.jsx'
@@ -17,17 +18,20 @@ class Card extends React.Component {
   }
   
   render() {
-    const headingLevel = this.props.headingLevel
-    const headingContent = this.props.headingContent
-    const metaContent = this.props.metaContent
-    const footerContent = this.props.footerContent
-    const classNames = `Card ${this.props.classNames}`
+    const {
+      headingLevel,
+      headingContent,
+      metaContent,
+      footerContent,
+      className
+    } = this.props
+    
     const hasAlert = this.props.hasAlert || this.state.hasAlert
     const alertType = this.props.alertType || this.state.alertType
     const alertContent = this.props.alertContent || this.state.alertContent
 
     return (
-      <div className={ classNames } role='region'>
+      <div className={ classNames( 'Card', className ) } role='region'>
         { headingContent &&
           <div className='Card-header'>
             <Heading

@@ -13,7 +13,7 @@ class FormWrapper extends React.Component {
 
     return (
       <Card 
-        classNames='FormWrapper'
+        className='FormWrapper'
         hasAlert={ hasAlert }
         alertType={ alertType }
         alertContent={ alertContent }

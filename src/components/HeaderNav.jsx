@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import {
   FaBars,
@@ -24,33 +25,33 @@ class HeaderNav extends React.Component {
   }
 
   handleClickOutside() {
-    this.close();
+    this.close()
   }
 
   handleKeyup = ( e ) => {
     if ( e.keyCode === 27 ) {
-      this.close();
+      this.close()
     }
   }
 
   close() {
     this.setState( {
       isOpen: false
-    } )
+    })
   }
 
   toggle() {
     this.setState( prevState => ( {
       isOpen: !prevState.isOpen
-    } ) )
+    }))
   }
 
   render() {
+    const { className } = this.props
     const isOpen = this.state.isOpen
-    const classNames = `HeaderNav ${this.props.className}`
 
     return(
-      <div className={ classNames }>
+      <div className={ classNames( 'HeaderNav', className ) }>
         <button
           onClick={ this.toggle }
           onKeyUp={ this.handleKeyup }
