@@ -38,6 +38,8 @@
   width: 10px;
   height: 10px;
   background-color: var(--purple);
+  transform: scale(1) translateY(0.75rem);
+  opacity: 0.33;
   animation: loading 2.25s var(--anim-easing) infinite;
 }
 
