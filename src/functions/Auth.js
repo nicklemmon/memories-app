@@ -1,13 +1,12 @@
 import auth0 from 'auth0-js';
-import { AuthConfig } from './.auth0.config.js';
 import history from './history.js';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
-    domain: AuthConfig.domain,
-    clientID: AuthConfig.clientId,
-    redirectUri: AuthConfig.callbackUrl,
-    audience: `https://${AuthConfig.domain}/userinfo`,
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENTID,
+    redirectUri: process.env.REACT_APP_AUTH0_CALLBACKURL,
+    audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo`,
     responseType: 'token id_token'
   });
 
