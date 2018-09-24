@@ -62,7 +62,7 @@ class FormAddMemory extends React.Component {
   handleSubmit( e ) {
     e.preventDefault()
 
-    axios.post( 'http://localhost:3001/api/memories', {
+    axios.post( `${process.env.REACT_APP_API_BASE_URL}/api/memories`, {
         title: this.state.title,
         date: this.state.date,
         summary: this.state.summary,

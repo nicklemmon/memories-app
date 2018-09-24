@@ -12,7 +12,7 @@ class MemoryGrid extends React.Component {
     super( props )
 
     this.state = {
-      memoriesURL: 'http://localhost:3001/api/memories',
+      memoriesURL: `${process.env.REACT_APP_API_BASE_URL}/api/memories`,
       memories: [],
       successDelete: false,
       loading: false
