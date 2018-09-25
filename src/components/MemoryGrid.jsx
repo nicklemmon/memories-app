@@ -15,6 +15,7 @@ class MemoryGrid extends React.Component {
       memoriesURL: `${process.env.REACT_APP_API_BASE_URL}/api/memories`,
       memories: [],
       successDelete: false,
+      errorMessage: false,
       loading: false
     }
 
@@ -25,7 +26,10 @@ class MemoryGrid extends React.Component {
   }
 
   getMemories() {
-    return axios.get( this.state.memoriesURL )
+    return axios({
+      method: 'get',
+      url: this.state.memoriesURL
+    })
   }
 
   updateMemories() {
@@ -36,6 +40,14 @@ class MemoryGrid extends React.Component {
             loading: false,
             memories: res.data,
           })
+        })
+        .catch( error => {
+          if ( error.response ) {
+            this.setState({
+              loading: false,
+              errorMessage: true
+            })
+          }
         })
     })
   }
@@ -56,12 +68,20 @@ class MemoryGrid extends React.Component {
   }
 
   render() {
+    const errorMessage = this.state.errorMessage
     const memories = this.state.memories
     const loading = this.state.loading
 
     return (
       <div>
-        { ( memories.length === 0 && !loading ) &&
+        { ( errorMessage && !loading ) &&
+          <Alert
+            type="error"
+            content="Whoops! Failed to retrieve memories. Try again another time."
+          />
+        }
+
+        { ( !errorMessage && memories.length === 0 && !loading ) &&
           <Alert
             type="attention"
             content="Sorry! No memories available. Please try again later."
