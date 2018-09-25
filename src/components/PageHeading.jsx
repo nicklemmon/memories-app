@@ -22,7 +22,7 @@ class PageHeading extends React.Component {
     return (
       <div className='PageHeading' tabIndex='-1' ref={ this.pageheading }>
         <Heading
-          classNames='PageHeading-heading'
+          className='PageHeading-heading'
           content={ content }
           level='1'
           alignment='center'

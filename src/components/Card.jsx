@@ -35,7 +35,7 @@ class Card extends React.Component {
         { headingContent &&
           <div className='Card-header'>
             <Heading
-              classNames='Card-heading'
+              className='Card-heading'
               content={ headingContent }
               level={ headingLevel }
             />
@@ -49,7 +49,7 @@ class Card extends React.Component {
         <div className='Card-content'>
           { hasAlert &&
             <Alert
-              classNames='Card-alert'
+              className='Card-alert'
               type={ alertType }
               content={ alertContent }
             />
