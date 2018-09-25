@@ -42,12 +42,10 @@ class MemoryGrid extends React.Component {
           })
         })
         .catch( error => {
-          if ( error.response ) {
-            this.setState({
-              loading: false,
-              errorMessage: true
-            })
-          }
+          this.setState({
+            loading: false,
+            errorMessage: true
+          })
         })
     })
   }
@@ -69,6 +67,7 @@ class MemoryGrid extends React.Component {
 
   render() {
     const errorMessage = this.state.errorMessage
+    const successDelete = this.state.successDelete
     const memories = this.state.memories
     const loading = this.state.loading
 
@@ -77,7 +76,7 @@ class MemoryGrid extends React.Component {
         { ( errorMessage && !loading ) &&
           <Alert
             type="error"
-            content="Whoops! Failed to retrieve memories. Try again another time."
+            content="Whoops! Failed to retrieve memories. Try again later."
           />
         }
 
@@ -88,7 +87,7 @@ class MemoryGrid extends React.Component {
           />
         }
 
-        { this.state.successDelete &&
+        { successDelete &&
           <Alert
             type="success"
             content="Memory deleted."
