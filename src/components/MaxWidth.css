@@ -1,0 +1,24 @@
+.MaxWidth {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.MaxWidth--xs {
+  max-width: 480px;
+}
+
+.MaxWidth--sm {
+  max-width: 736px;
+}
+
+.MaxWidth--md {
+  max-width: 980px;
+}
+
+.MaxWidth--lg {
+  max-width: 1280px;
+}
+
+.MaxWidth--xl {
+  max-width: 1690px;
+}
