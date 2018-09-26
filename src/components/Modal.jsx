@@ -18,7 +18,7 @@ class Modal extends React.Component {
     const heading = this.props.heading
 
     return (
-      <div className='Modal' id={ id } aria-labelledby={ `${id}-heading` } tabIndex='-1' ref={ this.modal }>
+      <div className='Modal' id={ id } aria-labelledby={ `${id}-heading` } tabIndex='-1' ref={ this.modal } aria-modal='true' role='dialog'>
         <div className='Modal-content'>
           <div className='Modal-heading' id={ `${id}-heading` }>{ heading }</div>
 

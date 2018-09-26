@@ -82,7 +82,6 @@ class ModalButton extends React.Component {
       <React.Fragment>
         <button
           className={ classNames( 'Modal-button', className ) }
-          aria-modal='dialog'
           title='Opens a dialog'
           onClick={ this.open }
         >
