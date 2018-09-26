@@ -3,9 +3,13 @@ node_js:
   - "stable"
 cache:
   directories:
-  - node_modules
+    - node_modules
 script:
   - cd test-app
   - npm install
   - npm test
   - npm run build
+
+smoketest:
+  on:
+    branch: master

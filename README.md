@@ -16,4 +16,4 @@ export const AuthConfig = {
 }
 ```
 3. Run `npm install`,
-4. Then, `npm run start-dev` to get to work.
+4. Then, `npm run start` to get to work.
