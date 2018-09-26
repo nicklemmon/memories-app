@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+import MaxWidth from '../components/MaxWidth.jsx'
 import MemoryCard from '../components/MemoryCard.jsx'
 import Alert from '../components/Alert.jsx'
 import Loading from '../components/Loading.jsx'
@@ -74,24 +75,30 @@ class MemoryGrid extends React.Component {
     return (
       <div>
         { ( errorMessage && !loading ) &&
-          <Alert
-            type="error"
-            content="Whoops! Failed to retrieve memories. Try again later."
-          />
+          <MaxWidth size='md'>
+            <Alert
+              type="error"
+              content="Whoops! Failed to retrieve memories. Try again later."
+            />
+          </MaxWidth>
         }
 
         { ( !errorMessage && memories.length === 0 && !loading ) &&
-          <Alert
-            type="attention"
-            content="Sorry! No memories available. Please try again later."
-          />
+          <MaxWidth size='md'>
+            <Alert
+              type='attention'
+              content='Sorry! No memories available. Please try again later.'
+            />
+          </MaxWidth>
         }
 
         { successDelete &&
-          <Alert
-            type="success"
-            content="Memory deleted."
-          />
+          <MaxWidth size='md'>
+            <Alert
+              type='success'
+              content='Memory deleted.'
+            />
+          </MaxWidth>
         }
         
         { loading ? <Loading/> :
