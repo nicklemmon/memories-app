@@ -1,19 +1,15 @@
+[![Build Status](https://travis-ci.org/nicklemmon/memories-app.svg?branch=master)](https://travis-ci.org/nicklemmon/memories-app)
+
 # Memories App
 
-1. Create a `.env` file with relevant database values,
+1. Create a `.env` file with relevant auth values,
 ```conf
-REACT_APP_MLAB_USERNAME = <someusername>
-REACT_APP_MLAB_PASSWORD = <somepassword>
-REACT_APP_MLAB_DB_ADDRESS = <gotosomedatabaseaddress>
-```
-2. Create an `.auth0.config.js` file inside `src/functions`
-```javascript
-export const AuthConfig = {
-  domain: 'nicklemmon.auth0.com',
-  clientId: 'rQ8hU5wWbRjyA1UUVB0gGt7yOz35SKfH',
-  callbackUrl: 'http://localhost:3000/callback',
-  dbConnectionName: 'Username-Password-Authentication',
-}
+REACT_APP_API_BASE_URL = <url>
+REACT_APP_AUTH0_DOMAIN = <domain>
+REACT_APP_AUTH0_CLIENTID = <clientid>
+REACT_APP_AUTH0_CALLBACKURL = <callbackurl>
+REACT_APP_AUTH0_DBCONNECTIONNAME = <dbconnectionname>
 ```
 3. Run `npm install`,
 4. Then, `npm run start` to get to work.
+5. `npm run build` for a production build
