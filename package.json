@@ -5,11 +5,8 @@
   "dependencies": {
     "auth0-js": "^9.6.1",
     "axios": "^0.18.0",
-    "bcrypt": "^2.0.1",
     "classnames": "^2.2.6",
-    "foreman": "^2.0.0",
     "history": "^4.7.2",
-    "marked": "^0.3.19",
     "react": "^16.3.2",
     "react-click-outside": "^3.0.1",
     "react-dom": "^16.3.2",
