@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import posed from 'react-pose'
 
 import {
   FaCheckCircle,
@@ -10,6 +11,17 @@ import {
 
 import './Alert.css'
 
+const PosedDiv = posed.div({
+  visible: {
+    opacity: 1,
+    scaleY: 1
+  },
+  hidden: {
+    opacity: 0,
+    scaleY: 0
+  }
+});
+
 class Alert extends React.Component {
   constructor( props ) {
     super( props )
@@ -17,7 +29,7 @@ class Alert extends React.Component {
     this.alertContent = React.createRef()
 
     this.state = {
-      isHidden: false
+      isHidden: true
     }
 
     this.show = this.show.bind( this )
@@ -25,6 +37,10 @@ class Alert extends React.Component {
   }
 
   componentDidMount() {
+    setTimeout( () => {
+      this.setState({ isHidden: false })
+    }, 300 )
+
     this.alertContent.current.focus()
   }
 
@@ -51,38 +67,35 @@ class Alert extends React.Component {
     const isHidden = this.state.isHidden
 
     return (
-      <React.Fragment>
-        { !isHidden &&
-          <div 
-            className={ classNames( `Alert Alert--${type}`, className ) } 
-            role='alert' 
-            tabIndex='-1'
-            { ...props }
-          >
-            <div className='Alert-pre'>
-              { type === 'error' &&
-                <FaExclamationCircle className='Alert-icon'/>
-              }
+      <PosedDiv
+        className={ classNames( `Alert Alert--${type}`, className ) } 
+        role='alert' 
+        tabIndex='-1'
+        pose={ isHidden ? 'hidden' : 'visible' }
+        { ...props }
+      >
+        <div className='Alert-pre'>
+          { type === 'error' &&
+            <FaExclamationCircle className='Alert-icon'/>
+          }
 
-              { type === 'success' &&
-                <FaCheckCircle className='Alert-icon'/>
-              }
+          { type === 'success' &&
+            <FaCheckCircle className='Alert-icon'/>
+          }
 
-              { type === 'attention' &&
-                <FaExclamationTriangle className='Alert-icon'/>
-              }
+          { type === 'attention' &&
+            <FaExclamationTriangle className='Alert-icon'/>
+          }
 
-              { type === 'info' &&
-                <FaInfoCircle className='Alert-icon'/>
-              }
-            </div>
+          { type === 'info' &&
+            <FaInfoCircle className='Alert-icon'/>
+          }
+      </div>
 
-            <div className='Alert-content' ref={ this.alertContent } tabIndex='-1'>
-              { content }
-            </div>
-          </div>
-        }
-     </React.Fragment>
+      <div className='Alert-content' ref={ this.alertContent } tabIndex='-1'>
+        { content }
+      </div>
+     </PosedDiv>
     )
   }
 }
