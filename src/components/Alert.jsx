@@ -15,6 +15,7 @@ const PosedDiv = posed.div({
   visible: {
     opacity: 1,
     scaleY: 1,
+    scaleX: 1,
     transition: {
       type: 'spring',
       delay: 300
@@ -22,7 +23,8 @@ const PosedDiv = posed.div({
   },
   hidden: {
     opacity: 0,
-    scaleY: 0.66
+    scaleY: 0.66,
+    scaleX: 0.925  
   }
 });
 
@@ -70,8 +72,7 @@ class Alert extends React.Component {
     return (
       <PosedDiv
         className={ classNames( `Alert Alert--${type}`, className ) } 
-        role='alert' 
-        tabIndex='-1'
+        role='alert'
         pose={ isHidden ? 'hidden' : 'visible' }
         { ...props }
       >

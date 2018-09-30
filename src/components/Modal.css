@@ -12,10 +12,6 @@
   max-width: var(--breakpoint-sm);
 }
 
-.Modal:focus {
-  outline: none; /* focus is for screen readers only, does not need to be visible */
-}
-
 .Modal-button {
   border: 0;
   padding: 0;
@@ -26,6 +22,10 @@
   font-size: var(--font-size-lg);
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
+}
+
+.Modal-heading:focus {
+  outline: none; /* focus is for screen readers only, does not need to be visible */
 }
 
 .Modal-content {
