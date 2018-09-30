@@ -37,23 +37,20 @@ class Alert extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout( () => {
-      this.setState({ isHidden: false })
-    }, 300 )
-
+    this.setState({ isHidden: false })
     this.alertContent.current.focus()
   }
 
   show() {
     this.setState( {
       isHidden: false
-    } )
+    })
   }
 
   hide() {
     this.setState( {
       isHidden: true
-    } )
+    })
   }
 
   render() {
