@@ -14,11 +14,15 @@ import './Alert.css'
 const PosedDiv = posed.div({
   visible: {
     opacity: 1,
-    scaleY: 1
+    scaleY: 1,
+    transition: {
+      type: 'spring',
+      delay: 300
+    }
   },
   hidden: {
     opacity: 0,
-    scaleY: 0
+    scaleY: 0.66
   }
 });
 
