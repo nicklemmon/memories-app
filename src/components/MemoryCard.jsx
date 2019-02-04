@@ -15,7 +15,8 @@ class MemoryCard extends React.Component {
       tags,
       summary,
       handleDelete,
-      className
+      className,
+      ...attributes
     } = this.props
     
     const dateStr = this.props.date || new Date()
@@ -48,6 +49,7 @@ class MemoryCard extends React.Component {
             )
           } )
         }
+        { ...attributes }
       >
         <p>{ summary }</p>
         

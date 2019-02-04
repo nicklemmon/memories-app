@@ -13,7 +13,7 @@ class MemoryGrid extends React.Component {
     super( props )
 
     this.state = {
-      memoriesURL: `${process.env.REACT_APP_API_BASE_URL}/api/memories`,
+      memoriesURL: `${process.env.REACT_APP_API_BASE_URL}/classes/memory`,
       memories: [],
       successDelete: false,
       errorMessage: false,
@@ -29,7 +29,12 @@ class MemoryGrid extends React.Component {
   getMemories() {
     return axios({
       method: 'get',
-      url: this.state.memoriesURL
+      url: this.state.memoriesURL,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Parse-REST-API-Key': process.env.REACT_APP_API_KEY,
+        'X-Parse-Application-Id': process.env.REACT_APP_APPLICATION_ID
+      }
     })
   }
 
@@ -39,7 +44,7 @@ class MemoryGrid extends React.Component {
         .then( res => {
           this.setState( {
             loading: false,
-            memories: res.data,
+            memories: res.data.results,
           })
         })
         .catch( error => {
@@ -67,10 +72,14 @@ class MemoryGrid extends React.Component {
   }
 
   render() {
-    const errorMessage = this.state.errorMessage
-    const successDelete = this.state.successDelete
-    const memories = this.state.memories
-    const loading = this.state.loading
+    const {
+      errorMessage,
+      successDelete,
+      memories,
+      loading
+    } = this.state;
+
+    console.log( memories );
 
     return (
       <div>
@@ -107,10 +116,10 @@ class MemoryGrid extends React.Component {
               Object.keys( memories ).map( memory => {
                 return (
                   <MemoryCard 
-                    key={ memories[memory]._id }
+                    key={ memories[memory].objectId }
                     title={ memories[memory].title }
                     summary={ memories[memory].summary }
-                    date={ memories[memory].date }
+                    date={ memories[memory].createdAt }
                     tags={ memories[memory].tags }
                     handleDelete={ () => this.deleteMemory( memories[memory]._id ) }
                     { ...this.props }

@@ -113,6 +113,10 @@ button:focus,
   transition: outline var(--anim-speed) var(--anim-easing);
 }
 
+[tabindex='-1']:focus {
+  outline: none;
+}
+
 /* Utility classes */
 .u-maxWidth-sm {
   max-width: var(--breakpoint-sm);
