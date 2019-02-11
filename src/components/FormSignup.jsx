@@ -14,7 +14,7 @@ class FormSignup extends React.Component {
       hasAlert: false,
       alertType: null,
       alertContent: null,
-      name: null,
+      username: null,
       email: null,
       password: null,
       successMsg: false,
@@ -29,8 +29,10 @@ class FormSignup extends React.Component {
 
   handleFormGroupChange( e ) {
     const target = e.target
-    const value = target.value
-    const name = target.name
+    const {
+      value,
+      name
+    } = target;
 
     this.setState( {
       [name]: value
@@ -39,7 +41,7 @@ class FormSignup extends React.Component {
 
   resetForm() {
     this.setState({
-      name: null,
+      username: null,
       email: null,
       password: null
     })
@@ -48,19 +50,28 @@ class FormSignup extends React.Component {
   handleSubmit( e ) {
     e.preventDefault()
 
-    axios.post( `${process.env.REACT_APP_API_BASE_URL}/api/users`, {
-        name: this.state.name,
+    axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/users`,
+      {
+        username: this.state.username,
         email: this.state.email,
-        password: this.state.password,
-        signUpDate: Date.now()
+        password: this.state.password
+      },
+      {
+        headers: {
+          'X-Parse-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+          'X-Parse-REST-API-Key': process.env.REACT_APP_API_KEY,
+          'X-Parse-Revocable-Session': '1',
+          'Content-Type': 'application/json'
+        }
       })
-      .then( res => {
-        this.resetForm()
-        this.setState( { successMsg: true } )
-      })
-      .catch( error => {
-        this.setState( { errorMsg: true } )
-      })
+        .then( res => {
+          this.resetForm()
+          this.setState( { successMsg: true } )
+        })
+        .catch( error => {
+          this.setState( { errorMsg: true } )
+        })
   }
 
   render() {
@@ -85,11 +96,11 @@ class FormSignup extends React.Component {
         alertContent={ alertContent }
       >
         <FormGroup
-          label='Name'
+          label='Username'
           type='text'
-          id='name'
+          id='username'
           handleChange={ this.handleFormGroupChange }
-          value={ this.state.name }
+          value={ this.state.username }
         />
 
         <FormGroup
