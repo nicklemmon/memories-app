@@ -29,21 +29,17 @@ class Hero extends React.Component {
           />
 
           <ButtonWrapper className='Hero-buttonWrapper'>
-            { !this.props.auth.isAuthenticated() &&
-              <Button 
-                type='primary' 
-                content='Log In'
-                onClick={ this.props.auth.login }
-              />
-            }
+            <Button 
+              type='primary' 
+              content='Log In'
+              linkTo='/login'
+            />
 
-            { this.props.auth.isAuthenticated() &&
-              <Button
-                type='primary'
-                content='Add Memory'
-                linkTo='/addmemory'
-              />
-            }
+            {/* <Button
+              type='primary'
+              content='Add Memory'
+              linkTo='/addmemory'
+            /> */}
 
             <Button
               type='secondary'

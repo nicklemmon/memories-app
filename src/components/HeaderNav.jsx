@@ -22,6 +22,7 @@ class HeaderNav extends React.Component {
 
     this.toggle = this.toggle.bind( this )
     this.close = this.close.bind( this )
+    this.logout = this.logout.bind( this )
   }
 
   handleClickOutside() {
@@ -44,6 +45,10 @@ class HeaderNav extends React.Component {
     this.setState( prevState => ( {
       isOpen: !prevState.isOpen
     }))
+  }
+
+  logout() {
+    console.log( 'Log out!' )
   }
 
   render() {
@@ -69,18 +74,16 @@ class HeaderNav extends React.Component {
           role='navigation' 
           aria-label='site'
         >
-          { !this.props.auth.isAuthenticated() &&
-            <NavLink
-              to='login'
-              className='HeaderNav-item'
-              onKeyUp={ this.handleKeyup }
-              onClick={ this.toggle }
-            >
-                <FaSignInAlt className='HeaderNav-itemIcon'/>
+          <NavLink
+            to='login'
+            className='HeaderNav-item'
+            onKeyUp={ this.handleKeyup }
+            onClick={ this.toggle }
+          >
+              <FaSignInAlt className='HeaderNav-itemIcon'/>
 
-                Log In
-            </NavLink>
-          }
+              Log In
+          </NavLink>
           
           <NavLink 
             to='memories' 
@@ -93,31 +96,27 @@ class HeaderNav extends React.Component {
             View Memories
           </NavLink>
 
-          { this.props.auth.isAuthenticated() &&
-            <NavLink 
-              to='addmemory' 
-              className='HeaderNav-item'
-              onKeyUp={ this.handleKeyup }
-              onClick={ this.toggle }
-            >
-              <FaPlusCircle className='HeaderNav-itemIcon'/>
+          <NavLink 
+            to='addmemory' 
+            className='HeaderNav-item'
+            onKeyUp={ this.handleKeyup }
+            onClick={ this.toggle }
+          >
+            <FaPlusCircle className='HeaderNav-itemIcon'/>
 
-              Add Memory
-            </NavLink>
-          }
+            Add Memory
+          </NavLink>
             
-          { this.props.auth.isAuthenticated() &&
-            <NavLink 
-              to='logout' 
-              className='HeaderNav-item'
-              onKeyUp={ this.handleKeyup }
-              onClick={ this.props.auth.logout }
-            >
-              <FaSignOutAlt className='HeaderNav-itemIcon'/>
+          <NavLink 
+            to='logout' 
+            className='HeaderNav-item'
+            onKeyUp={ this.handleKeyup }
+            onClick={ this.logout }
+          >
+            <FaSignOutAlt className='HeaderNav-itemIcon'/>
 
-              Log Out
-            </NavLink>
-          }
+            Log Out
+          </NavLink>
         </div>
       </div>
     )

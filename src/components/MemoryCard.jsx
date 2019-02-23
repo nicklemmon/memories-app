@@ -53,22 +53,20 @@ class MemoryCard extends React.Component {
       >
         <p>{ summary }</p>
         
-        { this.props.auth.isAuthenticated() &&
-          <ModalLauncher
-            className='MemoryCard-delete'
-            content={ <FaTrashAlt className='MemoryCard-trash' role='img' aria-label='Delete'/> }
-            id='delete-memory'
-            heading={ `Delete "${title}"?` }
-            hasCTAs={ true }
-            primaryButtonContent='Delete'
-            primaryButtonOnClick={ handleDelete }
-            primaryButtonCloses={ true }
-            secondaryButtonContent='Cancel'
-            secondaryButtonCloses={ true }
-          >
-            <p>Are you sure you want to delete this memory?</p>
-          </ModalLauncher>
-        }
+        <ModalLauncher
+          className='MemoryCard-delete'
+          content={ <FaTrashAlt className='MemoryCard-trash' role='img' aria-label='Delete'/> }
+          id='delete-memory'
+          heading={ `Delete "${title}"?` }
+          hasCTAs={ true }
+          primaryButtonContent='Delete'
+          primaryButtonOnClick={ handleDelete }
+          primaryButtonCloses={ true }
+          secondaryButtonContent='Cancel'
+          secondaryButtonCloses={ true }
+        >
+          <p>Are you sure you want to delete this memory?</p>
+        </ModalLauncher>
       </Card>
     )
   }

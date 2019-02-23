@@ -9,7 +9,6 @@ import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
 import MemoriesPage from '../pages/memories.jsx'
 import AddMemoryPage from '../pages/addmemory.jsx'
-import CallbackPage from '../pages/callback.jsx'
 import LoginPage from '../pages/login.jsx'
 import SignupPage from '../pages/signup.jsx'
 
@@ -46,13 +45,7 @@ class DefaultLayout extends React.Component {
               render={ () => <SignupPage { ...this.props } /> }
             />
 
-            { this.props.auth.isAuthenticated() &&
-              <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
-            }
-            
-            <Route path='/callback' render={ ( props ) => {
-              return <CallbackPage { ...props } /> 
-            }}/>
+            <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
 
             <Route
               path='/login'
