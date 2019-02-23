@@ -24,7 +24,6 @@ class FormSignup extends React.Component {
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
     this.handleSubmit = this.handleSubmit.bind( this )
     this.resetForm = this.resetForm.bind( this )
-    this.render = this.render.bind( this )
   }
 
   handleFormGroupChange( e ) {
@@ -71,6 +70,8 @@ class FormSignup extends React.Component {
         })
         .catch( error => {
           this.setState( { errorMsg: true } )
+
+          console.log( error );
         })
   }
 
@@ -86,6 +87,11 @@ class FormSignup extends React.Component {
     if ( this.state.successMsg ) {
       alertType = 'success'
       alertContent = 'Success! User added.'
+    }
+
+    if ( this.state.errorMsg ) {
+      alertType = 'error'
+      alertContent = 'Whoops! Something went wrong when signing up. Try again.'
     }
 
     return(

@@ -70,16 +70,16 @@ class HeaderNav extends React.Component {
           aria-label='site'
         >
           { !this.props.auth.isAuthenticated() &&
-            <div
+            <NavLink
+              to='login'
               className='HeaderNav-item'
-              role='button'
               onKeyUp={ this.handleKeyup }
-              onClick={ this.props.auth.login }
+              onClick={ this.toggle }
             >
                 <FaSignInAlt className='HeaderNav-itemIcon'/>
 
                 Log In
-            </div>
+            </NavLink>
           }
           
           <NavLink 
