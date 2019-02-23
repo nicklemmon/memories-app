@@ -64,8 +64,6 @@ class FormLogin extends React.Component {
         })
         .catch( error => {
           this.setState( { errorMsg: true } )
-
-          console.log( error );
         })
   }
 
