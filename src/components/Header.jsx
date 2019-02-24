@@ -8,11 +8,16 @@ import HeaderNav from './HeaderNav.jsx'
 
 class Header extends React.Component {
   render() {
-    const { className } = this.props
+    const {
+      className,
+      user
+    } = this.props
 
     return (
       <header className={ classNames( 'Header', className ) }>
-        <span className='Header-spacer' role='presentation'></span>
+        <span className='Header-user'>
+          { user && user.username }
+        </span>
 
         <NavLink 
           className='Header-brand'
@@ -21,7 +26,10 @@ class Header extends React.Component {
           Eva's Memories
         </NavLink>
 
-        <HeaderNav className='Header-nav' { ...this.props }/>
+        <HeaderNav
+          className='Header-nav'
+          user={ user }
+        />
       </header>
     )
   }

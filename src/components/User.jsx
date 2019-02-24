@@ -6,7 +6,7 @@ function User( props ) {
   return (
     <UserContext.Consumer>
       { user => (
-        <p>{ user.username }</p>
+        <p>Welcome, { user.username }!</p>
       ) }
     </UserContext.Consumer>
   )

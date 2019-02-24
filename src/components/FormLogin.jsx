@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+import Parse from 'parse'
+import { Redirect } from 'react-router-dom'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
@@ -15,12 +16,12 @@ class FormLogin extends React.Component {
       alertType: null,
       alertContent: null,
       username: null,
-      password: null
+      password: null,
+      redirect: false
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
     this.handleSubmit = this.handleSubmit.bind( this )
-    this.resetForm = this.resetForm.bind( this )
   }
 
   handleFormGroupChange( e ) {
@@ -35,88 +36,84 @@ class FormLogin extends React.Component {
     })
   }
 
-  resetForm() {
-    this.setState({
-      username: null,
-      password: null
-    })
+  signIn() {
+    Parse.User.logIn( this.state.username, this.state.password )
+      .then( user => {
+        this.setState({ redirect: true })
+      })
+      .catch( error => {
+        this.setState({ errorMsg: true })
+      })
   }
 
   handleSubmit( e ) {
     e.preventDefault()
 
-    axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/login`,
-      {
-        params: {
-          username: this.state.username,
-          password: this.state.password
-        },
-        headers: {
-          'X-Parse-Application-Id': process.env.REACT_APP_APPLICATION_ID,
-          'X-Parse-REST-API-Key': process.env.REACT_APP_API_KEY,
-          'X-Parse-Revocable-Session': 1
-        }
-      })
-        .then( res => {
-          this.resetForm()
-          this.setState( { successMsg: true } )
-        })
-        .catch( error => {
-          this.setState( { errorMsg: true } )
-        })
+    this.signIn()
   }
 
   render() {
+    const {
+      errorMsg,
+      redirect
+    } = this.state
+
     let hasAlert
     let alertType
     let alertContent
-
-    if ( this.state.successMsg || this.state.errorMsg ) {
+    
+    if ( errorMsg ) {
       hasAlert = true
-    }
-
-    if ( this.state.successMsg ) {
-      alertType = 'success'
-      alertContent = 'Success! You logged in.'
-    }
-
-    if ( this.state.errorMsg ) {
       alertType= 'error'
       alertContent = 'Invalid username or password.'
     }
 
     return (
-      <FormWrapper
-        hasAlert={ hasAlert }
-        alertType={ alertType }
-        alertContent={ alertContent }
-      >
-        <FormGroup
-          label='Username'
-          type='text'
-          id='username'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.username }
-        />
-
-        <FormGroup
-          label='Password'
-          type='password'
-          id='password'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.password }
-        />
-
-        <ButtonWrapper>
-          <Button
-            type='primary'
-            content='Login'
-            fullWidth='true'
-            onClick={ this.handleSubmit }
+      <React.Fragment>
+        { redirect &&
+          <Redirect
+            to={{
+              pathname: '/',
+              state: {
+                authedUser: this.state.authedUser
+              }
+            }}
           />
-        </ButtonWrapper>
-      </FormWrapper>
+        }
+        
+        { !redirect && 
+          <FormWrapper
+            hasAlert={ hasAlert }
+            alertType={ alertType }
+            alertContent={ alertContent }
+          >
+            <FormGroup
+              label='Username'
+              type='text'
+              id='username'
+              handleChange={ this.handleFormGroupChange }
+              value={ this.state.username }
+            />
+
+            <FormGroup
+              label='Password'
+              type='password'
+              id='password'
+              handleChange={ this.handleFormGroupChange }
+              value={ this.state.password }
+            />
+
+            <ButtonWrapper>
+              <Button
+                type='primary'
+                content='Login'
+                fullWidth='true'
+                onClick={ this.handleSubmit }
+              />
+            </ButtonWrapper>
+          </FormWrapper>
+        }
+      </React.Fragment>
     )
   }
 }

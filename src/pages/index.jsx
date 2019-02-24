@@ -9,7 +9,7 @@ class IndexPage extends React.Component {
   render() {
     return (
       <div>
-        <Hero { ...this.props }/>
+        <Hero/>
 
         <Content>
           <Heading
@@ -18,7 +18,7 @@ class IndexPage extends React.Component {
             alignment='center'
           />
 
-          <MemoryGrid { ...this.props }/>
+          <MemoryGrid/>
         </Content>
       </div>
     )

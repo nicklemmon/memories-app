@@ -1,29 +1,23 @@
 import React from 'react'
+import Parse from 'parse'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import DefaultLayout from './layouts/DefaultLayout.jsx'
-import { UserContext } from './components/UserContext.js'
+
 
 class App extends React.Component {
   constructor( props ) {
     super( props )
-
-    this.state = {
-      user: {
-        username: null,
-        firstName: null,
-        lastName: null
-      }
-    }
+    
+    Parse.initialize( process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_API_KEY )
+    Parse.serverURL = process.env.REACT_APP_API_BASE_URL
   }
 
   render() {
     return (
-      <UserContext.Provider value={ this.state.user }>
-        <Router>
-          <DefaultLayout { ...this.props }/>
-        </Router>
-      </UserContext.Provider>
+      <Router>
+        <DefaultLayout/>
+      </Router>
     )
   }
 }

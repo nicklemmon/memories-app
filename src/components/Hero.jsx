@@ -1,4 +1,5 @@
 import React from 'react'
+import Parse from 'parse'
 
 import Button from './Button.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
@@ -11,14 +12,28 @@ class Hero extends React.Component {
   constructor( props ) {
     super( props )
 
+    this.state = {
+      isSignedIn: false
+    }
+
+    this.fetchUser = this.fetchUser.bind( this )
     this.hero = React.createRef()
   }
 
+  fetchUser() {
+    if ( Parse.User.current() ) {
+      this.setState({ isSignedIn: true })
+    }
+  }
+
   componentDidMount() {
+    this.fetchUser()
     this.hero.current.focus()
   }
 
   render() {
+    const { isSignedIn } = this.state
+
     return (
       <div className='Hero' ref={ this.hero } tabIndex='-1'>
         <div className='Hero-wrapper'>
@@ -28,18 +43,24 @@ class Hero extends React.Component {
             className='Hero-heading'
           />
 
-          <ButtonWrapper className='Hero-buttonWrapper'>
-            <Button 
-              type='primary' 
-              content='Log In'
-              linkTo='/login'
-            />
+          <p>{ this.state.currentUser }</p>
 
-            {/* <Button
-              type='primary'
-              content='Add Memory'
-              linkTo='/addmemory'
-            /> */}
+          <ButtonWrapper className='Hero-buttonWrapper'>
+            { !isSignedIn && 
+              <Button 
+                type='primary' 
+                content='Log In'
+                linkTo='/login'
+              />
+            }
+            
+            { isSignedIn &&
+              <Button
+                type='primary'
+                content='Add Memory'
+                linkTo='/addmemory'
+              />
+            }
 
             <Button
               type='secondary'

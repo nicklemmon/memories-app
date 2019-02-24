@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import Parse from 'parse'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
@@ -49,28 +49,20 @@ class FormSignup extends React.Component {
   handleSubmit( e ) {
     e.preventDefault()
 
-    axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/users`,
-      {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password
-      },
-      {
-        headers: {
-          'X-Parse-Application-Id': process.env.REACT_APP_APPLICATION_ID,
-          'X-Parse-REST-API-Key': process.env.REACT_APP_API_KEY,
-          'X-Parse-Revocable-Session': '1',
-          'Content-Type': 'application/json'
-        }
+    const user = new Parse.User()
+
+    user.set( 'username', this.state.username )
+    user.set( 'email', this.state.email )
+    user.set( 'password', this.state.password )
+
+    user.signUp()
+      .then( user => {
+        this.resetForm()
+        this.setState({ successMsg: true })
       })
-        .then( res => {
-          this.resetForm()
-          this.setState( { successMsg: true } )
-        })
-        .catch( error => {
-          this.setState( { errorMsg: true } )
-        })
+      .catch( error => {
+        this.setState({ errorMsg: true })
+      })
   }
 
   render() {

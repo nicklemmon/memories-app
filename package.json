@@ -7,7 +7,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
-    "parse": "^2.1.0",
+    "parse": "^2.2.1",
     "react": "^16.3.2",
     "react-click-outside": "^3.0.1",
     "react-dom": "^16.3.2",

@@ -16,40 +16,30 @@ import './DefaultLayout.css'
 
 class DefaultLayout extends React.Component {
   render() {
-    return(
+    return (
       <div className='Layout'>
-        <Helmet
-          title="Memories"
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        />
+        <Helmet title="Memories"/>
         
-        <Header classNames='Layout-header' { ...this.props } />
+        <Header classNames='Layout-header' />
 
         <main className='Layout-main'>
           { this.props.children }
 
           <Switch>
-            <Route exact path='/' render = { () => {
-              return <IndexPage { ...this.props } />
-            }}/>
+            <Route exact path='/' component={ IndexPage } />
 
-            <Route path='/memories' render={ () => {
-              return <MemoriesPage { ...this.props } />
-            }}/>
+            <Route path='/memories' render={ () => <MemoriesPage/> } />
 
             <Route
               path='/signup'
-              render={ () => <SignupPage { ...this.props } /> }
+              render={ () => <SignupPage/> }
             />
 
-            <Route path='/addmemory' component={ AddMemoryPage } { ...this.props }/>
+            <Route path='/addmemory' component={ AddMemoryPage }/>
 
             <Route
               path='/login'
-              render={ () => <LoginPage { ...this.props } /> }
+              render={ () => <LoginPage/> }
             />
 
             <Route path='*' component={ NotFoundPage }/>
