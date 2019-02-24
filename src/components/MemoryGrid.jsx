@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import Parse from 'parse'
 
 import MaxWidth from '../components/MaxWidth.jsx'
 import MemoryCard from '../components/MemoryCard.jsx'
@@ -27,48 +27,38 @@ class MemoryGrid extends React.Component {
   }
 
   getMemories() {
-    return axios({
-      method: 'get',
-      url: this.state.memoriesURL,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-Parse-REST-API-Key': process.env.REACT_APP_API_KEY,
-        'X-Parse-Application-Id': process.env.REACT_APP_APPLICATION_ID
-      }
-    })
-  }
+    const Memory = Parse.Object.extend( 'memory' )
+    const query = new Parse.Query( Memory );
 
-  updateMemories() {
-    this.setState( { loading: true }, () => {
-      this.getMemories()
-        .then( res => {
-          this.setState( {
-            loading: false,
-            memories: res.data.results,
-          })
+    query.limit( 1000 );
+
+    query.find()
+      .then( res => {
+        this.setState({
+          memories: JSON.parse( JSON.stringify( res ) ) // There has *got* to be a better way to handle this 😓
         })
-        .catch( error => {
-          this.setState({
-            loading: false,
-            errorMessage: true
-          })
+      })
+      .catch( error => {
+        this.setState({
+          loading: false,
+          errorMessage: true
         })
-    })
+      })
   }
 
   deleteMemory( memoryID ) {
-    axios.delete( `${this.state.memoriesURL}/${memoryID}`, {
-      params: {
-        '_id': memoryID
-      }
-    }).then( res => {
-      this.updateMemories()
-      this.setState( { successDelete: true } )
-    })
+    // axios.delete( `${this.state.memoriesURL}/${memoryID}`, {
+    //   params: {
+    //     '_id': memoryID
+    //   }
+    // }).then( res => {
+    //   this.updateMemories()
+    //   this.setState( { successDelete: true } )
+    // })
   }
 
   componentDidMount() {
-    this.updateMemories()
+    this.getMemories()
   }
 
   render() {
@@ -77,9 +67,7 @@ class MemoryGrid extends React.Component {
       successDelete,
       memories,
       loading
-    } = this.state;
-
-    console.log( memories );
+    } = this.state
 
     return (
       <div>

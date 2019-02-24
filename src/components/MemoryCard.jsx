@@ -19,6 +19,19 @@ class MemoryCard extends React.Component {
       ...attributes
     } = this.props
     
+    let renderedTags
+
+    if ( tags ) {
+      renderedTags = tags.map( ( tag, index ) => {
+        return (
+          <Tag
+            key={ `tag-${tag.name}-${index}` }
+            content={ tag.name }
+          />
+        )
+      })
+    }
+    
     const dateStr = this.props.date || new Date()
     const date = new Date( dateStr )
 
@@ -39,16 +52,7 @@ class MemoryCard extends React.Component {
         headingContent={ title }
         headingLevel='3'
         metaContent={ formattedDate }
-        footerContent={
-          tags.map( ( tag, index ) => {
-            return (
-              <Tag
-                key={ `tag-${tag.name}-${index}` }
-                content={ tag.name }
-              />
-            )
-          } )
-        }
+        footerContent={ renderedTags }
         { ...attributes }
       >
         <p>{ summary }</p>

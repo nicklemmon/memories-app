@@ -9,7 +9,11 @@ class App extends React.Component {
   constructor( props ) {
     super( props )
     
-    Parse.initialize( process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_API_KEY )
+    Parse.initialize(
+      process.env.REACT_APP_APPLICATION_ID,
+      process.env.REACT_APP_API_KEY,
+      process.env.REACT_APP_MASTER_KEY
+    )
     Parse.serverURL = process.env.REACT_APP_API_BASE_URL
   }
 

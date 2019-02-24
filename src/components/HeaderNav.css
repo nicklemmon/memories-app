@@ -54,8 +54,13 @@
 }
 
 .HeaderNav-item {
+  width: 100%;
   display: flex;
+  align-items: center;
+  font-size: var(--font-size-md);
   padding: var(--spacing-md);
+  background-color: var(--white);
+  border: 0;
   color: var(--purple);
   cursor: pointer;
   text-decoration: none;

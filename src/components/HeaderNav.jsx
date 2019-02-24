@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import { Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import {
   FaBars,
@@ -8,6 +9,7 @@ import {
   FaCloud,
   FaPlusCircle
 } from 'react-icons/fa'
+import Parse from 'parse'
 import enhanceWithClickOutside from 'react-click-outside'
 
 import './HeaderNav.css'
@@ -17,7 +19,8 @@ class HeaderNav extends React.Component {
     super( props )
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      redirect: false
     }
 
     this.toggle = this.toggle.bind( this )
@@ -48,77 +51,97 @@ class HeaderNav extends React.Component {
   }
 
   logout() {
-    console.log( 'Log out!' )
+    Parse.User.logOut()
+      .then( () => {
+        this.setState({
+          redirect: true
+        }, () => {
+          this.setState({ redirect: false })
+        })
+      })
   }
 
   render() {
     const { className } = this.props
-    const isOpen = this.state.isOpen
+    const {
+      isOpen,
+      redirect
+    } = this.state
 
     return(
-      <div className={ classNames( 'HeaderNav', className ) }>
-        <button
-          onClick={ this.toggle }
-          onKeyUp={ this.handleKeyup }
-          className='HeaderNav-button' 
-          aria-label='menu'
-          aria-expanded={ isOpen ? 'true' : 'false' }
-          aria-controls='HeaderNav-list'
-        >
-          <FaBars className='HeaderNav-buttonIcon' />
-        </button>
+      <React.Fragment>
+        { redirect &&
+          <Redirect
+            to={{
+              pathname: '/login'
+            }}
+          />
+        }
 
-        <div 
-          id='HeaderNav-list'
-          className={ 'HeaderNav-list ' + ( isOpen ? 'isOpen' : '' ) } 
-          role='navigation' 
-          aria-label='site'
-        >
-          <NavLink
-            to='login'
-            className='HeaderNav-item'
-            onKeyUp={ this.handleKeyup }
-            onClick={ this.toggle }
-          >
-              <FaSignInAlt className='HeaderNav-itemIcon'/>
+        { !redirect &&
+          <div className={ classNames( 'HeaderNav', className ) }>
+            <button
+              onClick={ this.toggle }
+              onKeyUp={ this.handleKeyup }
+              className='HeaderNav-button' 
+              aria-label='menu'
+              aria-expanded={ isOpen ? 'true' : 'false' }
+              aria-controls='HeaderNav-list'
+            >
+              <FaBars className='HeaderNav-buttonIcon' />
+            </button>
+    
+            <div 
+              id='HeaderNav-list'
+              className={ 'HeaderNav-list ' + ( isOpen ? 'isOpen' : '' ) } 
+              role='navigation' 
+              aria-label='site'
+            >
+              <NavLink
+                to='login'
+                className='HeaderNav-item'
+                onKeyUp={ this.handleKeyup }
+                onClick={ this.toggle }
+              >
+                  <FaSignInAlt className='HeaderNav-itemIcon'/>
+    
+                  Log In
+              </NavLink>
+              
+              <NavLink 
+                to='memories' 
+                className='HeaderNav-item'
+                onKeyUp={ this.handleKeyup }
+                onClick={ this.toggle }
+              >
+                <FaCloud className='HeaderNav-itemIcon'/>
+    
+                View Memories
+              </NavLink>
+    
+              <NavLink 
+                to='addmemory' 
+                className='HeaderNav-item'
+                onKeyUp={ this.handleKeyup }
+                onClick={ this.toggle }
+              >
+                <FaPlusCircle className='HeaderNav-itemIcon'/>
+    
+                Add Memory
+              </NavLink>
 
-              Log In
-          </NavLink>
-          
-          <NavLink 
-            to='memories' 
-            className='HeaderNav-item'
-            onKeyUp={ this.handleKeyup }
-            onClick={ this.toggle }
-          >
-            <FaCloud className='HeaderNav-itemIcon'/>
+              <button
+                className='HeaderNav-item'
+                onClick={ this.logout }
+              >
+                <FaSignOutAlt className='HeaderNav-itemIcon'/>
 
-            View Memories
-          </NavLink>
-
-          <NavLink 
-            to='addmemory' 
-            className='HeaderNav-item'
-            onKeyUp={ this.handleKeyup }
-            onClick={ this.toggle }
-          >
-            <FaPlusCircle className='HeaderNav-itemIcon'/>
-
-            Add Memory
-          </NavLink>
-            
-          <NavLink 
-            to='logout' 
-            className='HeaderNav-item'
-            onKeyUp={ this.handleKeyup }
-            onClick={ this.logout }
-          >
-            <FaSignOutAlt className='HeaderNav-itemIcon'/>
-
-            Log Out
-          </NavLink>
-        </div>
-      </div>
+                Log Out
+              </button>
+            </div>
+          </div>
+        }
+      </React.Fragment>
     )
   }
 }
