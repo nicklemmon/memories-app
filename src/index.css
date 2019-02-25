@@ -105,6 +105,11 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
 a:focus,
 button:focus,
 [role='button']:focus,

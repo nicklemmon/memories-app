@@ -6,10 +6,13 @@ import './FormWrapper.css'
 
 class FormWrapper extends React.Component {
   render() {
-    const method = this.props.method;
-    const hasAlert = this.props.hasAlert;
-    const alertType = this.props.alertType;
-    const alertContent = this.props.alertContent;
+    const {
+      method,
+      hasAlert,
+      alertType,
+      alertContent,
+      footerContent
+    } = this.props
 
     return (
       <Card 
@@ -17,6 +20,7 @@ class FormWrapper extends React.Component {
         hasAlert={ hasAlert }
         alertType={ alertType }
         alertContent={ alertContent }
+        footerContent={ footerContent }
       >
         <form
           method={ method }

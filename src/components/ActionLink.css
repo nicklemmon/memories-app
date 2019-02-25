@@ -2,3 +2,7 @@
   display: inline-flex;
   align-items: center;
 }
+
+.ActionLink-icon {
+  margin-left: var(--spacing-xs);
+}

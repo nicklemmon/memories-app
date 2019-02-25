@@ -43,6 +43,6 @@
 }
 
 .Card-footer {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-md);
   background-color: var(--white);
 }

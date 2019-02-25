@@ -9,13 +9,15 @@ function ActionLink( props ) {
   const {
     to,
     className,
-    children
+    children,
+    ...attributes
   } = props
 
   return (
     <NavLink
       to={ to }
       className={ classNames( 'ActionLink', className ) }
+      { ...attributes }
     >
       { children }
 

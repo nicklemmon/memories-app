@@ -32,20 +32,6 @@ class MemoryCard extends React.Component {
         )
       })
     }
-    
-    // const dateStr = this.props.date || new Date()
-    // const date = new Date( dateStr )
-
-    // let day = date.getDay()
-
-    // if ( day < 10 ) day = `0${day}`
-
-    // let month = date.getMonth()
-
-    // if ( month < 10 ) month = `0${month}`
-
-    // let year = date.getFullYear()
-    // let formattedDate = `${month}/${day}/${year}`
 
     return (
       <Card

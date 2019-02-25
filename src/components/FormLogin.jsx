@@ -6,6 +6,7 @@ import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Button from './Button.jsx'
+import ActionLink from './ActionLink.jsx'
 
 class FormLogin extends React.Component {
   constructor( props ) {
@@ -86,6 +87,7 @@ class FormLogin extends React.Component {
             hasAlert={ hasAlert }
             alertType={ alertType }
             alertContent={ alertContent }
+            footerContent={ <ActionLink style={{ 'float': 'right' }} to='/signup'>Sign Up</ActionLink> }
           >
             <FormGroup
               label='Username'
