@@ -20,12 +20,14 @@ class HeaderNav extends React.Component {
 
     this.state = {
       isOpen: false,
-      redirect: false
+      redirect: false,
+      isSignedIn: false
     }
 
     this.toggle = this.toggle.bind( this )
     this.close = this.close.bind( this )
     this.logout = this.logout.bind( this )
+    this.fetchUser = this.fetchUser.bind( this )
   }
 
   handleClickOutside() {
@@ -45,16 +47,25 @@ class HeaderNav extends React.Component {
   }
 
   toggle() {
-    this.setState( prevState => ( {
-      isOpen: !prevState.isOpen
-    }))
+    this.fetchUser(
+      this.setState( prevState => ( {
+        isOpen: !prevState.isOpen
+      }))
+    )
+  }
+
+  fetchUser( callback ) {
+    if ( Parse.User.current() ) {
+      this.setState({ isSignedIn: true }, () => callback )
+    }
   }
 
   logout() {
     Parse.User.logOut()
       .then( () => {
         this.setState({
-          redirect: true
+          redirect: true,
+          isSignedIn: false
         }, () => {
           this.setState({ redirect: false })
         })
@@ -65,7 +76,8 @@ class HeaderNav extends React.Component {
     const { className } = this.props
     const {
       isOpen,
-      redirect
+      redirect,
+      isSignedIn
     } = this.state
 
     return(
@@ -97,16 +109,18 @@ class HeaderNav extends React.Component {
               role='navigation' 
               aria-label='site'
             >
-              <NavLink
-                to='login'
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                  <FaSignInAlt className='HeaderNav-itemIcon'/>
-    
-                  Log In
-              </NavLink>
+              { !isSignedIn &&
+                <NavLink
+                  to='login'
+                  className='HeaderNav-item'
+                  onKeyUp={ this.handleKeyup }
+                  onClick={ this.toggle }
+                >
+                    <FaSignInAlt className='HeaderNav-itemIcon'/>
+      
+                    Log In
+                </NavLink>
+              }
               
               <NavLink 
                 to='memories' 
@@ -130,14 +144,16 @@ class HeaderNav extends React.Component {
                 Add Memory
               </NavLink>
 
-              <button
-                className='HeaderNav-item'
-                onClick={ this.logout }
-              >
-                <FaSignOutAlt className='HeaderNav-itemIcon'/>
+              { isSignedIn &&
+                <button
+                  className='HeaderNav-item'
+                  onClick={ this.logout }
+                >
+                  <FaSignOutAlt className='HeaderNav-itemIcon'/>
 
-                Log Out
-              </button>
+                  Log Out
+                </button>
+              }
             </div>
           </div>
         }
