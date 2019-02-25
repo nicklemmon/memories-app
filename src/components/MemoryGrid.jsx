@@ -111,15 +111,15 @@ class MemoryGrid extends React.Component {
         { loading ? <Loading/> :
           <div className='MemoryGrid'>
             {
-              Object.keys( memories ).map( memory => {
+              memories.map( memory => {
                 return (
                   <MemoryCard 
-                    key={ memories[memory].objectId }
-                    title={ memories[memory].title }
-                    summary={ memories[memory].summary }
-                    date={ memories[memory].createdAt }
-                    tags={ memories[memory].tags }
-                    handleDelete={ () => this.deleteMemory( memories[memory].objectId ) }
+                    key={ memory.objectId }
+                    title={ memory.title }
+                    summary={ memory.summary }
+                    date={ new Date( memory.createdAt ).toLocaleDateString() }
+                    tags={ memory.tags }
+                    handleDelete={ () => this.deleteMemory( memory.objectId ) }
                     { ...this.props }
                   />
                 )

@@ -16,6 +16,7 @@ class MemoryCard extends React.Component {
       summary,
       handleDelete,
       className,
+      date,
       ...attributes
     } = this.props
     
@@ -32,26 +33,26 @@ class MemoryCard extends React.Component {
       })
     }
     
-    const dateStr = this.props.date || new Date()
-    const date = new Date( dateStr )
+    // const dateStr = this.props.date || new Date()
+    // const date = new Date( dateStr )
 
-    let day = date.getDay()
+    // let day = date.getDay()
 
-    if ( day < 10 ) day = `0${day}`
+    // if ( day < 10 ) day = `0${day}`
 
-    let month = date.getMonth()
+    // let month = date.getMonth()
 
-    if ( month < 10 ) month = `0${month}`
+    // if ( month < 10 ) month = `0${month}`
 
-    let year = date.getFullYear()
-    let formattedDate = `${month}/${day}/${year}`
+    // let year = date.getFullYear()
+    // let formattedDate = `${month}/${day}/${year}`
 
     return (
       <Card
         className={ classNames( 'MemoryCard', className ) }
         headingContent={ title }
         headingLevel='3'
-        metaContent={ formattedDate }
+        metaContent={ date }
         footerContent={ renderedTags }
         { ...attributes }
       >
