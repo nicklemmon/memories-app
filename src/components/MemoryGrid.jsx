@@ -21,9 +21,13 @@ class MemoryGrid extends React.Component {
     }
 
     this.getMemories = this.getMemories.bind( this )
-    this.updateMemories = this.updateMemories.bind( this )
     this.deleteMemory = this.deleteMemory.bind( this )
+    this.updateMemories = this.updateMemories.bind( this )
     this.render = this.render.bind( this )
+  }
+
+  updateMemories() {
+    this.setState({ loading: true }, () => this.getMemories() )
   }
 
   getMemories() {
@@ -35,6 +39,7 @@ class MemoryGrid extends React.Component {
     query.find()
       .then( res => {
         this.setState({
+          loading: false,
           memories: JSON.parse( JSON.stringify( res ) ) // There has *got* to be a better way to handle this 😓
         })
       })
@@ -47,18 +52,23 @@ class MemoryGrid extends React.Component {
   }
 
   deleteMemory( memoryID ) {
-    // axios.delete( `${this.state.memoriesURL}/${memoryID}`, {
-    //   params: {
-    //     '_id': memoryID
-    //   }
-    // }).then( res => {
-    //   this.updateMemories()
-    //   this.setState( { successDelete: true } )
-    // })
+    const Memory = Parse.Object.extend( 'memory' )
+    const query = new Parse.Query( Memory )
+
+    query.get( memoryID )
+      .then( obj => {
+        obj.destroy()
+      })
+      .then( () => {
+        this.updateMemories()
+      })
+      .catch( error => {
+        console.log( error )
+      })
   }
 
   componentDidMount() {
-    this.getMemories()
+    this.updateMemories()
   }
 
   render() {
@@ -109,7 +119,7 @@ class MemoryGrid extends React.Component {
                     summary={ memories[memory].summary }
                     date={ memories[memory].createdAt }
                     tags={ memories[memory].tags }
-                    handleDelete={ () => this.deleteMemory( memories[memory]._id ) }
+                    handleDelete={ () => this.deleteMemory( memories[memory].objectId ) }
                     { ...this.props }
                   />
                 )
