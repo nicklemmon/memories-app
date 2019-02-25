@@ -12,14 +12,16 @@
   right: var(--spacing-sm);
   width: 35px;
   height: 35px;
+  padding: 3px;
   cursor: pointer;
-  transition: background-color var(--anim-speed) var(--anim-easing);
+  transition: transform var(--anim-speed) var(--anim-easing),
+              box-shadow var(--anim-speed) var(--anim-easing);
 }
 
 .MemoryCard-delete:hover,
 .MemoryCard-delete:focus {
-  background-color: var(--dark-white);
-  outline: 0;
+  transform: translateY(-3px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.125);
 }
 
 .MemoryCard-trash {
