@@ -95,7 +95,7 @@
 
 :root {
   color: var(--darker-gray);
-  font-size: calc(15px + 0.33vw);
+  font-size: calc(15px + 0.2vw);
   font-family: var(--font-family-primary);
 }
 
