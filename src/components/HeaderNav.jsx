@@ -63,6 +63,8 @@ class HeaderNav extends React.Component {
   logout() {
     Parse.User.logOut()
       .then( () => {
+        this.close()
+        
         this.setState({
           redirect: true,
           isSignedIn: false
