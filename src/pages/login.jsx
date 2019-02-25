@@ -12,12 +12,6 @@ class LoginPage extends React.Component {
         <PageHeading content='Log In'/>
 
         <Content>
-          <Heading
-            level='2'
-            content='Log In'
-            alignment='center'
-          />
-
           <FormLogin/>
         </Content>
       </div>
