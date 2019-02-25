@@ -7,14 +7,10 @@ const PosedDiv = posed.div({
   visible: {
     translateX: '-50%',
     translateY: '-50%',
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      delay: 150
-    }
+    opacity: 1
   },
   hidden: {
-    translateY: '-45%',
+    translateY: '-65%',
     translateX: '-50%',
     opacity: 0
   }
