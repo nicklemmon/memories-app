@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import Parse from 'parse'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
@@ -18,7 +18,8 @@ class FormAddMemory extends React.Component {
       tags: [{ name: ''}],
       tagMax: 3,
       tagMaxReached: false,
-      successAdd: false
+      successMsg: false,
+      errorMsg: false
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
@@ -61,19 +62,22 @@ class FormAddMemory extends React.Component {
 
   handleSubmit( e ) {
     e.preventDefault()
+    
+    const Memory = Parse.Object.extend( 'memory' )
+    const NewMemory = new Memory()
 
-    axios.post( `${process.env.REACT_APP_API_BASE_URL}/api/memories`, {
-        title: this.state.title,
-        date: this.state.date,
-        summary: this.state.summary,
-        tags: this.state.tags
-      })
+    NewMemory.set( 'title', this.state.title )
+    NewMemory.set( 'summary', this.state.summary )
+    NewMemory.set( 'tags', this.state.tags )
+    NewMemory.set( 'recordedDate', new Date( this.state.date ) )
+
+    NewMemory.save()
       .then( res => {
         this.resetForm()
-        this.setState( { successAdd: true } )
+        this.setState({ successMsg: true })
       })
       .catch( error => {
-        console.log( error )
+        this.setState({ errorMsg: true })
       })
   }
 
@@ -83,7 +87,7 @@ class FormAddMemory extends React.Component {
     // Show the tax max reached message when one below the tag max for a memory
     this.setState({
       tags: this.state.tags.concat( [ { name: '' } ] )
-    });
+    })
 
     if ( this.state.tags.length === this.state.tagMax - 1 ) {
       this.setState({ tagMaxReached: true })
@@ -95,7 +99,7 @@ class FormAddMemory extends React.Component {
 
     this.setState({
       tags: this.state.tags.filter( ( tag, subIndex ) => index !== subIndex )
-    });
+    })
 
     if ( this.state.tags.length < this.state.tagMax + 1 ) {
       this.setState({ tagMaxReached: false })
@@ -106,17 +110,24 @@ class FormAddMemory extends React.Component {
     const {
       tags,
       tagMaxReached,
-      successAdd
-    } = this.state;
+      successMsg,
+      errorMsg
+    } = this.state
 
     let hasAlert
     let alertType
     let alertContent
 
-    if ( successAdd ) {
+    if ( successMsg ) {
       hasAlert = true
       alertType = 'success'
       alertContent = 'Success! Memory added.'
+    }
+
+    if ( errorMsg ) {
+      hasAlert = true
+      alertType = 'error'
+      alertContent = 'Whoops! Error failed to be added. Try again.'
     }
 
     return (
