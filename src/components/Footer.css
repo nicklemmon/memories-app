@@ -1,5 +1,7 @@
 .Footer {
-  padding: var(--section-padding);
+  padding: var(--container-padding);
+  padding-top: 0 !important; /* 😧 Forgive me for my sins! */
+  padding-bottom: 0 !important; /* 😧 Forgive me for my sins! */
   display: flex;
   align-items: center;
   height: var(--header-footer-height);
@@ -10,6 +12,7 @@
 
 .Footer a {
   color: var(--white);
+  text-decoration: underline;
 }
 
 @media (min-width: 736px) {

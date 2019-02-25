@@ -8,7 +8,7 @@
   width: 100%;
   font-family: var(--font-family-primary);
   height: var(--header-footer-height);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0 var(--spacing-md);
   background-color: var(--purple);
   border-bottom: 1px solid var(--dark-purple);
   box-shadow: var(--box-shadow-sm);
