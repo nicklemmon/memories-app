@@ -19,9 +19,10 @@
 }
 
 .Modal-heading {
+  color: var(--dark-gray);
   font-size: var(--font-size-lg);
   font-weight: 700;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .Modal-heading:focus {

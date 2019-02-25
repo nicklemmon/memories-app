@@ -39,6 +39,7 @@
 .Card-content {
   padding: var(--spacing-md);
   line-height: 1.5;
+  color: var(--gray);
 }
 
 .Card-footer {
