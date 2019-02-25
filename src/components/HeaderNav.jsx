@@ -122,27 +122,31 @@ class HeaderNav extends React.Component {
                 </NavLink>
               }
               
-              <NavLink 
-                to='memories' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaCloud className='HeaderNav-itemIcon'/>
+              { isSignedIn &&
+                <NavLink 
+                  to='memories' 
+                  className='HeaderNav-item'
+                  onKeyUp={ this.handleKeyup }
+                  onClick={ this.toggle }
+                >
+                  <FaCloud className='HeaderNav-itemIcon'/>
+      
+                  View Memories
+                </NavLink>
+              }
     
-                View Memories
-              </NavLink>
-    
-              <NavLink 
-                to='addmemory' 
-                className='HeaderNav-item'
-                onKeyUp={ this.handleKeyup }
-                onClick={ this.toggle }
-              >
-                <FaPlusCircle className='HeaderNav-itemIcon'/>
-    
-                Add Memory
-              </NavLink>
+              { isSignedIn &&
+                <NavLink 
+                  to='addmemory' 
+                  className='HeaderNav-item'
+                  onKeyUp={ this.handleKeyup }
+                  onClick={ this.toggle }
+                >
+                  <FaPlusCircle className='HeaderNav-itemIcon'/>
+      
+                  Add Memory
+                </NavLink>
+              }
 
               { isSignedIn &&
                 <button
