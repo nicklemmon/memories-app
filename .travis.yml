@@ -8,9 +8,8 @@ cache:
   - node_modules
 
 script:
-  - npm install
+  - npm ci
   - npm test
-  - npm run build
 
 defaults: &defaults
   script:
@@ -35,5 +34,5 @@ deploy:
   provider: script
   script: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir ./build
   skip_cleanup: true
-    on:
-      branch: master
+  on:
+    branch: master
