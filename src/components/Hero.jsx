@@ -2,7 +2,7 @@ import React from 'react'
 import Parse from 'parse'
 
 import Button from './Button.jsx'
-import ButtonWrapper from './ButtonWrapper.jsx'
+import Card from './Card.jsx'
 import Heading from './Heading.jsx'
 
 import backgroundImage from '../images/cityscape.jpg'
@@ -43,9 +43,7 @@ class Hero extends React.Component {
             className='Hero-heading'
           />
 
-          <p>{ this.state.currentUser }</p>
-
-          <ButtonWrapper className='Hero-buttonWrapper'>
+          <Card className='Hero-card'>
             { !isSignedIn && 
               <Button 
                 type='primary' 
@@ -67,7 +65,7 @@ class Hero extends React.Component {
               content='View Memories'
               linkTo='/memories'
             />
-          </ButtonWrapper>
+          </Card>
 
           <img 
             className='Hero-background' 
