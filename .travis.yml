@@ -1,10 +1,39 @@
 language: node_js
+
 node_js:
   - "stable"
+
 cache:
   directories:
   - node_modules
+
 script:
   - npm install
   - npm test
   - npm run build
+
+defaults: &defaults
+  script:
+    - npm run test
+    - kill $(jobs -p) || true
+
+jobs:
+  include:
+    # we have multiple jobs to execute using just a single stage
+    # but we can pass group name via environment variable to Cypress test runner
+    - stage: test
+      env:
+        - STAGE_NAME=1x-electron
+      <<: *defaults
+
+before_deploy:
+  - rm -rf build
+  - npm install netlify-cli -g
+  - npm run build
+
+deploy:
+  provider: script
+  script: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir ./build
+  skip_cleanup: true
+    on:
+      branch: master
