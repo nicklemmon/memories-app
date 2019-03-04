@@ -7,8 +7,6 @@ class IndexPage extends React.Component {
     return (
       <div>
         <Hero/>
-
-        <p>Making a test change.</p>
       </div>
     )
   }
