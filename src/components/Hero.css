@@ -72,9 +72,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   margin: 0 auto;
+  text-align: center;
   z-index: var(--z-index-xl);
   padding: var(--spacing-md) 0;
+  width: 100%;
   max-width: var(--breakpoint-sm);
+}
+
+.Hero-cardDirections {
+  margin-bottom: var(--spacing-lg);
 }

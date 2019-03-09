@@ -45,26 +45,38 @@ class Hero extends React.Component {
 
           <Card className='Hero-card'>
             { !isSignedIn && 
-              <Button 
-                type='primary' 
-                content='Log In'
-                linkTo='/login'
-              />
+              <React.Fragment>
+                <p className='Hero-cardDirections'>Log in or sign up to get started.</p>
+
+                <Button 
+                  type='primary' 
+                  content='Log In'
+                  linkTo='/login'
+                />
+
+                <Button
+                  type='secondary'
+                  content='Sign Up'
+                  linkTo='/signup'
+                />
+              </React.Fragment>
             }
             
             { isSignedIn &&
-              <Button
-                type='primary'
-                content='Add Memory'
-                linkTo='/addmemory'
-              />
-            }
+              <React.Fragment>
+                <Button
+                  type='primary'
+                  content='Add Memory'
+                  linkTo='/addmemory'
+                />
 
-            <Button
-              type='secondary'
-              content='View Memories'
-              linkTo='/memories'
-            />
+                <Button
+                  type='secondary'
+                  content='View Memories'
+                  linkTo='/memories'
+                />
+              </React.Fragment>
+            }
           </Card>
 
           <img 
