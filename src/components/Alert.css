@@ -1,4 +1,5 @@
 .Alert {
+  background-color: var(--white);
   border: 2px solid var(--light-gray);
   border-bottom: 2px solid var(--light-gray);
   box-shadow: var(--box-shadow-sm);

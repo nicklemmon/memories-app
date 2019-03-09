@@ -67,8 +67,15 @@
   }
 }
 
+.Hero-successMsg {
+  position: relative; /* enables use of z-index */
+  margin-bottom: var(--spacing-lg);
+  z-index: var(--z-index-lg);
+}
+
 .Hero-card {
   position: relative;
+  z-index: var(--z-index-xl);
   display: flex;
   align-items: center;
   justify-content: center;

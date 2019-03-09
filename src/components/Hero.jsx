@@ -4,6 +4,7 @@ import Parse from 'parse'
 import Button from './Button.jsx'
 import Card from './Card.jsx'
 import Heading from './Heading.jsx'
+import Alert from './Alert.jsx'
 
 import backgroundImage from '../images/cityscape.jpg'
 import './Hero.css'
@@ -33,6 +34,7 @@ class Hero extends React.Component {
 
   render() {
     const { isSignedIn } = this.state
+    const { hasSuccessMessage } = this.props
 
     return (
       <div className='Hero' ref={ this.hero } tabIndex='-1'>
@@ -43,41 +45,51 @@ class Hero extends React.Component {
             className='Hero-heading'
           />
 
-          <Card className='Hero-card'>
-            { !isSignedIn && 
-              <React.Fragment>
-                <p className='Hero-cardDirections'>Log in or sign up to get started.</p>
-
-                <Button 
-                  type='primary' 
-                  content='Log In'
-                  linkTo='/login'
-                />
-
-                <Button
-                  type='secondary'
-                  content='Sign Up'
-                  linkTo='/signup'
-                />
-              </React.Fragment>
+          <div className='Hero-content'>
+            { hasSuccessMessage &&
+              <Alert
+                type='success'
+                content='Success! You are now logged in.'
+                className='Hero-successMsg'
+              />
             }
-            
-            { isSignedIn &&
-              <React.Fragment>
-                <Button
-                  type='primary'
-                  content='Add Memory'
-                  linkTo='/addmemory'
-                />
 
-                <Button
-                  type='secondary'
-                  content='View Memories'
-                  linkTo='/memories'
-                />
-              </React.Fragment>
-            }
-          </Card>
+            <Card className='Hero-card'>
+              { !isSignedIn && 
+                <React.Fragment>
+                  <p className='Hero-cardDirections'>Log in or sign up to get started.</p>
+
+                  <Button 
+                    type='primary' 
+                    content='Log In'
+                    linkTo='/login'
+                  />
+
+                  <Button
+                    type='secondary'
+                    content='Sign Up'
+                    linkTo='/signup'
+                  />
+                </React.Fragment>
+              }
+              
+              { isSignedIn &&
+                <React.Fragment>
+                  <Button
+                    type='primary'
+                    content='Add Memory'
+                    linkTo='/addmemory'
+                  />
+
+                  <Button
+                    type='secondary'
+                    content='View Memories'
+                    linkTo='/memories'
+                  />
+                </React.Fragment>
+              }
+            </Card>
+          </div>
 
           <img 
             className='Hero-background' 
