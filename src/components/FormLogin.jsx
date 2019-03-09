@@ -88,29 +88,32 @@ class FormLogin extends React.Component {
             hasAlert={ hasAlert }
             alertType={ alertType }
             alertContent={ alertContent }
-            footerContent={ <ActionLink style={{ 'float': 'right' }} to='/signup'>Sign Up</ActionLink> }
+            footerContent={ <ActionLink cy='link-sign-up' style={{ 'float': 'right' }} to='/signup'>Sign Up</ActionLink> }
           >
             <FormGroup
               label='Username'
               type='text'
               id='username'
+              cy='form-group-username'
               handleChange={ this.handleFormGroupChange }
               value={ this.state.username }
-            />
+              />
 
             <FormGroup
               label='Password'
               type='password'
               id='password'
+              cy='form-group-password'
               handleChange={ this.handleFormGroupChange }
               value={ this.state.password }
-            />
+              />
 
             <ButtonWrapper>
               <Button
                 type='primary'
-                content='Login'
+                content='Log In'
                 fullWidth='true'
+                cy='button-log-in'
                 onClick={ this.handleSubmit }
               />
             </ButtonWrapper>

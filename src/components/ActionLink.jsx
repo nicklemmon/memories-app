@@ -10,6 +10,7 @@ function ActionLink( props ) {
     to,
     className,
     children,
+    cy,
     ...attributes
   } = props
 
@@ -17,6 +18,7 @@ function ActionLink( props ) {
     <NavLink
       to={ to }
       className={ classNames( 'ActionLink', className ) }
+      data-cy={ cy }
       { ...attributes }
     >
       { children }

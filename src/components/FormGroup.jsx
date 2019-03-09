@@ -30,13 +30,17 @@ class FormGroup extends React.Component {
       placeholder,
       buttonContent,
       buttonOnClick,
-      className
+      className,
+      cy
     } = this.props
     
     const inputClassName = classNames( `FormGroup-input FormGroup-input--${type}`, className )
     
     return (
-      <div className='FormGroup'>
+      <div
+        className='FormGroup'
+        data-cy={ cy }
+      >
         <label 
           className='FormGroup-label' 
           htmlFor={ id }
