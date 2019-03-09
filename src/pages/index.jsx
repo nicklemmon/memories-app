@@ -6,16 +6,20 @@ function IndexPage( props ) {
   const { location } = props
 
   let successMsg = false
+  let userName
 
   //const hasSuccessMessage = props.location.state.hasSuccessMessage ? props.location.state.hasSuccessMessage : false
   if ( location.state && location.state.hasSuccessMessage ) {
     successMsg = true
+    userName = location.state.userName
   }
 
   return (
     <div>
-      {/* <Hero hasSuccessMessage={ hasSuccessMessage }/> */}
-      <Hero hasSuccessMessage={ successMsg } />
+      <Hero
+        hasSuccessMessage={ successMsg }
+        userName={ userName }
+      />
     </div>
   )
 }

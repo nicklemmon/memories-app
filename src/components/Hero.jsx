@@ -34,7 +34,10 @@ class Hero extends React.Component {
 
   render() {
     const { isSignedIn } = this.state
-    const { hasSuccessMessage } = this.props
+    const {
+      hasSuccessMessage,
+      userName
+    } = this.props
 
     return (
       <div className='Hero' ref={ this.hero } tabIndex='-1'>
@@ -49,7 +52,7 @@ class Hero extends React.Component {
             { hasSuccessMessage &&
               <Alert
                 type='success'
-                content='Success! You are now logged in.'
+                content={ `Success! Logged in as ${userName}.` }
                 className='Hero-successMsg'
               />
             }

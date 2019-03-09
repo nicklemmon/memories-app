@@ -76,7 +76,8 @@ class FormLogin extends React.Component {
             to={{
               pathname: '/',
               state: {
-                hasSuccessMessage: true
+                hasSuccessMessage: true,
+                userName: this.state.username
               }
             }}
           />
