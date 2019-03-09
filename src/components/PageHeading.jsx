@@ -17,10 +17,18 @@ class PageHeading extends React.Component {
   }
 
   render() {
-    const content = this.props.content
+    const {
+      content,
+      cy
+    } = this.props
 
     return (
-      <div className='PageHeading' tabIndex='-1' ref={ this.pageheading }>
+      <div
+        className='PageHeading'
+        tabIndex='-1'
+        ref={ this.pageheading }
+        data-cy={ cy }
+      >
         <Heading
           className='PageHeading-heading'
           content={ content }

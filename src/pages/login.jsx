@@ -8,7 +8,10 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        <PageHeading content='Log In'/>
+        <PageHeading
+          content='Log In'
+          cy='heading-log-in'
+        />
 
         <Content>
           <FormLogin/>
