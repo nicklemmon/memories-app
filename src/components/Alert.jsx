@@ -64,7 +64,8 @@ class Alert extends React.Component {
       type,
       content,
       className,
-      ...props
+      cy,
+      ...attributes
     } = this.props
 
     const isHidden = this.state.isHidden
@@ -74,7 +75,8 @@ class Alert extends React.Component {
         className={ classNames( `Alert Alert--${type}`, className ) } 
         role='alert'
         pose={ isHidden ? 'hidden' : 'visible' }
-        { ...props }
+        data-cy={ cy }
+        { ...attributes }
       >
         <div className='Alert-pre'>
           { type === 'error' &&

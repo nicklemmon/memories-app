@@ -12,7 +12,8 @@ class Button extends React.Component {
       content,
       fullWidth,
       role,
-      ...props
+      cy,
+      ...attributes
     } = this.props
 
     const classNames = `Button Button--${type} ${this.props.classNames}`;
@@ -25,7 +26,8 @@ class Button extends React.Component {
             className={ classNames } 
             style={ styles }
             to={ linkTo }
-            { ...props }
+            data-cy={ cy }
+            { ...attributes }
           >
             { content }
           </NavLink>
@@ -34,7 +36,8 @@ class Button extends React.Component {
             className={ classNames } 
             style={ styles }
             onClick={ this.props.onClick }
-            { ...props }
+            data-cy={ cy }
+            { ...attributes }
           >
             { content }
           </button>

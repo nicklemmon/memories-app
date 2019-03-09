@@ -9,8 +9,11 @@ class Footer extends React.Component  {
     const currentYear = ( new Date() ).getFullYear()
 
     return (
-      <footer className={ classNames( 'Footer', className ) }>
-        <p>All rights reserved, <a href="http://nicklemmon.com">Nick Lemmon</a> { currentYear }</p>
+      <footer
+        className={ classNames( 'Footer', className ) }
+        data-cy='footer'
+      >
+        <p>All rights reserved, <a href='http://nicklemmon.com'>Nick Lemmon</a> { currentYear }</p>
       </footer>
     )
   }

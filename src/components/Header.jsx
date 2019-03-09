@@ -14,7 +14,10 @@ class Header extends React.Component {
     } = this.props
 
     return (
-      <header className={ classNames( 'Header', className ) }>
+      <header
+        className={ classNames( 'Header', className ) }
+        data-cy='header'
+      >
         <span className='Header-user'>
           { user && user.username }
         </span>

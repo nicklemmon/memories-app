@@ -66,12 +66,14 @@ class Hero extends React.Component {
                     type='primary' 
                     content='Log In'
                     linkTo='/login'
+                    cy='button-log-in'
                   />
 
                   <Button
                     type='secondary'
                     content='Sign Up'
                     linkTo='/signup'
+                    cy='button-sign-up'
                   />
                 </React.Fragment>
               }
