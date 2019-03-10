@@ -95,6 +95,7 @@ class FormSignup extends React.Component {
           label='Username'
           type='text'
           id='username'
+          cy='form-group-username'
           handleChange={ this.handleFormGroupChange }
           value={ this.state.username }
         />
@@ -103,6 +104,7 @@ class FormSignup extends React.Component {
           label='Email'
           type='email'
           id='email'
+          cy='form-group-email'
           handleChange={ this.handleFormGroupChange }
           value={ this.state.email }
         />
@@ -111,6 +113,7 @@ class FormSignup extends React.Component {
           label='Password'
           type='password'
           id='password'
+          cy='form-group-password'
           handleChange={ this.handleFormGroupChange }
           value={ this.state.password }
         />
@@ -119,12 +122,14 @@ class FormSignup extends React.Component {
           <Button
             type='primary'
             content='Sign Up!'
+            cy='button-sign-up'
             onClick={ this.handleFormSubmit }
           />
 
           <Button
             type='secondary'
             content='Cancel'
+            cy='button-cancel'
             linkTo='/'
           />
         </ButtonWrapper>

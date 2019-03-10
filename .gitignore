@@ -14,7 +14,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.auth0.config.js
+cypress.env.json
 
 npm-debug.log*
 yarn-debug.log*
