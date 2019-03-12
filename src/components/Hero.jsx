@@ -2,7 +2,7 @@ import React from 'react'
 import Parse from 'parse'
 
 import Button from './Button'
-import Card from './Card.jsx'
+import Card from './Card'
 import Heading from './Heading.jsx'
 import Alert from './Alert'
 

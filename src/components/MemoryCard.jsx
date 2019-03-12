@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { FaTrashAlt } from 'react-icons/fa'
 
-import Card from './Card.jsx'
+import Card from './Card'
 import Tag from './Tag.jsx'
 import ModalLauncher from './ModalLauncher.jsx'
 
