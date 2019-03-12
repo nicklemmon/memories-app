@@ -6,7 +6,7 @@ import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
 import Button from './Button'
-import ActionLink from './ActionLink.jsx'
+import ActionLink from './ActionLink'
 
 class FormLogin extends React.Component {
   constructor( props ) {

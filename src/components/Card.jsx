@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 import Heading from './Heading.jsx'
-import Alert from './Alert.jsx'
+import Alert from './Alert'
 
 import './Card.css'
 

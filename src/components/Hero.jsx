@@ -4,7 +4,7 @@ import Parse from 'parse'
 import Button from './Button'
 import Card from './Card.jsx'
 import Heading from './Heading.jsx'
-import Alert from './Alert.jsx'
+import Alert from './Alert'
 
 import backgroundImage from '../images/cityscape.jpg'
 import './Hero.css'

@@ -2,7 +2,7 @@ import React from 'react'
 
 import PageHeading from '../components/PageHeading.jsx'
 import Content from '../components/Content.jsx'
-import Alert from '../components/Alert.jsx'
+import Alert from '../components/Alert'
 
 const NotFoundPage = () => (
   <div>

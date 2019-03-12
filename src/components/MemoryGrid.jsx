@@ -3,7 +3,7 @@ import Parse from 'parse'
 
 import MaxWidth from '../components/MaxWidth.jsx'
 import MemoryCard from '../components/MemoryCard.jsx'
-import Alert from '../components/Alert.jsx'
+import Alert from './Alert'
 import Loading from '../components/Loading.jsx'
 
 import './MemoryGrid.css'
