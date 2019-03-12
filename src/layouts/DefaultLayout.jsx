@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
 
 import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
+import Footer from '../components/Footer'
 
 import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
