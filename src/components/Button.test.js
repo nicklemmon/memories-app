@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import Button from '../components/Button'
+import Button from './Button'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 describe( '<Button/>', () => {
