@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import './Header.css'
 
-import HeaderNav from './HeaderNav.jsx'
+import HeaderNav from '../HeaderNav'
 
 class Header extends React.Component {
   render() {
