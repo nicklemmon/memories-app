@@ -1,12 +1,12 @@
 import React from 'react'
 import Parse from 'parse'
 
-import Button from './Button'
-import Card from './Card'
-import Heading from './Heading'
-import Alert from './Alert'
+import Button from '../Button'
+import Card from '../Card'
+import Heading from '../Heading'
+import Alert from '../Alert'
 
-import backgroundImage from '../images/cityscape.jpg'
+import backgroundImage from '../../images/cityscape.jpg'
 import './Hero.css'
 
 class Hero extends React.Component {
