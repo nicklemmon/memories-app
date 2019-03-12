@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PageHeading from '../components/PageHeading.jsx'
-import Content from '../components/Content.jsx'
+import Content from '../components/Content'
 import Alert from '../components/Alert'
 
 const NotFoundPage = () => (

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Content from '../components/Content.jsx'
+import Content from '../components/Content'
 import PageHeading from '../components/PageHeading.jsx'
 import FormSignup from '../components/FormSignup.jsx'
 
