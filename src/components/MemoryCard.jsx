@@ -4,7 +4,7 @@ import { FaTrashAlt } from 'react-icons/fa'
 
 import Card from './Card'
 import Tag from './Tag.jsx'
-import ModalLauncher from './ModalLauncher.jsx'
+import ModalLauncher from './ModalLauncher'
 
 import './MemoryCard.css'
 
