@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Content from '../components/Content'
-import Heading from '../components/Heading.jsx'
+import Content from '../Content'
+import Heading from '../Heading'
 
 class LoginPage extends React.Component {
   render() {

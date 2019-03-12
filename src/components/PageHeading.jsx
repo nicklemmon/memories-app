@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Heading from '../components/Heading.jsx'
+import Heading from './Heading'
 
 import backgroundImage from '../images/cityscape.jpg'
 import './PageHeading.css'
