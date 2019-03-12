@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Content from '../components/Content'
-import PageHeading from '../components/PageHeading.jsx'
+import PageHeading from '../components/PageHeading'
 import FormSignup from '../components/FormSignup.jsx'
 
 class SignupPage extends React.Component {
