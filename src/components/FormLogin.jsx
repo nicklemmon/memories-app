@@ -3,7 +3,7 @@ import Parse from 'parse'
 import { Redirect } from 'react-router-dom'
 
 import FormWrapper from './FormWrapper.jsx'
-import FormGroup from './FormGroup.jsx'
+import FormGroup from './FormGroup'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
 import ActionLink from './ActionLink'

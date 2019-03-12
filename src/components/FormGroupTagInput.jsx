@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormGroup from './FormGroup.jsx'
+import FormGroup from './FormGroup'
 
 class FormGroupTagInput extends React.Component {
   render() {

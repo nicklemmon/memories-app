@@ -2,7 +2,7 @@ import React from 'react'
 import Parse from 'parse'
 
 import FormWrapper from './FormWrapper.jsx'
-import FormGroup from './FormGroup.jsx'
+import FormGroup from './FormGroup'
 import FormGroupTagInput from './FormGroupTagInput.jsx'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
