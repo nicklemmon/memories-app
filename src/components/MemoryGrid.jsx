@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 
-import MaxWidth from '../components/MaxWidth.jsx'
+import MaxWidth from '../components/MaxWidth'
 import MemoryCard from '../components/MemoryCard.jsx'
 import Alert from './Alert'
 import Loading from '../components/Loading'
