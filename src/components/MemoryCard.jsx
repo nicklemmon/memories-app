@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { FaTrashAlt } from 'react-icons/fa'
 
 import Card from './Card'
-import Tag from './Tag.jsx'
+import Tag from './Tag'
 import ModalLauncher from './ModalLauncher'
 
 import './MemoryCard.css'
