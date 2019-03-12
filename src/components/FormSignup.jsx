@@ -3,7 +3,7 @@ import Parse from 'parse'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
-import ButtonWrapper from './ButtonWrapper.jsx'
+import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
 
 class FormSignup extends React.Component {

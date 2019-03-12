@@ -4,7 +4,7 @@ import Parse from 'parse'
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import FormGroupTagInput from './FormGroupTagInput.jsx'
-import ButtonWrapper from './ButtonWrapper.jsx'
+import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
 
 class FormAddMemory extends React.Component {

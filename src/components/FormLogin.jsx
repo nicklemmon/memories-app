@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
-import ButtonWrapper from './ButtonWrapper.jsx'
+import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
 import ActionLink from './ActionLink'
 
