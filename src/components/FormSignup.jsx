@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 
-import FormWrapper from './FormWrapper.jsx'
+import FormWrapper from './FormWrapper'
 import FormGroup from './FormGroup'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
