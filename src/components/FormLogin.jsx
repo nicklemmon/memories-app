@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
-import Button from './Button.jsx'
+import Button from './Button'
 import ActionLink from './ActionLink.jsx'
 
 class FormLogin extends React.Component {

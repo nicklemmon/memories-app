@@ -5,7 +5,7 @@ import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import FormGroupTagInput from './FormGroupTagInput.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
-import Button from './Button.jsx'
+import Button from './Button'
 
 class FormAddMemory extends React.Component {
   constructor( props ) {

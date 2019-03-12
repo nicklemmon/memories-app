@@ -4,7 +4,7 @@ import Parse from 'parse'
 import FormWrapper from './FormWrapper.jsx'
 import FormGroup from './FormGroup.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
-import Button from './Button.jsx'
+import Button from './Button'
 
 class FormSignup extends React.Component {
   constructor( props ) {

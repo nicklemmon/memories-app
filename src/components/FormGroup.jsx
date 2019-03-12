@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import Button from './Button.jsx';
+import Button from './Button';
 
 import './FormGroup.css'
 

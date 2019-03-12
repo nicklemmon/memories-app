@@ -4,7 +4,7 @@ import { FaTimes } from 'react-icons/fa'
 
 import Modal from './Modal.jsx'
 import ButtonWrapper from './ButtonWrapper.jsx'
-import Button from './Button.jsx'
+import Button from './Button'
 
 class ModalButton extends React.Component {
   constructor( props ) {
