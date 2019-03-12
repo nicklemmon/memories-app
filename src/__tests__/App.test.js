@@ -4,6 +4,6 @@ import App from '../App.js'
 
 describe( '<App/>', () => {
   it( 'Renders without crashing', () => {
-    shallow( <App /> );
+    shallow( <App /> )
   })
 })

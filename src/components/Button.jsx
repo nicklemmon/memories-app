@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { NavLink } from 'react-router-dom';
 
 import './Button.css'
@@ -11,19 +12,19 @@ class Button extends React.Component {
       linkTo,
       content,
       fullWidth,
-      role,
+      onClick,
       cy,
       ...attributes
     } = this.props
 
-    const classNames = `Button Button--${type} ${this.props.classNames}`;
+    const calculatedClassNames = classNames( `Button Button--${type}`, className )
     const styles = { width: fullWidth ? '100%' : '' }
 
     return (
       <React.Fragment>
         { linkTo ?
           <NavLink
-            className={ classNames } 
+            className={ calculatedClassNames } 
             style={ styles }
             to={ linkTo }
             data-cy={ cy }
@@ -33,9 +34,9 @@ class Button extends React.Component {
           </NavLink>
         :
           <button
-            className={ classNames } 
+            className={ calculatedClassNames } 
             style={ styles }
-            onClick={ this.props.onClick }
+            onClick={ onClick }
             data-cy={ cy }
             { ...attributes }
           >
