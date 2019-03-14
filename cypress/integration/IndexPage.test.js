@@ -22,6 +22,14 @@ describe( 'The index page in the logged out state', () => {
   })
 })
 
+describe( 'The index page title', () => {
+  before( () => beforeSteps() )
+
+  it( 'Is "Memories App" with no delimitters or other content', () => {
+    cy.title().should( 'eq', 'Memories App' )
+  })
+})
+
 describe( 'The log in button', () => {
   before( () => beforeSteps() )
 

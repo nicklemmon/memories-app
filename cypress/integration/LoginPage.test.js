@@ -21,3 +21,11 @@ describe( 'The log in page in the logged out state', () => {
     cy.get( '[data-cy="link-sign-up"]' ).should( 'be.visible' )
   })
 })
+
+describe( 'The login page title', () => {
+  before( () => beforeSteps() )
+
+  it( 'Is "Log In | Memories App"', () => {
+    cy.title().should( 'eq', 'Log In | Memories App' )
+  })
+})
