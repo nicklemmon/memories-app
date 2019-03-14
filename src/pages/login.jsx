@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import PageHeading from '../components/PageHeading'
 import Content from '../components/Content'
@@ -8,6 +9,8 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
+        <Helmet title='Log In' />
+        
         <PageHeading
           content='Log In'
           cy='heading-log-in'

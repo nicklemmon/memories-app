@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
 
 import Header from '../components/Header'
@@ -18,8 +17,6 @@ class DefaultLayout extends React.Component {
   render() {
     return (
       <div className='Layout'>
-        <Helmet title="Memories"/>
-        
         <Header classNames='Layout-header' />
 
         <main className='Layout-main'>

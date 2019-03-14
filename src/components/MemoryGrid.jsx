@@ -1,14 +1,14 @@
 import React from 'react'
 import Parse from 'parse'
 
-import MaxWidth from '../components/MaxWidth'
-import MemoryCard from '../components/MemoryCard.jsx'
+import MaxWidth from './MaxWidth'
+import MemoryCard from './MemoryCard'
 import Alert from './Alert'
-import Loading from '../components/Loading'
+import Loading from './Loading'
 
 import './MemoryGrid.css'
 
-class MemoryGrid extends React.Component {
+export default class MemoryGrid extends React.Component {
   constructor( props ) {
     super( props )
 
@@ -80,7 +80,7 @@ class MemoryGrid extends React.Component {
     } = this.state
 
     return (
-      <div>
+      <React.Fragment>
         { ( errorMessage && !loading ) &&
           <MaxWidth size='md'>
             <Alert
@@ -90,14 +90,14 @@ class MemoryGrid extends React.Component {
           </MaxWidth>
         }
 
-        { ( !errorMessage && memories.length === 0 && !loading ) &&
+        {/* { ( !errorMessage && memories.length === 0 && !loading ) &&
           <MaxWidth size='md'>
             <Alert
               type='attention'
               content='Sorry! No memories available. Please try again later.'
             />
           </MaxWidth>
-        }
+        } */}
 
         { successDelete &&
           <MaxWidth size='md'>
@@ -127,9 +127,7 @@ class MemoryGrid extends React.Component {
             }
           </div>
         }
-      </div>
+      </React.Fragment>
     )
   }
 }
-
-export default MemoryGrid
