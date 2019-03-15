@@ -14,7 +14,9 @@ class Hero extends React.Component {
     super( props )
 
     this.state = {
-      isSignedIn: false
+      isSignedIn: false,
+      canRead: false,
+      canWrite: false
     }
 
     this.fetchUser = this.fetchUser.bind( this )
@@ -22,8 +24,16 @@ class Hero extends React.Component {
   }
 
   fetchUser() {
-    if ( Parse.User.current() ) {
-      this.setState({ isSignedIn: true })
+    const User = Parse.User.current()
+    const userId = User.id
+    const Permissions = User.attributes.ACL.permissionsById[userId]
+
+    if ( User ) {
+      this.setState({
+        isSignedIn: true,
+        canRead: Permissions.read,
+        canWrite: Permissions.write
+      })
     }
   }
 
@@ -33,7 +43,11 @@ class Hero extends React.Component {
   }
 
   render() {
-    const { isSignedIn } = this.state
+    const {
+      isSignedIn,
+      canRead,
+      canWrite
+    } = this.state
     const {
       hasSuccessMessage,
       userName
@@ -61,7 +75,7 @@ class Hero extends React.Component {
               { !isSignedIn && 
                 <React.Fragment>
                   <p className='Hero-cardDirections'>Log in or sign up to get started.</p>
-
+                  
                   <Button 
                     type='primary' 
                     content='Log In'
@@ -80,17 +94,21 @@ class Hero extends React.Component {
               
               { isSignedIn &&
                 <React.Fragment>
-                  <Button
-                    type='primary'
-                    content='Add Memory'
-                    linkTo='/addmemory'
-                  />
+                  { canWrite &&
+                    <Button
+                      type='primary'
+                      content='Add Memory'
+                      linkTo='/addmemory'
+                    />
+                  }
 
-                  <Button
-                    type='secondary'
-                    content='View Memories'
-                    linkTo='/memories'
-                  />
+                  { canRead &&
+                    <Button
+                      type='secondary'
+                      content='View Memories'
+                      linkTo='/memories'
+                    />
+                  }
                 </React.Fragment>
               }
             </Card>
