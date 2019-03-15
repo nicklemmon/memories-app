@@ -32,11 +32,11 @@ export default class MemoryGrid extends React.Component {
   setUserPermissions() {
     const User = Parse.User.current()
     const userId = User.id
-    const permissions = User.attributes.ACL.permissionsById[userId]
+    const Permissions = User.attributes.ACL.permissionsById[userId]
 
     this.setState({
-      canRead: permissions.read,
-      canWrite: permissions.write
+      canRead: Permissions.read,
+      canWrite: Permissions.write
     })
   }
 
@@ -127,22 +127,26 @@ export default class MemoryGrid extends React.Component {
         { loading ? <Loading/> :
           <div className='MemoryGrid'>
             {
-              memories.map( memory => {
-                const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : new Date( memory.createdAt ).toLocaleDateString()
+              memories
+                .sort( function( a, b ) {
+                  return new Date( b.recordedDate.iso ) - new Date( a.recordedDate.iso )
+                })
+                .map( memory => {
+                  const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : null
 
-                return (
-                  <MemoryCard 
-                    key={ memory.objectId }
-                    title={ memory.title }
-                    summary={ memory.summary }
-                    date={ date }
-                    tags={ memory.tags }
-                    canDelete={ canWrite }
-                    handleDelete={ () => this.deleteMemory( memory.objectId ) }
-                    { ...this.props }
-                  />
-                )
-              } )
+                  return (
+                    <MemoryCard 
+                      key={ memory.objectId }
+                      title={ memory.title }
+                      summary={ memory.summary }
+                      date={ date }
+                      tags={ memory.tags }
+                      canDelete={ canWrite }
+                      handleDelete={ () => this.deleteMemory( memory.objectId ) }
+                      { ...this.props }
+                    />
+                  )
+                } )
             }
           </div>
         }
