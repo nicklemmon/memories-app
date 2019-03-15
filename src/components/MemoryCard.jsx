@@ -5,10 +5,33 @@ import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
 import Card from './Card'
 import Tag from './Tag'
 import ModalLauncher from './ModalLauncher'
+import FormGroup from './FormGroup'
 
 import './MemoryCard.css'
 
 class MemoryCard extends React.Component {
+  constructor( props ) {
+    super( props )
+
+    this.state = {
+      title: null,
+      date: null,
+      summary: null
+    }
+
+    this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
+  }
+
+  handleFormGroupChange( e ) {
+    const target = e.target
+    const value = target.value
+    const name = target.name
+
+    this.setState({
+      [name]: value
+    })
+  }
+
   render() {
     const {
       id,
@@ -16,6 +39,7 @@ class MemoryCard extends React.Component {
       tags,
       summary,
       canWrite,
+      handleEdit,
       handleDelete,
       className,
       date,
@@ -34,6 +58,21 @@ class MemoryCard extends React.Component {
         )
       })
     }
+    
+    // NOTE: Replace with [date-fns](https://github.com/date-fns/date-fns) probably
+    const dateChunks = date.split( '/' )
+    const month = dateChunks[0]
+    const day = dateChunks[1]
+    const year = dateChunks[2]
+
+    let formattedDay = day
+    let formattedMonth = month
+
+    if ( day.length < 2 ) formattedDay = `0${day}`
+
+    if ( month.length < 2 ) formattedMonth = `0${month}`
+
+    const formattedDate = `${year}-${formattedMonth}-${formattedDay}`
 
     return (
       <Card
@@ -58,9 +97,39 @@ class MemoryCard extends React.Component {
                 />
               }
               id={ `edit-memory-${id}`}
-              heading={ `Editing "${title}"` }
+              heading='Edit Memory'
+              hasCTAs={ true }
+              primaryButtonContent='Submit'
+              primaryButtonOnClick={ handleEdit }
+              primaryButtonCloses={ true }
+              secondaryButtonContent='Cancel'
+              secondaryButtonCloses={ true }
             >
-              <p>Editing...</p>
+              <form>
+                <FormGroup
+                  label='Title'
+                  type='text'
+                  id='title'
+                  handleChange={ this.handleFormGroupChange }
+                  value={ title }
+                />
+
+                <FormGroup
+                  label='Memory Date'
+                  type='date'
+                  id='date'
+                  handleChange={ this.handleFormGroupChange }
+                  value={ formattedDate }
+                />
+
+                <FormGroup
+                  label='Summary'
+                  type='textarea'
+                  id='summary'
+                  handleChange={ this.handleFormGroupChange }
+                  value={ summary }
+                />
+              </form>
             </ModalLauncher>
 
             <ModalLauncher
