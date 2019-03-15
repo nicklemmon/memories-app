@@ -21,7 +21,9 @@ class HeaderNav extends React.Component {
     this.state = {
       isOpen: false,
       redirect: false,
-      isSignedIn: false
+      isSignedIn: false,
+      canRead: false,
+      canWrite: false
     }
 
     this.toggle = this.toggle.bind( this )
@@ -55,8 +57,16 @@ class HeaderNav extends React.Component {
   }
 
   fetchUser( callback ) {
-    if ( Parse.User.current() ) {
-      this.setState({ isSignedIn: true }, () => callback )
+    const User = Parse.User.current()
+    const userId = User.id
+    const Permissions = User.attributes.ACL.permissionsById[userId]
+
+    if ( User ) {
+      this.setState({
+        isSignedIn: true,
+        canRead: Permissions.read,
+        canWrite: Permissions.write
+      }, () => callback )
     }
   }
 
@@ -79,7 +89,9 @@ class HeaderNav extends React.Component {
     const {
       isOpen,
       redirect,
-      isSignedIn
+      isSignedIn,
+      canRead,
+      canWrite
     } = this.state
 
     return(
@@ -124,7 +136,7 @@ class HeaderNav extends React.Component {
                 </NavLink>
               }
               
-              { isSignedIn &&
+              { isSignedIn && canRead &&
                 <NavLink 
                   to='memories' 
                   className='HeaderNav-item'
@@ -137,7 +149,7 @@ class HeaderNav extends React.Component {
                 </NavLink>
               }
     
-              { isSignedIn &&
+              { isSignedIn && canWrite &&
                 <NavLink 
                   to='addmemory' 
                   className='HeaderNav-item'
