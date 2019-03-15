@@ -112,12 +112,14 @@ export default class MemoryGrid extends React.Component {
           <div className='MemoryGrid'>
             {
               memories.map( memory => {
+                const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : new Date( memory.createdAt ).toLocaleDateString()
+
                 return (
                   <MemoryCard 
                     key={ memory.objectId }
                     title={ memory.title }
                     summary={ memory.summary }
-                    date={ new Date( memory.createdAt ).toLocaleDateString() }
+                    date={ date }
                     tags={ memory.tags }
                     handleDelete={ () => this.deleteMemory( memory.objectId ) }
                     { ...this.props }
