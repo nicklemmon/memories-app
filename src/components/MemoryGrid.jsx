@@ -90,14 +90,14 @@ export default class MemoryGrid extends React.Component {
           </MaxWidth>
         }
 
-        {/* { ( !errorMessage && memories.length === 0 && !loading ) &&
+        { ( !errorMessage && memories.length === 0 && !loading ) &&
           <MaxWidth size='md'>
             <Alert
               type='attention'
               content='Sorry! No memories available. Please try again later.'
             />
           </MaxWidth>
-        } */}
+        }
 
         { successDelete &&
           <MaxWidth size='md'>
