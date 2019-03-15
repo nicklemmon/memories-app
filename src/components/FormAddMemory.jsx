@@ -127,7 +127,7 @@ class FormAddMemory extends React.Component {
     if ( errorMsg ) {
       hasAlert = true
       alertType = 'error'
-      alertContent = 'Whoops! Error failed to be added. Try again.'
+      alertContent = 'Whoops! Memory failed to be added. Try again.'
     }
 
     return (
