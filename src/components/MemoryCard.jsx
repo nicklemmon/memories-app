@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { FaTrashAlt } from 'react-icons/fa'
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
 
 import Card from './Card'
 import Tag from './Tag'
@@ -11,10 +11,11 @@ import './MemoryCard.css'
 class MemoryCard extends React.Component {
   render() {
     const {
+      id,
       title,
       tags,
       summary,
-      canDelete,
+      canWrite,
       handleDelete,
       className,
       date,
@@ -45,21 +46,44 @@ class MemoryCard extends React.Component {
       >
         <p>{ summary }</p>
         
-        { canDelete &&
-          <ModalLauncher
-            className='MemoryCard-delete'
-            content={ <FaTrashAlt className='MemoryCard-trash' role='img' aria-label='Delete'/> }
-            id='delete-memory'
-            heading={ `Delete "${title}"?` }
-            hasCTAs={ true }
-            primaryButtonContent='Delete'
-            primaryButtonOnClick={ handleDelete }
-            primaryButtonCloses={ true }
-            secondaryButtonContent='Cancel'
-            secondaryButtonCloses={ true }
-          >
-            <p>Are you sure you want to delete this memory?</p>
-          </ModalLauncher>
+        { canWrite &&
+          <div className='MemoryCard-actions'>
+            <ModalLauncher
+              className='MemoryCard-action'
+              content={
+                <FaPencilAlt
+                  className='MemoryCard-actionIcon'
+                  role='img'
+                  aria-label='Edit'
+                />
+              }
+              id={ `edit-memory-${id}`}
+              heading={ `Editing "${title}"` }
+            >
+              <p>Editing...</p>
+            </ModalLauncher>
+
+            <ModalLauncher
+              className='MemoryCard-action'
+              content={
+                <FaTrashAlt
+                  className='MemoryCard-actionIcon'
+                  role='img'
+                  aria-label='Delete'
+                />
+              }
+              id={ `delete-memory-${id}` }
+              heading={ `Delete "${title}"?` }
+              hasCTAs={ true }
+              primaryButtonContent='Delete'
+              primaryButtonOnClick={ handleDelete }
+              primaryButtonCloses={ true }
+              secondaryButtonContent='Cancel'
+              secondaryButtonCloses={ true }
+            >
+              <p>Are you sure you want to delete this memory?</p>
+            </ModalLauncher>
+          </div>
         }
       </Card>
     )

@@ -2,30 +2,32 @@
   position: relative; /* allows absolute positioning within */
 }
 
-.MemoryCard-delete {
-  background-color: var(--white);
+.MemoryCard-actions {
   position: absolute;
-  border: 0;
-  border-radius: 50%;
-  border: 1px solid var(--white);
   bottom: var(--spacing-sm);
   right: var(--spacing-sm);
+}
+
+.MemoryCard-action {
+  border-radius: 50%;
   width: 35px;
   height: 35px;
-  padding: 3px;
-  cursor: pointer;
+  padding: 10px;
+  border: 0;
   transition: transform var(--anim-speed) var(--anim-easing),
               box-shadow var(--anim-speed) var(--anim-easing);
 }
 
-.MemoryCard-delete:hover,
-.MemoryCard-delete:focus {
+.MemoryCard-action:hover,
+.MemoryCard-action:focus {
   transform: translateY(-3px);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.125);
 }
 
-.MemoryCard-trash {
+.MemoryCard-actionIcon {
   color: var(--blue);
-  width: 66%;
-  height: 66%;
+  background-color: var(--white);
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
 }

@@ -155,12 +155,13 @@ export default class MemoryGrid extends React.Component {
                         key={ memory.objectId }
                       >
                         <MemoryCard
+                          id={ `memory-card-${memory.objectId }` }
                           className='MemoryGrid-card'
                           title={ memory.title }
                           summary={ memory.summary }
                           date={ date }
                           tags={ memory.tags }
-                          canDelete={ canWrite }
+                          canWrite={ canWrite }
                           handleDelete={ () => this.deleteMemory( memory.objectId ) }
                           { ...this.props }
                         />
