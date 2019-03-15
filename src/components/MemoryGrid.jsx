@@ -1,5 +1,6 @@
 import React from 'react'
 import Parse from 'parse'
+import posed, { PoseGroup } from 'react-pose'
 
 import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
@@ -7,6 +8,17 @@ import Alert from './Alert'
 import Loading from './Loading'
 
 import './MemoryGrid.css'
+
+const Parent = posed.div({
+  enter: {
+    delayChildren: 50,
+    staggerChildren: 33
+  }
+})
+const Child = posed.div({
+  enter: { y: 0, opacity: 1 },
+  exit: { y: 25, opacity: 0 }
+})
 
 export default class MemoryGrid extends React.Component {
   constructor( props ) {
@@ -123,33 +135,42 @@ export default class MemoryGrid extends React.Component {
             />
           </MaxWidth>
         }
-        
-        { loading ? <Loading/> :
-          <div className='MemoryGrid'>
-            {
-              memories
-                .sort( function( a, b ) {
-                  return new Date( b.recordedDate.iso ) - new Date( a.recordedDate.iso )
-                })
-                .map( memory => {
-                  const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : null
 
-                  return (
-                    <MemoryCard 
-                      key={ memory.objectId }
-                      title={ memory.title }
-                      summary={ memory.summary }
-                      date={ date }
-                      tags={ memory.tags }
-                      canDelete={ canWrite }
-                      handleDelete={ () => this.deleteMemory( memory.objectId ) }
-                      { ...this.props }
-                    />
-                  )
-                } )
-            }
-          </div>
-        }
+        { loading && <Loading/> }
+        
+        <PoseGroup>
+          { !loading &&
+            <Parent className='MemoryGrid' key='grid'>
+              {
+                memories
+                  .sort( function( a, b ) {
+                    return new Date( b.recordedDate.iso ) - new Date( a.recordedDate.iso )
+                  })
+                  .map( memory => {
+                    const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : null
+
+                    return (
+                      <Child
+                        className='MemoryGrid-cardWrapper'
+                        key={ memory.objectId }
+                      >
+                        <MemoryCard
+                          className='MemoryGrid-card'
+                          title={ memory.title }
+                          summary={ memory.summary }
+                          date={ date }
+                          tags={ memory.tags }
+                          canDelete={ canWrite }
+                          handleDelete={ () => this.deleteMemory( memory.objectId ) }
+                          { ...this.props }
+                        />
+                      </Child>
+                    )
+                  } )
+              }
+            </Parent>
+          }
+        </PoseGroup>
       </React.Fragment>
     )
   }

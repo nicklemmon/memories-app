@@ -9,7 +9,8 @@
   grid-template-columns: 1fr;
 }
 
-.MemoryGrid > * {
+.MemoryGrid > *,
+.MemoryGrid-card {
   height: 100%;
 }
 
