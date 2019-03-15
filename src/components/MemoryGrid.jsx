@@ -17,13 +17,27 @@ export default class MemoryGrid extends React.Component {
       memories: [],
       successDelete: false,
       errorMessage: false,
-      loading: false
+      loading: false,
+      canRead: false,
+      canWrite: false
     }
 
+    this.setUserPermissions = this.setUserPermissions.bind( this )
     this.getMemories = this.getMemories.bind( this )
     this.deleteMemory = this.deleteMemory.bind( this )
     this.updateMemories = this.updateMemories.bind( this )
     this.render = this.render.bind( this )
+  }
+
+  setUserPermissions() {
+    const User = Parse.User.current()
+    const userId = User.id
+    const permissions = User.attributes.ACL.permissionsById[userId]
+
+    this.setState({
+      canRead: permissions.read,
+      canWrite: permissions.write
+    })
   }
 
   updateMemories() {
@@ -68,6 +82,7 @@ export default class MemoryGrid extends React.Component {
   }
 
   componentDidMount() {
+    this.setUserPermissions()
     this.updateMemories()
   }
 
@@ -76,7 +91,8 @@ export default class MemoryGrid extends React.Component {
       errorMessage,
       successDelete,
       memories,
-      loading
+      loading,
+      canWrite
     } = this.state
 
     return (
@@ -121,6 +137,7 @@ export default class MemoryGrid extends React.Component {
                     summary={ memory.summary }
                     date={ date }
                     tags={ memory.tags }
+                    canDelete={ canWrite }
                     handleDelete={ () => this.deleteMemory( memory.objectId ) }
                     { ...this.props }
                   />
