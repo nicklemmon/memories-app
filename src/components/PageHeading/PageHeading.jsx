@@ -2,7 +2,7 @@ import React from 'react';
 
 import Heading from '../Heading'
 
-import backgroundImage from '../../images/cityscape.jpg'
+import backgroundImage from '../../images/blanket.png'
 import './PageHeading.css'
 
 class PageHeading extends React.Component {

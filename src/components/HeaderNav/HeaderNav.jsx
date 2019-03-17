@@ -58,10 +58,11 @@ class HeaderNav extends React.Component {
 
   fetchUser( callback ) {
     const User = Parse.User.current()
-    const userId = User.id
-    const Permissions = User.attributes.ACL.permissionsById[userId]
-
+    
     if ( User ) {
+      const userId = User.id
+      const Permissions = User.attributes.ACL.permissionsById[userId]
+
       this.setState({
         isSignedIn: true,
         canRead: Permissions.read,

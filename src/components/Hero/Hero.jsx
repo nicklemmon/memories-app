@@ -6,7 +6,7 @@ import Card from '../Card'
 import Heading from '../Heading'
 import Alert from '../Alert'
 
-import backgroundImage from '../../images/cityscape.jpg'
+import backgroundImage from '../../images/feet.png'
 import './Hero.css'
 
 class Hero extends React.Component {
@@ -24,11 +24,12 @@ class Hero extends React.Component {
   }
 
   fetchUser() {
-    const User = Parse.User.current()
-    const userId = User.id
-    const Permissions = User.attributes.ACL.permissionsById[userId]
+    const User = Parse.User.current() 
 
     if ( User ) {
+      const userId = User.id
+      const Permissions = User.attributes.ACL.permissionsById[userId]
+
       this.setState({
         isSignedIn: true,
         canRead: Permissions.read,
@@ -121,8 +122,6 @@ class Hero extends React.Component {
             aria-hidden='true'
           />
         </div>
-
-        <div className='Hero-underlay'></div>
       </div>
     )
   }
