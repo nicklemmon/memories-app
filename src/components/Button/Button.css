@@ -5,13 +5,13 @@
   justify-content: center;
   width: 100%;
   border: 0;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 0.9rem 1.33rem;
   outline: none;
   font-family: var(--font-family-primary);
-  font-weight: 700;
+  font-weight: 400;
   font-size: var(--font-size-md);
-  border-radius: var(--border-radius);
-  border: 1px solid currentColor;
+  border-radius: calc(var(--border-radius) * 1.75);
+  border: 2px solid currentColor;
   box-shadow: var(--box-shadow-sm);
   overflow: hidden;
   cursor: pointer;
@@ -40,7 +40,7 @@
   }
 
   .Button + .Button {
-    margin: 0 0 0 var(--spacing-md);
+    margin: 0 0 0 var(--spacing-sm);
   }
 }
 
@@ -50,7 +50,7 @@
 }
 
 .Button--primary {
-  background-color: var(--dark-blue);
+  background: var(--dark-blue);
   color: var(--white);
   border-color: var(--dark-blue);
 }

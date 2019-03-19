@@ -83,7 +83,7 @@ class Hero extends React.Component {
                 />
 
                 <Button
-                  type='secondary'
+                  type='tertiary'
                   content='Sign Up'
                   linkTo='/signup'
                   cy='button-sign-up'
@@ -103,7 +103,7 @@ class Hero extends React.Component {
 
                 { canRead &&
                   <Button
-                    type='secondary'
+                    type='tertiary'
                     content='View Memories'
                     linkTo='/memories'
                   />
