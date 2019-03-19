@@ -2,7 +2,6 @@ import React from 'react'
 import Parse from 'parse'
 
 import Button from '../Button'
-import Card from '../Card'
 import Heading from '../Heading'
 import Alert from '../Alert'
 
@@ -59,9 +58,11 @@ class Hero extends React.Component {
         <div className='Hero-wrapper'>
           <Heading
             level='1'
-            content='Track memories, view memories.'
+            content='Welcome to Eva&rsquo;s Memories'
             className='Hero-heading'
           />
+
+          <p className='Hero-subheading'>A collection of quotes and other notes from Eva's childhood.</p>
 
           <div className='Hero-content'>
             { hasSuccessMessage &&
@@ -72,47 +73,43 @@ class Hero extends React.Component {
               />
             }
 
-            <Card className='Hero-card'>
-              { !isSignedIn && 
-                <React.Fragment>
-                  <p className='Hero-cardDirections'>Log in or sign up to get started.</p>
-                  
-                  <Button 
-                    type='primary' 
-                    content='Log In'
-                    linkTo='/login'
-                    cy='button-log-in'
-                  />
+            { !isSignedIn && 
+              <React.Fragment>
+                <Button 
+                  type='primary' 
+                  content='Log In'
+                  linkTo='/login'
+                  cy='button-log-in'
+                />
 
+                <Button
+                  type='secondary'
+                  content='Sign Up'
+                  linkTo='/signup'
+                  cy='button-sign-up'
+                />
+              </React.Fragment>
+            }
+            
+            { isSignedIn &&
+              <React.Fragment>
+                { canWrite &&
+                  <Button
+                    type='primary'
+                    content='Add Memory'
+                    linkTo='/addmemory'
+                  />
+                }
+
+                { canRead &&
                   <Button
                     type='secondary'
-                    content='Sign Up'
-                    linkTo='/signup'
-                    cy='button-sign-up'
+                    content='View Memories'
+                    linkTo='/memories'
                   />
-                </React.Fragment>
-              }
-              
-              { isSignedIn &&
-                <React.Fragment>
-                  { canWrite &&
-                    <Button
-                      type='primary'
-                      content='Add Memory'
-                      linkTo='/addmemory'
-                    />
-                  }
-
-                  { canRead &&
-                    <Button
-                      type='secondary'
-                      content='View Memories'
-                      linkTo='/memories'
-                    />
-                  }
-                </React.Fragment>
-              }
-            </Card>
+                }
+              </React.Fragment>
+            }
           </div>
 
           <img 

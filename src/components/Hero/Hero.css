@@ -4,7 +4,10 @@
   position: relative; /* allows absolute positioning within */
 }
 
-.Hero-heading {
+.Hero-heading,
+.Hero-subheading {
+  text-align: center;
+  line-height: 1.5;
   text-shadow: 0 0 var(--spacing-xl) rgba(0, 0, 0, 0.33);
 }
 
@@ -43,8 +46,15 @@
 .Hero-heading {
   text-align: center;
   font-size: calc(2.5rem + 0.75vw);
+  margin-bottom: 0;
   line-height: 1.2;
-  margin-bottom: var(--spacing-lg);
+}
+
+.Hero-subheading {
+  font-size: 1.5rem;
+  opacity: 0.85;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 @media (min-width: 1690px) {
@@ -59,18 +69,9 @@
   z-index: var(--z-index-lg);
 }
 
-.Hero-card {
+.Hero-content {
   position: relative;
   z-index: var(--z-index-xl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-  z-index: var(--z-index-xl);
-  padding: var(--spacing-md) 0;
-  width: 100%;
-  max-width: var(--breakpoint-sm);
 }
 
 .Hero-cardDirections {
