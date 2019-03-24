@@ -22,6 +22,7 @@
   color: var(--white);
   font-weight: 700;
   font-size: var(--font-size-md);
+  text-align: center;
 }
 
 .Header-nav {
