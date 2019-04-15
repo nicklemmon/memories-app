@@ -155,6 +155,7 @@ export default class MemoryGrid extends React.Component {
                         key={ memory.objectId }
                       >
                         <MemoryCard
+                          rawId={ memory.objectId }
                           id={ `memory-card-${memory.objectId }` }
                           className='MemoryGrid-card'
                           title={ memory.title }

@@ -1,11 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
-import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
+import { FaTrashAlt } from 'react-icons/fa'
 
 import Card from './Card'
 import Tag from './Tag'
 import ModalLauncher from './ModalLauncher'
-import FormGroup from './FormGroup'
+import ModalLauncherEditMemory from './ModalLauncherEditMemory'
 
 import './MemoryCard.css'
 
@@ -34,6 +34,7 @@ class MemoryCard extends React.Component {
 
   render() {
     const {
+      rawId,
       id,
       title,
       tags,
@@ -87,50 +88,13 @@ class MemoryCard extends React.Component {
         
         { canWrite &&
           <div className='MemoryCard-actions'>
-            <ModalLauncher
-              className='MemoryCard-action'
-              content={
-                <FaPencilAlt
-                  className='MemoryCard-actionIcon'
-                  role='img'
-                  aria-label='Edit'
-                />
-              }
-              id={ `edit-memory-${id}`}
-              heading='Edit Memory'
-              hasCTAs={ true }
-              primaryButtonContent='Submit'
-              primaryButtonOnClick={ handleEdit }
-              primaryButtonCloses={ true }
-              secondaryButtonContent='Cancel'
-              secondaryButtonCloses={ true }
-            >
-              <form>
-                <FormGroup
-                  label='Title'
-                  type='text'
-                  id='title'
-                  handleChange={ this.handleFormGroupChange }
-                  value={ title }
-                />
-
-                <FormGroup
-                  label='Memory Date'
-                  type='date'
-                  id='date'
-                  handleChange={ this.handleFormGroupChange }
-                  value={ formattedDate }
-                />
-
-                <FormGroup
-                  label='Summary'
-                  type='textarea'
-                  id='summary'
-                  handleChange={ this.handleFormGroupChange }
-                  value={ summary }
-                />
-              </form>
-            </ModalLauncher>
+            <ModalLauncherEditMemory
+              rawId={ rawId }
+              id={ id }
+              title={ title }
+              date={ formattedDate }
+              summary={ summary }
+            />
 
             <ModalLauncher
               className='MemoryCard-action'
