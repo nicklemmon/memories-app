@@ -32,22 +32,23 @@ class FormEditMemory extends React.Component {
     })
   }
 
-  handleSubmit( rawId ) {
+  handleSubmit( id, successCallback ) {
     const {
       title,
       summary
     } = this.state
     const memory = Parse.Object.extend( 'memory' )
     const query = new Query( memory )
-    console.log( 'rawId', rawId )
+    console.log( 'id', id )
 
-    query.get( rawId ).then( ( object ) => {
+    query.get( id ).then( ( object ) => {
       object.set( 'title', title )
       object.set( 'summary', summary )
       object.save()
         .then( ( response ) => {
           console.log( `${JSON.stringify(response)}` )
-          this.setState({ hasSuccessMessage: true })
+          this.setState({ modalIsOpen: false })
+          successCallback()
         }, ( error ) => {
           this.setState({ hasErrorMessage: true })
         })
@@ -57,14 +58,15 @@ class FormEditMemory extends React.Component {
   render() {
     const { 
       rawId,
-      id 
+      id,
+      editSuccessCallback
     } = this.props
     const {
       title,
       date,
       summary,
-      hasSuccessMessage,
-      hasErrorMessage
+      hasErrorMessage,
+      modalIsOpen
     } = this.state
 
     return (
@@ -81,17 +83,11 @@ class FormEditMemory extends React.Component {
         heading='Edit Memory'
         hasCTAs
         primaryButtonContent='Submit'
-        primaryButtonOnClick={ () => this.handleSubmit( rawId ) }
+        primaryButtonOnClick={ () => this.handleSubmit( rawId, editSuccessCallback ) }
         secondaryButtonContent='Cancel'
         secondaryButtonCloses
+        isOpen={ modalIsOpen }
       >
-        { hasSuccessMessage &&
-          <Alert
-            type='success'
-            content='Memory updated!'
-          />
-        }
-
         { hasErrorMessage &&
           <Alert
             type='error'

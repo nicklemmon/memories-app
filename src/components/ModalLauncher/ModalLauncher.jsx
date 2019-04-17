@@ -23,6 +23,10 @@ class ModalButton extends React.Component {
     this.secondaryButtonHandleClick = this.secondaryButtonHandleClick.bind( this )
   }
 
+  componentDidUpdate( prevProps ) {
+    if ( this.props.isOpen !== prevProps.isOpen ) this.setState({ isOpen: this.props.isOpen })
+  }
+
   open() {
     this.setState({
       isOpen: true

@@ -40,7 +40,7 @@ class MemoryCard extends React.Component {
       tags,
       summary,
       canWrite,
-      handleEdit,
+      editSuccessCallback,
       handleDelete,
       className,
       date,
@@ -94,6 +94,7 @@ class MemoryCard extends React.Component {
               title={ title }
               date={ formattedDate }
               summary={ summary }
+              editSuccessCallback={ editSuccessCallback }
             />
 
             <ModalLauncher
