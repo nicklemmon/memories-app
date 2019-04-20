@@ -15,7 +15,8 @@ class FormEditMemory extends React.Component {
       date: this.props.date,
       summary: this.props.summary,
       hasSuccessMessage: false,
-      hasErrorMessage: false
+      hasErrorMessage: false,
+      modalIsOpen: false
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
@@ -39,16 +40,13 @@ class FormEditMemory extends React.Component {
     } = this.state
     const memory = Parse.Object.extend( 'memory' )
     const query = new Query( memory )
-    console.log( 'id', id )
 
     query.get( id ).then( ( object ) => {
       object.set( 'title', title )
       object.set( 'summary', summary )
       object.save()
         .then( ( response ) => {
-          console.log( `${JSON.stringify(response)}` )
-          this.setState({ modalIsOpen: false })
-          successCallback()
+          this.setState({ modalIsOpen: false }, () => successCallback() )
         }, ( error ) => {
           this.setState({ hasErrorMessage: true })
         })
@@ -59,13 +57,13 @@ class FormEditMemory extends React.Component {
     const { 
       rawId,
       id,
-      editSuccessCallback
+      editSuccessCallback,
+      editFailureCallback
     } = this.props
     const {
       title,
       date,
       summary,
-      hasErrorMessage,
       modalIsOpen
     } = this.state
 
@@ -83,18 +81,12 @@ class FormEditMemory extends React.Component {
         heading='Edit Memory'
         hasCTAs
         primaryButtonContent='Submit'
-        primaryButtonOnClick={ () => this.handleSubmit( rawId, editSuccessCallback ) }
+        primaryButtonOnClick={ () => this.handleSubmit( rawId, editSuccessCallback, editFailureCallback ) }
+        primaryButtonCloses
         secondaryButtonContent='Cancel'
         secondaryButtonCloses
         isOpen={ modalIsOpen }
       >
-        { hasErrorMessage &&
-          <Alert
-            type='error'
-            content='Memory failed to update. Try again later.'
-          />
-        }
-
         <FormGroup
           label='Title'
           type='text'

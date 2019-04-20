@@ -39,6 +39,7 @@ export default class MemoryGrid extends React.Component {
     this.deleteMemory = this.deleteMemory.bind( this )
     this.updateMemories = this.updateMemories.bind( this )
     this.handleSuccessEdit = this.handleSuccessEdit.bind( this )
+    this.handleFailedEdit = this.handleFailedEdit.bind( this )
     this.render = this.render.bind( this )
   }
 
@@ -95,7 +96,15 @@ export default class MemoryGrid extends React.Component {
   }
 
   handleSuccessEdit() {
-    this.setState({ successEdit : true }, () => this.getMemories() )
+    this.setState({
+      successEdit : true,
+    }, () => this.getMemories() )
+  }
+
+  handleFailedEdit() {
+    this.setState({
+      failedEdit : true,
+    })
   }
 
   componentDidMount() {
@@ -108,6 +117,7 @@ export default class MemoryGrid extends React.Component {
       errorMessage,
       successDelete,
       successEdit,
+      failedEdit,
       memories,
       loading,
       canWrite
@@ -151,6 +161,15 @@ export default class MemoryGrid extends React.Component {
           </MaxWidth>
         }
 
+        { failedEdit &&
+          <MaxWidth size='md'>
+            <Alert
+              type='error'
+              content='Memory failed to be edited. Try again!'
+            />
+          </MaxWidth>
+        }
+
         { loading && <Loading/> }
         
         <PoseGroup>
@@ -180,6 +199,8 @@ export default class MemoryGrid extends React.Component {
                           canWrite={ canWrite }
                           handleDelete={ () => this.deleteMemory( memory.objectId ) }
                           editSuccessCallback={ this.handleSuccessEdit }
+                          editFailureCallback={ this.handleFailedEdit }
+                          editModalOpen={ false }
                           { ...this.props }
                         />
                       </Child>
