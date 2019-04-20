@@ -86,8 +86,6 @@ export default class MemoryGrid extends React.Component {
     query.get( memoryID )
       .then( obj => {
         obj.destroy()
-      })
-      .then( () => {
         this.updateMemories()
       })
       .catch( error => {

@@ -3,7 +3,6 @@ import Parse, { Query } from 'parse'
 import { FaPencilAlt } from 'react-icons/fa'
 
 import ModalLauncher from './ModalLauncher'
-import Alert from './Alert'
 import FormGroup from './FormGroup'
 
 class FormEditMemory extends React.Component {
