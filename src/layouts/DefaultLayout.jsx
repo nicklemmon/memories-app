@@ -1,8 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { Provider } from "mobx-react"
+
+import AppStore from '../stores/AppStore'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import PageLoader from '../components/PageLoader/PageLoader'
 
 import IndexPage from '../pages/index.jsx'
 import NotFoundPage from '../pages/404.jsx'
@@ -18,6 +22,10 @@ class DefaultLayout extends React.Component {
     return (
       <div className='Layout'>
         <Header classNames='Layout-header' />
+
+        <Provider appStore={ AppStore }>
+          <PageLoader />
+        </Provider>
 
         <main className='Layout-main'>
           { this.props.children }
