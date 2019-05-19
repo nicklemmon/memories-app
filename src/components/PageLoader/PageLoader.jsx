@@ -2,10 +2,6 @@ import React from 'react'
 import { observer, inject } from 'mobx-react'
 
 class PageLoader extends React.Component {
-  componentDidMount() {
-    // this.props.appStore.setLoading()
-  }
-
   render() {
     return (
       <div className="PageLoader">
@@ -15,4 +11,4 @@ class PageLoader extends React.Component {
   }
 }
 
-export default inject( 'appStore' )(observer( PageLoader ) );
+export default inject( 'appStore' )( observer( PageLoader ) );
