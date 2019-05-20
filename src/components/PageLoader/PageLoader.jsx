@@ -1,31 +1,20 @@
 import React from 'react'
+import FocusLock from 'react-focus-lock'
 
 import Loading from '../Loading'
 
 import './PageLoader.css'
 
-class PageLoader extends React.Component {
-  constructor( props ) {
-    super( props )
-
-    this.loader = React.createRef()
-  }
-
-  componentDidMount() {
-    this.loader.current.focus()
-  }
-
-  render() {
-    return (
+export default function PageLoader( props ) {
+  return (
+    <FocusLock>
       <div
         className="PageLoader" 
         tabIndex="-1"
-        ref={ this.loader }
+        autoFocus
       >
         <Loading className="PageLoader-loading"/>
       </div>
-    )
-  }
+    </FocusLock>
+  )
 }
-
-export default PageLoader

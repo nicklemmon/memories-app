@@ -1,5 +1,6 @@
 import React from 'react'
 import posed from 'react-pose'
+import FocusLock from 'react-focus-lock'
 
 import './Modal.css'
 
@@ -49,7 +50,7 @@ class Modal extends React.Component {
         role='dialog'
         pose={ isHidden ? 'hidden' : 'visible' }
       >
-        <div className='Modal-content'>
+        <FocusLock className='Modal-content'>
           <div
             className='Modal-heading'
             id={ `${id}-heading` }
@@ -60,7 +61,7 @@ class Modal extends React.Component {
           </div>
 
           { this.props.children }
-        </div>
+        </FocusLock>
       </PosedDiv>
     )
   }
