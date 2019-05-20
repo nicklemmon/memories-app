@@ -1,14 +1,31 @@
 import React from 'react'
-import { observer, inject } from 'mobx-react'
+
+import Loading from '../Loading'
+
+import './PageLoader.css'
 
 class PageLoader extends React.Component {
+  constructor( props ) {
+    super( props )
+
+    this.loader = React.createRef()
+  }
+
+  componentDidMount() {
+    this.loader.current.focus()
+  }
+
   render() {
     return (
-      <div className="PageLoader">
-        { this.props.appStore.isLoading && <div>🏋️ LOADING!! 🏋️</div> }
+      <div
+        className="PageLoader" 
+        tabIndex="-1"
+        ref={ this.loader }
+      >
+        <Loading className="PageLoader-loading"/>
       </div>
     )
   }
 }
 
-export default inject( 'appStore' )( observer( PageLoader ) );
+export default PageLoader
