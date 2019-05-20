@@ -29,7 +29,7 @@ class App extends React.Component {
         />
         
         <Router>
-          <Provider appStore={ AppStore }>
+          <Provider appState={ AppStore }>
             <DefaultLayout/>
           </Provider>
         </Router>

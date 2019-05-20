@@ -21,7 +21,7 @@ class DefaultLayout extends React.Component {
       <div className='Layout'>
         <Header classNames='Layout-header' />
 
-        { this.props.appStore.isLoading && <PageLoader /> }
+        { this.props.appState.isLoading && <PageLoader /> }
 
         <main className='Layout-main'>
           { this.props.children }
@@ -53,5 +53,5 @@ class DefaultLayout extends React.Component {
   }
 }
 
-export default inject( 'appStore' )( observer( DefaultLayout ) );
+export default inject( 'appState' )( observer( DefaultLayout ) );
 // export default DefaultLayout
