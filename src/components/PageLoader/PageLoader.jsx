@@ -11,6 +11,7 @@ export default function PageLoader( props ) {
       <div
         className="PageLoader" 
         tabIndex="-1"
+        role="alert"
         autoFocus
       >
         <Loading className="PageLoader-loading"/>
