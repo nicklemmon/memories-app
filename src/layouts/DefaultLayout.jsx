@@ -53,5 +53,4 @@ class DefaultLayout extends React.Component {
   }
 }
 
-export default inject( 'appState' )( observer( DefaultLayout ) );
-// export default DefaultLayout
+export default inject( 'appState' )( observer( DefaultLayout ) )
