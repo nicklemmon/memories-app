@@ -3,7 +3,7 @@ import Parse from 'parse'
 import Helmet from 'react-helmet'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import DefaultLayout from './layouts/DefaultLayout.jsx'
+import DefaultLayout from './layouts/DefaultLayout'
 
 class App extends React.Component {
   constructor( props ) {

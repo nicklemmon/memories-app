@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import FormWrapper from './FormWrapper'
 import FormGroup from './FormGroup'
-import FormGroupTagInput from './FormGroupTagInput.jsx'
+import FormGroupTagInput from './FormGroupTagInput'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
 
