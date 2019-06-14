@@ -2,8 +2,6 @@ import React from 'react'
 
 import Card from '../Card'
 
-import './FormWrapper.css'
-
 class FormWrapper extends React.Component {
   render() {
     const {
@@ -21,6 +19,7 @@ class FormWrapper extends React.Component {
         alertType={ alertType }
         alertContent={ alertContent }
         footerContent={ footerContent }
+        isBrokenOut={ true }
       >
         <form
           method={ method }
