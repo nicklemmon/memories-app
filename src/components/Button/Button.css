@@ -10,7 +10,7 @@
   font-family: var(--font-family-primary);
   font-weight: 400;
   font-size: var(--font-size-md);
-  border-radius: calc(var(--border-radius) * 1.75);
+  border-radius: calc(var(--border-radius));
   border: 2px solid currentColor;
   box-shadow: var(--box-shadow-sm);
   overflow: hidden;
