@@ -1,5 +1,6 @@
 import React from 'react'
 import Parse from 'parse'
+import { Redirect } from 'react-router-dom'
 
 import FormWrapper from './FormWrapper'
 import FormGroup from './FormGroup'
@@ -18,8 +19,8 @@ class FormAddMemory extends React.Component {
       tags: [{ name: ''}],
       tagMax: 3,
       tagMaxReached: false,
-      successMsg: false,
-      errorMsg: false
+      errorMsg: false,
+      redirect: false
     }
 
     this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
@@ -61,22 +62,32 @@ class FormAddMemory extends React.Component {
   }
 
   handleSubmit( e ) {
+    const {
+      title,
+      summary,
+      tags,
+      date
+    } = this.state
+
     e.preventDefault()
     
     const Memory = Parse.Object.extend( 'memory' )
     const NewMemory = new Memory()
 
-    NewMemory.set( 'title', this.state.title )
-    NewMemory.set( 'summary', this.state.summary )
-    NewMemory.set( 'tags', this.state.tags )
-    NewMemory.set( 'recordedDate', new Date( this.state.date ) )
+    NewMemory.set( 'title', title )
+    NewMemory.set( 'summary', summary )
+    NewMemory.set( 'tags', tags )
+    NewMemory.set( 'recordedDate', new Date( date ) )
 
     NewMemory.save()
       .then( res => {
-        this.resetForm()
-        this.setState({ successMsg: true })
+        console.log( res );
+
+        this.setState({ redirect: true })
       })
       .catch( error => {
+        console.log( error );
+
         this.setState({ errorMsg: true })
       })
   }
@@ -110,19 +121,13 @@ class FormAddMemory extends React.Component {
     const {
       tags,
       tagMaxReached,
-      successMsg,
-      errorMsg
+      errorMsg,
+      redirect
     } = this.state
 
     let hasAlert
     let alertType
     let alertContent
-
-    if ( successMsg ) {
-      hasAlert = true
-      alertType = 'success'
-      alertContent = 'Success! Memory added.'
-    }
 
     if ( errorMsg ) {
       hasAlert = true
@@ -131,73 +136,91 @@ class FormAddMemory extends React.Component {
     }
 
     return (
-      <FormWrapper 
-        handleSubmit={ this.handleSubmit }
-        hasAlert={ hasAlert }
-        alertType={ alertType }
-        alertContent={ alertContent }
-      >
-        <FormGroup
-          label='Title'
-          type='text'
-          id='title'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.title }
-        />
-
-        <FormGroup
-          label='Memory Date'
-          type='date'
-          id='date'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.date }
-        />
-
-        <FormGroup
-          label='Summary'
-          type='textarea'
-          id='summary'
-          handleChange={ this.handleFormGroupChange }
-          value={ this.state.summary }
-        />
-
-        { tags.map( ( tag, index ) => {
-            return(
-              <FormGroupTagInput
-                index={ index }
-                key={ `tag-input-${index}` }
-                handleChange={ ( e ) => this.handleFormGroupTagChange( e, index ) }
-                buttonOnClick={ ( e ) => this.handleFormGroupTagDeleteClick( e, index ) }
-                value={ tag.name }
-              />
-            )
-          })
+      <React.Fragment>
+        { redirect &&
+          <Redirect
+            to={{
+              pathname: '/addmemorysuccess',
+              state: {
+                title: this.state.title,
+                summary: this.state.summary,
+                tags: this.state.tags,
+                date: this.state.date
+              }
+            }}
+          />
         }
 
-        <ButtonWrapper>
-          { tagMaxReached ?
-            <p>Maximum of 3 tags per memory.</p>
-
-            :
-
-            <Button
-              type='tertiary'
-              content='Add Another Tag'
-              onClick={ this.handleAddTagClick }
-              fullWidth={ true }
+        { !redirect &&
+          <FormWrapper 
+            handleSubmit={ this.handleSubmit }
+            hasAlert={ hasAlert }
+            alertType={ alertType }
+            alertContent={ alertContent }
+          >
+            <FormGroup
+              label='Title'
+              type='text'
+              id='title'
+              handleChange={ this.handleFormGroupChange }
+              value={ this.state.title }
             />
-          }
-        </ButtonWrapper>
 
-        <ButtonWrapper>
-          <Button
-            type='primary'
-            content='Add Memory'
-            fullWidth
-            onClick={ this.handleFormSubmit }
-          />
-        </ButtonWrapper>
-      </FormWrapper>
+            <FormGroup
+              label='Memory Date'
+              type='date'
+              id='date'
+              handleChange={ this.handleFormGroupChange }
+              value={ this.state.date }
+            />
+
+            <FormGroup
+              label='Summary'
+              type='textarea'
+              id='summary'
+              handleChange={ this.handleFormGroupChange }
+              value={ this.state.summary }
+            />
+
+            { tags.map( ( tag, index ) => {
+                return(
+                  <FormGroupTagInput
+                    index={ index }
+                    key={ `tag-input-${index}` }
+                    handleChange={ ( e ) => this.handleFormGroupTagChange( e, index ) }
+                    buttonOnClick={ ( e ) => this.handleFormGroupTagDeleteClick( e, index ) }
+                    value={ tag.name }
+                  />
+                )
+              })
+            }
+
+            <ButtonWrapper>
+              { tagMaxReached ?
+                <p>Maximum of 3 tags per memory.</p>
+
+                :
+
+                <Button
+                  type='tertiary'
+                  content='Add Another Tag'
+                  onClick={ this.handleAddTagClick }
+                  fullWidth={ true }
+                />
+              }
+            </ButtonWrapper>
+
+            <ButtonWrapper>
+              <Button
+                type='primary'
+                content='Add Memory'
+                fullWidth
+                onClick={ this.handleFormSubmit }
+              />
+            </ButtonWrapper>
+          </FormWrapper>
+        }
+      </React.Fragment>
     )
   }
 }
