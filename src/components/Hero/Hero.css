@@ -45,7 +45,7 @@
 
 .Hero-heading {
   text-align: center;
-  font-size: calc(2.5rem + 0.75vw);
+  font-size: 2.5rem;
   margin-bottom: 0;
   line-height: 1.2;
 }
