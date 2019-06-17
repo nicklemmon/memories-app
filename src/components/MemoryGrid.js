@@ -5,7 +5,8 @@ import posed, { PoseGroup } from 'react-pose'
 import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
-import Loading from './Loading'
+import PageLoader from './PageLoader'
+import AppStore from '../stores/AppStore'
 
 import './MemoryGrid.css'
 
@@ -60,22 +61,26 @@ export default class MemoryGrid extends React.Component {
 
   getMemories() {
     const Memory = Parse.Object.extend( 'memory' )
-    const query = new Parse.Query( Memory );
+    const query = new Parse.Query( Memory )
 
-    query.limit( 1000 );
+    query.limit( 1000 )
+
+    AppStore.setLoading()
 
     query.find()
       .then( res => {
         this.setState({
-          loading: false,
           memories: JSON.parse( JSON.stringify( res ) ) // There has *got* to be a better way to handle this 😓
         })
       })
       .catch( error => {
         this.setState({
-          loading: false,
           errorMessage: true
         })
+      })
+      .then( () => {
+        this.setState({ loading: false })
+        AppStore.unsetLoading()
       })
   }
 
@@ -167,8 +172,6 @@ export default class MemoryGrid extends React.Component {
             />
           </MaxWidth>
         }
-
-        { loading && <Loading/> }
         
         <PoseGroup>
           { !loading &&
