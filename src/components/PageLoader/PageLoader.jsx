@@ -9,12 +9,15 @@ export default function PageLoader( props ) {
   return (
     <FocusLock>
       <div
-        className="PageLoader" 
-        tabIndex="-1"
-        role="alert"
+        className='PageLoader' 
+        tabIndex='-1'
+        role='alert'
         autoFocus
       >
-        <Loading className="PageLoader-loading"/>
+        <Loading
+          className='PageLoader-loading'
+          description='Loading...'
+        />
       </div>
     </FocusLock>
   )
