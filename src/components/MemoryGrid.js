@@ -5,7 +5,6 @@ import posed, { PoseGroup } from 'react-pose'
 import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
-import PageLoader from './PageLoader'
 import AppStore from '../stores/AppStore'
 
 import './MemoryGrid.css'
