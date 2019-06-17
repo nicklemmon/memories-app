@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 
 import PageHeading from '../components/PageHeading'
 import Content from '../components/Content'
-import FormLogin from '../components/FormLogin.jsx'
+import FormLogin from '../components/FormLogin'
 
 class LoginPage extends React.Component {
   render() {

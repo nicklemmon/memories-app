@@ -3,22 +3,22 @@ import Helmet from 'react-helmet'
 
 import Content from '../components/Content'
 import PageHeading from '../components/PageHeading'
-import FormAddMemory from '../components/FormAddMemory.jsx'
+import FormSignup from '../components/FormSignup'
 
-class AddMemoryPage extends React.Component {
+class SignupPage extends React.Component {
   render() {
     return (
       <div>
-        <Helmet title='Add a Memory'/>
+        <Helmet title='Sign Up'/>
         
-        <PageHeading content='Add a Memory'/>
+        <PageHeading content='Sign Up'/>
 
         <Content>
-          <FormAddMemory/>
+          <FormSignup/>
         </Content>
       </div>
     )
   }
 }
 
-export default AddMemoryPage
+export default SignupPage

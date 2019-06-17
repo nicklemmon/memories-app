@@ -23,7 +23,8 @@ class Card extends React.Component {
       headingContent,
       metaContent,
       footerContent,
-      className
+      className,
+      isBrokenOut
     } = this.props
     
     const hasAlert = this.props.hasAlert || this.state.hasAlert
@@ -31,7 +32,7 @@ class Card extends React.Component {
     const alertContent = this.props.alertContent || this.state.alertContent
 
     return (
-      <div className={ classNames( 'Card', className ) } role='region'>
+      <div className={ classNames( 'Card', isBrokenOut && 'Card--brokenOut', className ) } role='region'>
         { headingContent &&
           <div className='Card-header'>
             <Heading

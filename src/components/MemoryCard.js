@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { FaTrashAlt } from 'react-icons/fa'
+import { format } from 'date-fns'
 
 import Card from './Card'
 import Tag from './Tag'
@@ -50,6 +51,7 @@ class MemoryCard extends React.Component {
     } = this.props
     
     let renderedTags
+    let formattedDate
 
     if ( tags ) {
       renderedTags = tags.map( ( tag, index ) => {
@@ -62,27 +64,16 @@ class MemoryCard extends React.Component {
       })
     }
     
-    // NOTE: Replace with [date-fns](https://github.com/date-fns/date-fns) probably
-    const dateChunks = date.split( '/' )
-    const month = dateChunks[0]
-    const day = dateChunks[1]
-    const year = dateChunks[2]
-
-    let formattedDay = day
-    let formattedMonth = month
-
-    if ( day.length < 2 ) formattedDay = `0${day}`
-
-    if ( month.length < 2 ) formattedMonth = `0${month}`
-
-    const formattedDate = `${year}-${formattedMonth}-${formattedDay}`
+    if ( date ) {
+      formattedDate = format( date, 'MM/DD/YYYY' );
+    }
 
     return (
       <Card
         className={ classNames( 'MemoryCard', className ) }
         headingContent={ title }
         headingLevel='3'
-        metaContent={ date }
+        metaContent={ formattedDate }
         footerContent={ renderedTags }
         { ...attributes }
       >

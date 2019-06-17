@@ -5,8 +5,7 @@ import { Provider } from 'mobx-react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import AppStore from './stores/AppStore'
-
-import DefaultLayout from './layouts/DefaultLayout.jsx'
+import DefaultLayout from './layouts/DefaultLayout'
 
 class App extends React.Component {
   constructor( props ) {

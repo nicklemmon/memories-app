@@ -11,6 +11,19 @@
   font-family: var(--font-family-primary);
 }
 
+.Card--brokenOut {
+  position: relative; /* allows use of z-index */
+  z-index: var(--z-index-lg);
+  margin: 0 auto;
+  max-width: var(--breakpoint-xs);
+}
+
+@media (min-width: 736px) {
+  .Card--brokenOut {
+    margin-top: -5rem;
+  }
+}
+
 .Card-alert {
   margin-bottom: var(--spacing-lg);
 }

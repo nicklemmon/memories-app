@@ -10,14 +10,15 @@
   font-family: var(--font-family-primary);
   font-weight: 400;
   font-size: var(--font-size-md);
-  border-radius: calc(var(--border-radius) * 1.75);
+  border-radius: calc(var(--border-radius));
   border: 2px solid currentColor;
   box-shadow: var(--box-shadow-sm);
   overflow: hidden;
   cursor: pointer;
   width: 100%;
   text-decoration: none;
-  transition: background-color var(--anim-speed) var(--anim-easing),
+  transition: border-color var(--anim-speed) var(--anim-easing),
+              background-color var(--anim-speed) var(--anim-easing),
               box-shadow var(--anim-speed) var(--anim-easing);
 }
 
