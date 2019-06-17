@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 
 import Header from '../components/Header'
@@ -72,4 +72,4 @@ class DefaultLayout extends React.Component {
   }
 }
 
-export default inject( 'appState' )( observer( DefaultLayout ) )
+export default withRouter( inject( 'appState' )( observer( DefaultLayout ) ) )
