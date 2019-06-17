@@ -7,6 +7,7 @@ import FormGroup from './FormGroup'
 import FormGroupTagInput from './FormGroupTagInput'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
+import AppStore from '../stores/AppStore'
 
 class FormAddMemory extends React.Component {
   constructor( props ) {
@@ -79,16 +80,19 @@ class FormAddMemory extends React.Component {
     NewMemory.set( 'tags', tags )
     NewMemory.set( 'recordedDate', new Date( date ) )
 
+    AppStore.setLoading()
+
     NewMemory.save()
       .then( res => {
-        console.log( res );
-
         this.setState({ redirect: true })
       })
       .catch( error => {
         console.log( error );
 
         this.setState({ errorMsg: true })
+      })
+      .then( () => {
+        AppStore.unsetLoading()
       })
   }
 

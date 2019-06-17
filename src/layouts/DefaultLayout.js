@@ -28,25 +28,41 @@ class DefaultLayout extends React.Component {
           { this.props.children }
 
           <Switch>
-            <Route exact path='/' component={ IndexPage } />
+            <Route
+              exact
+              path='/'
+              component={ IndexPage } 
+            />
 
-            <Route path='/memories' render={ () => <MemoriesPage/> } />
+            <Route
+              path='/memories'
+              component={ MemoriesPage }
+            />
 
             <Route
               path='/signup'
-              render={ () => <SignupPage/> }
+              component={ SignupPage }
             />
 
-            <Route path='/addmemory' component={ AddMemoryPage }/>
+            <Route
+              path='/addmemory'
+              component={ AddMemoryPage }
+            />
 
-            <Route path='/addmemorysuccess' component={ AddMemorySuccessPage }/>
+            <Route
+              path='/addmemorysuccess'
+              component={ AddMemorySuccessPage }
+            />
 
             <Route
               path='/login'
-              render={ () => <LoginPage/> }
+              component={ LoginPage }
             />
 
-            <Route path='*' component={ NotFoundPage }/>
+            <Route
+              path='*'
+              component={ NotFoundPage }
+            />
           </Switch>
         </main>
 
