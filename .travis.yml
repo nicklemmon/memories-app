@@ -10,19 +10,16 @@ cache:
   override:
     - npm ci
 
-defaults: &defaults
-  script:
-    - npm run test
-    - kill $(jobs -p) || true
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
+      - libgconf-2-4
 
-jobs:
-  include:
-    # we have multiple jobs to execute using just a single stage
-    # but we can pass group name via environment variable to Cypress test runner
-    - stage: test
-      env:
-        - STAGE_NAME=1x-electron
-      <<: *defaults
+script:
+  - npm run test
+  - npm run build
+  - npm run test:cy:ci
 
 before_deploy:
   - rm -rf build
