@@ -1,31 +1,20 @@
-import React from 'react'
-import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
-import { FaChevronRight } from 'react-icons/fa'
+import React from 'react';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import { FaChevronRight } from 'react-icons/fa';
 
-import './ActionLink.css'
+import './ActionLink.css';
 
-function ActionLink( props ) {
-  const {
-    to,
-    className,
-    children,
-    cy,
-    ...attributes
-  } = props
+function ActionLink(props) {
+  const { to, className, children, cy, ...attributes } = props;
 
   return (
-    <NavLink
-      to={ to }
-      className={ classNames( 'ActionLink', className ) }
-      data-cy={ cy }
-      { ...attributes }
-    >
-      { children }
+    <NavLink to={to} className={classNames('ActionLink', className)} data-cy={cy} {...attributes}>
+      {children}
 
-      <FaChevronRight className='ActionLink-icon' />
+      <FaChevronRight className="ActionLink-icon" />
     </NavLink>
-  )
+  );
 }
 
-export default ActionLink
+export default ActionLink;
