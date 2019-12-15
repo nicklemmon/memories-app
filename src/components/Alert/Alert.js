@@ -9,6 +9,7 @@ import {
   FaInfoCircle
 } from 'react-icons/fa'
 
+
 import './Alert.css'
 
 const PosedDiv = posed.div({
