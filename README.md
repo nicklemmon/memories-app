@@ -13,3 +13,4 @@ REACT_APP_AUTH0_DBCONNECTIONNAME = <dbconnectionname>
 3. Run `npm install`,
 4. Then, `npm run start` to get to work.
 5. `npm run build` for a production build
+
