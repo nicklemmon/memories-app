@@ -37,7 +37,7 @@
     "test:cy:ci": "npm start & wait-on http://localhost:3000 && npm run test:cy:run"
   },
   "devDependencies": {
-    "cypress": "^3.7.0",
+    "cypress": "^3.8.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "eslint": "^6.7.2",
