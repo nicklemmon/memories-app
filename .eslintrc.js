@@ -1,12 +1,10 @@
 module.exports = {
-  "parserOptions": {
-    "ecmaVersion": 9,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+  parserOptions: {
+    ecmaVersion: 11,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  "extends": [
-    "prettier",
-  ]
+  extends: ['prettier'],
 };

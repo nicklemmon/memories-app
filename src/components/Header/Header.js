@@ -1,41 +1,27 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import classNames from 'classnames'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
-import './Header.css'
+import './Header.css';
 
-import HeaderNav from '../HeaderNav'
+import HeaderNav from '../HeaderNav';
 
 class Header extends React.Component {
   render() {
-    const {
-      className,
-      user
-    } = this.props
+    const { className, user } = this.props;
 
     return (
-      <header
-        className={ classNames( 'Header', className ) }
-        data-cy='header'
-      >
-        <span className='Header-user'>
-          { user && user.username }
-        </span>
+      <header className={classNames('Header', className)} data-cy="header">
+        <span className="Header-user">{user && user.username}</span>
 
-        <NavLink 
-          className='Header-brand'
-          to='/'
-        >
+        <Link className="Header-brand" to="/">
           Eva's Memories
-        </NavLink>
+        </Link>
 
-        <HeaderNav
-          className='Header-nav'
-          user={ user }
-        />
+        <HeaderNav className="Header-nav" user={user} />
       </header>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;
