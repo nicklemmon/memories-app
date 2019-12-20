@@ -34,7 +34,7 @@
     "eject": "react-scripts eject",
     "test:cy:run": "$(npm bin)/cypress run",
     "test:cy:open": "$(npm bin)/cypress open",
-    "test:cy:ci": "npm start & wait-on http://localhost:3000 && npm run test:cy:run"
+    "test:cy:ci": "npm start & wait-on http://127.0.0.1:3000 && npm run test:cy:run"
   },
   "devDependencies": {
     "cypress": "^3.8.0",
