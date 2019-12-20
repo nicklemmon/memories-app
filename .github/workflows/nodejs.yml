@@ -21,6 +21,6 @@ jobs:
           npm ci
           npm run test
       - name: end to end test
-        run: npm run test:cy:ci
-        env:
-          CI: true
+        run: |
+          npm ci
+          npm run test:cy:ci
