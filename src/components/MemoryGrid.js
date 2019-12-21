@@ -12,17 +12,17 @@ import './MemoryGrid.css'
 const Parent = posed.div({
   enter: {
     delayChildren: 50,
-    staggerChildren: 33
-  }
+    staggerChildren: 33,
+  },
 })
 const Child = posed.div({
   enter: { y: 0, opacity: 1 },
-  exit: { y: 25, opacity: 0 }
+  exit: { y: 25, opacity: 0 },
 })
 
 export default class MemoryGrid extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
       memoriesURL: `${process.env.REACT_APP_API_BASE_URL}/classes/memory`,
@@ -31,16 +31,16 @@ export default class MemoryGrid extends React.Component {
       errorMessage: false,
       loading: false,
       canRead: false,
-      canWrite: false
+      canWrite: false,
     }
 
-    this.setUserPermissions = this.setUserPermissions.bind( this )
-    this.getMemories = this.getMemories.bind( this )
-    this.deleteMemory = this.deleteMemory.bind( this )
-    this.updateMemories = this.updateMemories.bind( this )
-    this.handleSuccessEdit = this.handleSuccessEdit.bind( this )
-    this.handleFailedEdit = this.handleFailedEdit.bind( this )
-    this.render = this.render.bind( this )
+    this.setUserPermissions = this.setUserPermissions.bind(this)
+    this.getMemories = this.getMemories.bind(this)
+    this.deleteMemory = this.deleteMemory.bind(this)
+    this.updateMemories = this.updateMemories.bind(this)
+    this.handleSuccessEdit = this.handleSuccessEdit.bind(this)
+    this.handleFailedEdit = this.handleFailedEdit.bind(this)
+    this.render = this.render.bind(this)
   }
 
   setUserPermissions() {
@@ -50,62 +50,67 @@ export default class MemoryGrid extends React.Component {
 
     this.setState({
       canRead: Permissions.read,
-      canWrite: Permissions.write
+      canWrite: Permissions.write,
     })
   }
 
   updateMemories() {
-    this.setState({ loading: true }, () => this.getMemories() )
+    this.setState({ loading: true }, () => this.getMemories())
   }
 
   getMemories() {
-    const Memory = Parse.Object.extend( 'memory' )
-    const query = new Parse.Query( Memory )
+    const Memory = Parse.Object.extend('memory')
+    const query = new Parse.Query(Memory)
 
-    query.limit( 1000 )
+    query.limit(1000)
 
     AppStore.setLoading()
 
-    query.find()
-      .then( res => {
+    query
+      .find()
+      .then(res => {
         this.setState({
-          memories: JSON.parse( JSON.stringify( res ) ) // There has *got* to be a better way to handle this 😓
+          memories: JSON.parse(JSON.stringify(res)), // There has *got* to be a better way to handle this 😓
         })
       })
-      .catch( error => {
+      .catch(error => {
         this.setState({
-          errorMessage: true
+          errorMessage: true,
         })
       })
-      .then( () => {
+      .then(() => {
         this.setState({ loading: false })
         AppStore.unsetLoading()
       })
   }
 
-  deleteMemory( memoryID ) {
-    const Memory = Parse.Object.extend( 'memory' )
-    const query = new Parse.Query( Memory )
+  deleteMemory(memoryID) {
+    const Memory = Parse.Object.extend('memory')
+    const query = new Parse.Query(Memory)
 
-    query.get( memoryID )
-      .then( obj => {
+    query
+      .get(memoryID)
+      .then(obj => {
         obj.destroy()
         this.updateMemories()
       })
-      .catch( error => {
-        console.log( error )
+      .catch(error => {
+        console.log(error)
       })
   }
 
   handleSuccessEdit() {
-    this.setState({
-      successEdit : true,
-    }, () => this.getMemories() )
+    this.setState(
+      {
+        successEdit: true,
+      },
+      () => this.getMemories(),
+    )
   }
 
   handleFailedEdit() {
     this.setState({
-      failedEdit : true,
+      failedEdit: true,
     })
   }
 
@@ -122,93 +127,85 @@ export default class MemoryGrid extends React.Component {
       failedEdit,
       memories,
       loading,
-      canWrite
+      canWrite,
     } = this.state
 
     return (
       <React.Fragment>
-        { ( errorMessage && !loading ) &&
-          <MaxWidth size='md'>
-            <Alert
-              type="error"
-              content="Whoops! Failed to retrieve memories. Try again later."
-            />
+        {errorMessage && !loading && (
+          <MaxWidth size="md">
+            <Alert type="error">
+              <p>Whoops! Failed to retrieve memories. Try again later.</p>
+            </Alert>
           </MaxWidth>
-        }
+        )}
 
-        { ( !errorMessage && memories.length === 0 && !loading ) &&
-          <MaxWidth size='md'>
-            <Alert
-              type='attention'
-              content='Sorry! No memories available. Please try again later.'
-            />
+        {!errorMessage && memories.length === 0 && !loading && (
+          <MaxWidth size="md">
+            <Alert type="attention">
+              <p>Sorry! No memories available. Please try again later.</p>
+            </Alert>
           </MaxWidth>
-        }
+        )}
 
-        { successDelete &&
-          <MaxWidth size='md'>
-            <Alert
-              type='success'
-              content='Memory successfully deleted.'
-            />
+        {successDelete && (
+          <MaxWidth size="md">
+            <Alert type="success">
+              <p>Memory successfully deleted.</p>
+            </Alert>
           </MaxWidth>
-        }
+        )}
 
-        { successEdit &&
-          <MaxWidth size='md'>
-            <Alert
-              type='success'
-              content='Memory successfully edited.'
-            />
+        {successEdit && (
+          <MaxWidth size="md">
+            <Alert type="success">
+              <p>Memory successfully edited.</p>
+            </Alert>
           </MaxWidth>
-        }
+        )}
 
-        { failedEdit &&
-          <MaxWidth size='md'>
-            <Alert
-              type='error'
-              content='Memory failed to be edited. Try again!'
-            />
+        {failedEdit && (
+          <MaxWidth size="md">
+            <Alert type="error">
+              <p>Memory failed to be edited. Try again!</p>
+            </Alert>
           </MaxWidth>
-        }
-        
+        )}
+
         <PoseGroup>
-          { !loading &&
-            <Parent className='MemoryGrid' key='grid'>
-              {
-                memories
-                  .sort( function( a, b ) {
-                    return new Date( b.recordedDate.iso ) - new Date( a.recordedDate.iso )
-                  })
-                  .map( memory => {
-                    const date = memory.recordedDate ? new Date( memory.recordedDate.iso ).toLocaleDateString() : null
+          {!loading && (
+            <Parent className="MemoryGrid" key="grid">
+              {memories
+                .sort(function(a, b) {
+                  return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
+                })
+                .map(memory => {
+                  const date = memory.recordedDate
+                    ? new Date(memory.recordedDate.iso).toLocaleDateString()
+                    : null
 
-                    return (
-                      <Child
-                        className='MemoryGrid-cardWrapper'
-                        key={ memory.objectId }
-                      >
-                        <MemoryCard
-                          rawId={ memory.objectId }
-                          id={ `memory-card-${memory.objectId }` }
-                          className='MemoryGrid-card'
-                          title={ memory.title }
-                          summary={ memory.summary }
-                          date={ date }
-                          tags={ memory.tags }
-                          canWrite={ canWrite }
-                          handleDelete={ () => this.deleteMemory( memory.objectId ) }
-                          editSuccessCallback={ this.handleSuccessEdit }
-                          editFailureCallback={ this.handleFailedEdit }
-                          editModalOpen={ false }
-                          { ...this.props }
-                        />
-                      </Child>
-                    )
-                  } )
-              }
+                  return (
+                    <Child className="MemoryGrid-cardWrapper" key={memory.objectId}>
+                      <MemoryCard
+                        rawId={memory.objectId}
+                        id={`memory-card-${memory.objectId}`}
+                        className="MemoryGrid-card"
+                        title={memory.title}
+                        summary={memory.summary}
+                        date={date}
+                        tags={memory.tags}
+                        canWrite={canWrite}
+                        handleDelete={() => this.deleteMemory(memory.objectId)}
+                        editSuccessCallback={this.handleSuccessEdit}
+                        editFailureCallback={this.handleFailedEdit}
+                        editModalOpen={false}
+                        {...this.props}
+                      />
+                    </Child>
+                  )
+                })}
             </Parent>
-          }
+          )}
         </PoseGroup>
       </React.Fragment>
     )

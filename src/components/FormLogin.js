@@ -9,8 +9,8 @@ import Button from './Button'
 import ActionLink from './ActionLink'
 
 class FormLogin extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
       hasAlert: false,
@@ -18,107 +18,106 @@ class FormLogin extends React.Component {
       alertContent: null,
       username: null,
       password: null,
-      redirect: false
+      redirect: false,
     }
 
-    this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
-    this.handleSubmit = this.handleSubmit.bind( this )
+    this.handleFormGroupChange = this.handleFormGroupChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleFormGroupChange( e ) {
+  handleFormGroupChange(e) {
     const target = e.target
-    const {
-      value,
-      name
-    } = target;
+    const { value, name } = target
 
-    this.setState( {
-      [name]: value
+    this.setState({
+      [name]: value,
     })
   }
 
   signIn() {
-    Parse.User.logIn( this.state.username, this.state.password )
-      .then( user => {
+    Parse.User.logIn(this.state.username, this.state.password)
+      .then(user => {
         this.setState({ redirect: true })
       })
-      .catch( error => {
+      .catch(error => {
         this.setState({ errorMsg: true })
       })
   }
 
-  handleSubmit( e ) {
+  handleSubmit(e) {
     e.preventDefault()
 
     this.signIn()
   }
 
   render() {
-    const {
-      errorMsg,
-      redirect
-    } = this.state
+    const { errorMsg, redirect } = this.state
 
     let hasAlert
     let alertType
     let alertContent
-    
-    if ( errorMsg ) {
+
+    if (errorMsg) {
       hasAlert = true
-      alertType= 'error'
+      alertType = 'error'
       alertContent = 'Invalid username or password.'
     }
 
     return (
       <React.Fragment>
-        { redirect &&
+        {redirect && (
           <Redirect
             to={{
               pathname: '/',
               state: {
                 hasSuccessMessage: true,
-                userName: this.state.username
-              }
+                userName: this.state.username,
+              },
             }}
           />
-        }
-        
-        { !redirect && 
+        )}
+
+        {!redirect && (
           <FormWrapper
-            hasAlert={ hasAlert }
-            alertType={ alertType }
-            alertContent={ alertContent }
-            footerContent={ <ActionLink cy='link-sign-up' style={{ 'float': 'right' }} to='/signup'>Sign Up</ActionLink> }
+            hasAlert={hasAlert}
+            alertType={alertType}
+            alertContent={alertContent}
+            footerContent={
+              <ActionLink cy="link-sign-up" style={{ float: 'right' }} to="/signup">
+                Sign Up
+              </ActionLink>
+            }
           >
             <FormGroup
-              label='Username'
-              type='text'
-              id='username'
-              cy='form-group-username'
-              handleChange={ this.handleFormGroupChange }
-              value={ this.state.username }
-              />
+              label="Username"
+              type="text"
+              id="username"
+              cy="form-group-username"
+              handleChange={this.handleFormGroupChange}
+              value={this.state.username}
+            />
 
             <FormGroup
-              label='Password'
-              type='password'
-              id='password'
-              cy='form-group-password'
-              handleChange={ this.handleFormGroupChange }
-              value={ this.state.password }
-              />
+              label="Password"
+              type="password"
+              id="password"
+              cy="form-group-password"
+              handleChange={this.handleFormGroupChange}
+              value={this.state.password}
+            />
 
             <ButtonWrapper>
               <Button
-                type='primary'
-                content='Log In'
-                fullWidth='true'
-                cy='button-log-in'
-                onClick={ this.handleSubmit }
-              />
+                type="primary"
+                fullWidth="true"
+                cy="button-log-in"
+                onClick={this.handleSubmit}
+              >
+                Log In
+              </Button>
             </ButtonWrapper>
           </FormWrapper>
-        }
+        )}
       </React.Fragment>
     )
   }

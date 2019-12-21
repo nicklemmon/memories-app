@@ -1,35 +1,24 @@
 import React from 'react'
+import { Card, CardAlert, CardContent, CardFooter } from '../Card'
 
-import Card from '../Card'
+export default function FormWrapper(props) {
+  const { method, hasAlert, alertType, alertContent, children, footerContent, handleSubmit } = props
 
-class FormWrapper extends React.Component {
-  render() {
-    const {
-      method,
-      hasAlert,
-      alertType,
-      alertContent,
-      footerContent
-    } = this.props
+  return (
+    <Card className="FormWrapper" isBrokenOut={true}>
+      <CardContent>
+        {hasAlert && (
+          <CardAlert type={alertType}>
+            <p>{alertContent}</p>
+          </CardAlert>
+        )}
 
-    return (
-      <Card 
-        className='FormWrapper'
-        hasAlert={ hasAlert }
-        alertType={ alertType }
-        alertContent={ alertContent }
-        footerContent={ footerContent }
-        isBrokenOut={ true }
-      >
-        <form
-          method={ method }
-          onSubmit={ this.props.handleSubmit }
-        >
-          { this.props.children }
+        <form method={method} onSubmit={handleSubmit}>
+          {children}
         </form>
-      </Card>
-    )
-  }
-}
+      </CardContent>
 
-export default FormWrapper
+      <CardFooter>{footerContent}</CardFooter>
+    </Card>
+  )
+}

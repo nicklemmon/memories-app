@@ -1,25 +1,25 @@
-.Content {
+.PageContent {
   width: 100%;
   margin: 0 auto;
   padding: var(--section-padding);
 }
 
-.Content--xs {
+.PageContent--xs {
   max-width: var(--breakpoint-xs);
 }
 
-.Content--sm {
+.PageContent--sm {
   max-width: var(--breakpoint-sm);
 }
 
-.Content--md {
+.PageContent--md {
   max-width: var(--breakpoint-md);
 }
 
-.Content--lg {
+.PageContent--lg {
   max-width: var(--breakpoint-lg);
 }
 
-.Content--xl {
+.PageContent--xl {
   max-width: var(--breakpoing-xl);
 }

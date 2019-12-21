@@ -3,18 +3,17 @@ import Parse from 'parse'
 import Helmet from 'react-helmet'
 import { Provider } from 'mobx-react'
 import { BrowserRouter as Router } from 'react-router-dom'
-
 import AppStore from './stores/AppStore'
 import DefaultLayout from './layouts/DefaultLayout'
 
 class App extends React.Component {
-  constructor( props ) {
-    super( props )
-    
+  constructor(props) {
+    super(props)
+
     Parse.initialize(
       process.env.REACT_APP_APPLICATION_ID,
       process.env.REACT_APP_API_KEY,
-      process.env.REACT_APP_MASTER_KEY
+      process.env.REACT_APP_MASTER_KEY,
     )
     Parse.serverURL = process.env.REACT_APP_API_BASE_URL
   }
@@ -22,14 +21,11 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Helmet
-          defaultTitle='Memories App'
-          titleTemplate='%s | Memories App'
-        />
-        
+        <Helmet defaultTitle="Memories App" titleTemplate="%s | Memories App" />
+
         <Router>
-          <Provider appState={ AppStore }>
-            <DefaultLayout/>
+          <Provider appState={AppStore}>
+            <DefaultLayout />
           </Provider>
         </Router>
       </React.Fragment>
@@ -37,4 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App
