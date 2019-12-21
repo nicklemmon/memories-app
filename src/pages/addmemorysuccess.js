@@ -16,7 +16,7 @@ function AddMemorySuccessPage(props) {
     <>
       <Helmet title="Memory Added" />
 
-      <PageHeading content="Memory Added" />
+      <PageHeading>Memory Added</PageHeading>
 
       <PageContent>
         <MaxWidth size="xs">
