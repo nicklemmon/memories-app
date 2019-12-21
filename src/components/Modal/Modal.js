@@ -8,21 +8,21 @@ const PosedDiv = posed.div({
   visible: {
     translateX: '-50%',
     translateY: '-50%',
-    opacity: 1
+    opacity: 1,
   },
   hidden: {
     translateY: '-65%',
     translateX: '-50%',
-    opacity: 0
-  }
+    opacity: 0,
+  },
 })
 
 class Modal extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
-      isHidden: true
+      isHidden: true,
     }
 
     this.modalHeading = React.createRef()
@@ -34,33 +34,25 @@ class Modal extends React.Component {
   }
 
   render() {
-    const {
-      id,
-      heading
-    } = this.props
+    const { id, heading } = this.props
 
     const { isHidden } = this.state
 
     return (
       <PosedDiv
-        className='Modal'
-        id={ id }
-        aria-labelledby={ `${id}-heading` }
-        aria-modal='true'
-        role='dialog'
-        pose={ isHidden ? 'hidden' : 'visible' }
+        className="Modal"
+        id={id}
+        aria-labelledby={`${id}-heading`}
+        aria-modal="true"
+        role="dialog"
+        pose={isHidden ? 'hidden' : 'visible'}
       >
-        <FocusLock className='Modal-content'>
-          <div
-            className='Modal-heading'
-            id={ `${id}-heading` }
-            ref={ this.modalHeading }
-            tabIndex='-1'
-          >
-            { heading }
+        <FocusLock className="Modal-content">
+          <div className="Modal-heading" id={`${id}-heading`} ref={this.modalHeading} tabIndex="-1">
+            {heading}
           </div>
 
-          { this.props.children }
+          {this.props.children}
         </FocusLock>
       </PosedDiv>
     )

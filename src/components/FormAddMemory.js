@@ -10,45 +10,45 @@ import Button from './Button'
 import AppStore from '../stores/AppStore'
 
 class FormAddMemory extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
       title: '',
       date: '',
       summary: '',
-      tags: [{ name: ''}],
+      tags: [],
       tagMax: 3,
       tagMaxReached: false,
       errorMsg: false,
-      redirect: false
+      redirect: false,
     }
 
-    this.handleFormGroupChange = this.handleFormGroupChange.bind( this )
-    this.handleFormGroupTagChange = this.handleFormGroupTagChange.bind( this )
-    this.handleSubmit = this.handleSubmit.bind( this )
-    this.handleAddTagClick = this.handleAddTagClick.bind( this )
-    this.handleFormGroupTagDeleteClick = this.handleFormGroupTagDeleteClick.bind( this )
-    this.resetForm = this.resetForm.bind( this )
-    this.render = this.render.bind( this )
+    this.handleFormGroupChange = this.handleFormGroupChange.bind(this)
+    this.handleFormGroupTagChange = this.handleFormGroupTagChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAddTagClick = this.handleAddTagClick.bind(this)
+    this.handleFormGroupTagDeleteClick = this.handleFormGroupTagDeleteClick.bind(this)
+    this.resetForm = this.resetForm.bind(this)
+    this.render = this.render.bind(this)
   }
 
-  handleFormGroupChange( e ) {
+  handleFormGroupChange(e) {
     const target = e.target
     const value = target.value
     const name = target.name
 
     this.setState({
-      [name]: value
+      [name]: value,
     })
   }
 
-  handleFormGroupTagChange( e, index ) {
-    const newTags = this.state.tags.map( ( tag, subIndex  ) => {
-      if ( index !== subIndex ) return tag
+  handleFormGroupTagChange(e, index) {
+    const newTags = this.state.tags.map((tag, subIndex) => {
+      if (index !== subIndex) return tag
 
       return { ...tag, name: e.target.value }
-    });
+    })
 
     this.setState({ tags: newTags })
   }
@@ -58,82 +58,75 @@ class FormAddMemory extends React.Component {
       title: '',
       date: '',
       summary: '',
-      tags: [{ name: ''}]
+      tags: [],
     })
   }
 
-  handleSubmit( e ) {
-    const {
-      title,
-      summary,
-      tags,
-      date
-    } = this.state
+  handleSubmit(e) {
+    const { title, summary, tags, date } = this.state
 
     e.preventDefault()
-    
-    const Memory = Parse.Object.extend( 'memory' )
+
+    const filteredTags = tags.filter(value => Object.keys(value).length !== 0)
+    const Memory = Parse.Object.extend('memory')
     const NewMemory = new Memory()
 
-    NewMemory.set( 'title', title )
-    NewMemory.set( 'summary', summary )
-    NewMemory.set( 'tags', tags )
-    NewMemory.set( 'recordedDate', new Date( date ) )
+    NewMemory.set('title', title)
+    NewMemory.set('summary', summary)
+    NewMemory.set('tags', filteredTags)
+    NewMemory.set('recordedDate', new Date(date))
 
     AppStore.setLoading()
 
     NewMemory.save()
-      .then( res => {
+      .then(res => {
+        console.log('res', res)
         this.setState({ redirect: true })
       })
-      .catch( error => {
-        console.log( error );
+      .catch(error => {
+        console.log(error)
 
         this.setState({ errorMsg: true })
       })
-      .then( () => {
+      .then(() => {
         AppStore.unsetLoading()
       })
   }
 
-  handleAddTagClick( e ) {
+  handleAddTagClick(e) {
     e.preventDefault()
 
     // Show the tax max reached message when one below the tag max for a memory
     this.setState({
-      tags: this.state.tags.concat( [ { name: '' } ] )
+      tags: this.state.tags.concat([{}]),
     })
 
-    if ( this.state.tags.length === this.state.tagMax - 1 ) {
+    if (this.state.tags.length === this.state.tagMax - 1) {
       this.setState({ tagMaxReached: true })
     }
   }
 
-  handleFormGroupTagDeleteClick( e, index ) {
+  handleFormGroupTagDeleteClick(e, index) {
     e.preventDefault()
 
     this.setState({
-      tags: this.state.tags.filter( ( tag, subIndex ) => index !== subIndex )
+      tags: this.state.tags.filter((tag, subIndex) => index !== subIndex),
     })
 
-    if ( this.state.tags.length < this.state.tagMax + 1 ) {
+    if (this.state.tags.length < this.state.tagMax + 1) {
       this.setState({ tagMaxReached: false })
     }
   }
 
   render() {
-    const {
-      tags,
-      tagMaxReached,
-      errorMsg,
-      redirect
-    } = this.state
+    const { tags, tagMaxReached, errorMsg, redirect } = this.state
+    console.log('tags', tags)
 
     let hasAlert
     let alertType
     let alertContent
 
-    if ( errorMsg ) {
+    if (errorMsg) {
       hasAlert = true
       alertType = 'error'
       alertContent = 'Whoops! Memory failed to be added. Try again.'
@@ -141,7 +134,7 @@ class FormAddMemory extends React.Component {
 
     return (
       <React.Fragment>
-        { redirect &&
+        {redirect && (
           <Redirect
             to={{
               pathname: '/addmemorysuccess',
@@ -149,81 +142,72 @@ class FormAddMemory extends React.Component {
                 title: this.state.title,
                 summary: this.state.summary,
                 tags: this.state.tags,
-                date: this.state.date
-              }
+                date: this.state.date,
+              },
             }}
           />
-        }
+        )}
 
-        { !redirect &&
-          <FormWrapper 
-            handleSubmit={ this.handleSubmit }
-            hasAlert={ hasAlert }
-            alertType={ alertType }
-            alertContent={ alertContent }
+        {!redirect && (
+          <FormWrapper
+            handleSubmit={this.handleSubmit}
+            hasAlert={hasAlert}
+            alertType={alertType}
+            alertContent={alertContent}
           >
             <FormGroup
-              label='Title'
-              type='text'
-              id='title'
-              handleChange={ this.handleFormGroupChange }
-              value={ this.state.title }
+              label="Title"
+              type="text"
+              id="title"
+              handleChange={this.handleFormGroupChange}
+              value={this.state.title}
             />
 
             <FormGroup
-              label='Memory Date'
-              type='date'
-              id='date'
-              handleChange={ this.handleFormGroupChange }
-              value={ this.state.date }
+              label="Memory Date"
+              type="date"
+              id="date"
+              handleChange={this.handleFormGroupChange}
+              value={this.state.date}
             />
 
             <FormGroup
-              label='Summary'
-              type='textarea'
-              id='summary'
-              handleChange={ this.handleFormGroupChange }
-              value={ this.state.summary }
+              label="Summary"
+              type="textarea"
+              id="summary"
+              handleChange={this.handleFormGroupChange}
+              value={this.state.summary}
             />
 
-            { tags.map( ( tag, index ) => {
-                return(
-                  <FormGroupTagInput
-                    index={ index }
-                    key={ `tag-input-${index}` }
-                    handleChange={ ( e ) => this.handleFormGroupTagChange( e, index ) }
-                    buttonOnClick={ ( e ) => this.handleFormGroupTagDeleteClick( e, index ) }
-                    value={ tag.name }
-                  />
-                )
-              })
-            }
+            {tags.map((tag, index) => {
+              return (
+                <FormGroupTagInput
+                  index={index}
+                  key={`tag-input-${index}`}
+                  handleChange={e => this.handleFormGroupTagChange(e, index)}
+                  buttonOnClick={e => this.handleFormGroupTagDeleteClick(e, index)}
+                  value={tag.name}
+                />
+              )
+            })}
 
             <ButtonWrapper>
-              { tagMaxReached ?
+              {tagMaxReached ? (
                 <p>Maximum of 3 tags per memory.</p>
-
-                :
-
-                <Button
-                  type='tertiary'
-                  content='Add Another Tag'
-                  onClick={ this.handleAddTagClick }
-                  fullWidth={ true }
-                />
-              }
+              ) : (
+                <Button type="tertiary" onClick={this.handleAddTagClick} fullWidth={true}>
+                  {tags.length > 0 ? 'Add Another Tag' : 'Add Tag'}
+                </Button>
+              )}
             </ButtonWrapper>
 
             <ButtonWrapper>
-              <Button
-                type='primary'
-                content='Add Memory'
-                fullWidth
-                onClick={ this.handleFormSubmit }
-              />
+              <Button type="primary" fullWidth onClick={this.handleFormSubmit}>
+                Add Memory
+              </Button>
             </ButtonWrapper>
           </FormWrapper>
-        }
+        )}
       </React.Fragment>
     )
   }

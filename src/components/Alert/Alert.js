@@ -1,94 +1,35 @@
-import React from 'react';
-import classNames from 'classnames';
-import posed from 'react-pose';
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import {
   FaCheckCircle,
   FaExclamationCircle,
   FaExclamationTriangle,
   FaInfoCircle,
-} from 'react-icons/fa';
+} from 'react-icons/fa'
+import './Alert.css'
 
-import './Alert.css';
+export default function Alert(props) {
+  const { type, children, className, cy } = props
 
+  return (
+    <div role="alert" className={classNames(`Alert Alert--${type}`, className)} data-cy={cy}>
+      <div className="Alert-pre">
+        {type === 'error' && <FaExclamationCircle className="Alert-icon" />}
 
-const PosedDiv = posed.div({
-  visible: {
-    opacity: 1,
-    scaleY: 1,
-    scaleX: 1,
-    transition: {
-      type: 'spring',
-      delay: 300,
-    },
-  },
-  hidden: {
-    opacity: 0,
-    scaleY: 0.66,
-    scaleX: 0.925,
-  },
-});
+        {type === 'success' && <FaCheckCircle className="Alert-icon" />}
 
-class Alert extends React.Component {
-  constructor(props) {
-    super(props);
+        {type === 'attention' && <FaExclamationTriangle className="Alert-icon" />}
 
-    this.alertContent = React.createRef();
+        {type === 'info' && <FaInfoCircle className="Alert-icon" />}
+      </div>
 
-    this.state = {
-      isHidden: true,
-    };
-
-    this.show = this.show.bind(this);
-    this.hide = this.hide.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({ isHidden: false });
-    this.alertContent.current.focus();
-  }
-
-  show() {
-    this.setState({
-      isHidden: false,
-    });
-  }
-
-  hide() {
-    this.setState({
-      isHidden: true,
-    });
-  }
-
-  render() {
-    const { type, content, className, cy, ...attributes } = this.props;
-
-    const isHidden = this.state.isHidden;
-
-    return (
-      <PosedDiv
-        className={classNames(`Alert Alert--${type}`, className)}
-        role="alert"
-        pose={isHidden ? 'hidden' : 'visible'}
-        data-cy={cy}
-        {...attributes}
-      >
-        <div className="Alert-pre">
-          {type === 'error' && <FaExclamationCircle className="Alert-icon" />}
-
-          {type === 'success' && <FaCheckCircle className="Alert-icon" />}
-
-          {type === 'attention' && <FaExclamationTriangle className="Alert-icon" />}
-
-          {type === 'info' && <FaInfoCircle className="Alert-icon" />}
-        </div>
-
-        <div className="Alert-content" ref={this.alertContent} tabIndex="-1">
-          {content}
-        </div>
-      </PosedDiv>
-    );
-  }
+      <div className="Alert-content">{children}</div>
+    </div>
+  )
 }
 
-export default Alert;
+Alert.propTypes = {
+  type: PropTypes.oneOf(['error', 'success', 'attention', 'info']),
+  className: PropTypes.string,
+}

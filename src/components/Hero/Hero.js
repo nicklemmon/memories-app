@@ -9,30 +9,30 @@ import backgroundImage from '../../images/feet.png'
 import './Hero.css'
 
 class Hero extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
       isSignedIn: false,
       canRead: false,
-      canWrite: false
+      canWrite: false,
     }
 
-    this.fetchUser = this.fetchUser.bind( this )
+    this.fetchUser = this.fetchUser.bind(this)
     this.hero = React.createRef()
   }
 
   fetchUser() {
-    const User = Parse.User.current() 
+    const User = Parse.User.current()
 
-    if ( User ) {
+    if (User) {
       const userId = User.id
       const Permissions = User.attributes.ACL.permissionsById[userId]
 
       this.setState({
         isSignedIn: true,
         canRead: Permissions.read,
-        canWrite: Permissions.write
+        canWrite: Permissions.write,
       })
     }
   }
@@ -43,81 +43,55 @@ class Hero extends React.Component {
   }
 
   render() {
-    const {
-      isSignedIn,
-      canRead,
-      canWrite
-    } = this.state
-    const {
-      hasSuccessMessage,
-      userName
-    } = this.props
+    const { isSignedIn, canRead, canWrite } = this.state
+    const { hasSuccessMessage, userName } = this.props
 
     return (
-      <div className='Hero' ref={ this.hero } tabIndex='-1'>
-        <div className='Hero-wrapper'>
-          <Heading
-            level='1'
-            content='Welcome to Eva&rsquo;s Memories'
-            className='Hero-heading'
-          />
+      <div className="Hero" ref={this.hero} tabIndex="-1">
+        <div className="Hero-wrapper">
+          <Heading level="1" content="Welcome to Eva&rsquo;s Memories" className="Hero-heading" />
 
-          <p className='Hero-subheading'>A collection of quotes and other notes from Eva's childhood.</p>
+          <p className="Hero-subheading">
+            A collection of quotes and other notes from Eva's childhood.
+          </p>
 
-          <div className='Hero-content'>
-            { hasSuccessMessage &&
-              <Alert
-                type='success'
-                content={ `Success! Logged in as ${userName}.` }
-                className='Hero-successMsg'
-              />
-            }
+          <div className="Hero-content">
+            {hasSuccessMessage && (
+              <Alert type="success" className="Hero-successMsg">
+                <p>{`Success! Logged in as ${userName}.`}</p>
+              </Alert>
+            )}
 
-            { !isSignedIn && 
+            {!isSignedIn && (
               <React.Fragment>
-                <Button 
-                  type='primary' 
-                  content='Log In'
-                  linkTo='/login'
-                  cy='button-log-in'
-                />
+                <Button type="primary" linkTo="/login" cy="button-log-in">
+                  Log In
+                </Button>
 
-                <Button
-                  type='tertiary'
-                  content='Sign Up'
-                  linkTo='/signup'
-                  cy='button-sign-up'
-                />
+                <Button type="tertiary" linkTo="/signup" cy="button-sign-up">
+                  Sign Up
+                </Button>
               </React.Fragment>
-            }
-            
-            { isSignedIn &&
+            )}
+
+            {isSignedIn && (
               <React.Fragment>
-                { canWrite &&
-                  <Button
-                    type='primary'
-                    content='Add Memory'
-                    linkTo='/addmemory'
-                  />
-                }
+                {canWrite && (
+                  <Button type="primary" linkTo="/addmemory">
+                    Add Memory
+                  </Button>
+                )}
 
-                { canRead &&
-                  <Button
-                    type='tertiary'
-                    content='View Memories'
-                    linkTo='/memories'
-                  />
-                }
+                {canRead && (
+                  <Button type="tertiary" linkTo="/memories">
+                    View Memories
+                  </Button>
+                )}
               </React.Fragment>
-            }
+            )}
           </div>
 
-          <img 
-            className='Hero-background' 
-            src={ backgroundImage } 
-            alt='' 
-            aria-hidden='true'
-          />
+          <img className="Hero-background" src={backgroundImage} alt="" aria-hidden="true" />
         </div>
       </div>
     )

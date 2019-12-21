@@ -1,72 +1,59 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-
-import Content from '../components/Content'
+import PageContent from '../components/PageContent'
 import PageHeading from '../components/PageHeading'
-import Alert from '../components/Alert'
 import MaxWidth from '../components/MaxWidth'
-import Card from '../components/Card'
+import { Card, CardAlert, CardContent } from '../components/Card'
 import MemoryCard from '../components/MemoryCard'
 import ButtonWrapper from '../components/ButtonWrapper'
 import Button from '../components/Button'
 
-function AddMemorySuccessPage( props ) {
-  const {
-    title,
-    summary,
-    date,
-    tags
-  } = props.location.state
+function AddMemorySuccessPage(props) {
+  const { title, summary, date, tags } = props.location.state
 
   return (
-    <div>
-      <Helmet title='Memory Added'/>
+    <>
+      <Helmet title="Memory Added" />
 
-      <PageHeading content='Memory Added'/>
+      <PageHeading content="Memory Added" />
 
-      <Content>
-        <MaxWidth size='xs'>
-          <Card isBrokenOut={ true }>
-            <Alert
-              type='success'
-              content='Memory successfully added'
-              className='Card-alert'
-              cy='alert-success'
-            />
+      <PageContent>
+        <MaxWidth size="xs">
+          <Card isBrokenOut={true}>
+            <CardContent>
+              <CardAlert type="success" cy="alert-success">
+                <p>Memory successfully added</p>
+              </CardAlert>
 
-
-            <MemoryCard
-              id='success-card'
-              title={ title }
-              summary={ summary }
-              date={ date }
-              tags={ tags }
-              canWrite={ false }
-            />
-
-            <p style={{ 'marginBottom': '1rem', 'marginTop': '2rem' }}>Add additional memories, or see your new memory with the rest of the bunch.</p>
-
-            <ButtonWrapper>
-              <Button
-                type='primary'
-                linkTo='/addmemory'
-                content='Add Another Memory'
-                cy='button-add-another'
+              <MemoryCard
+                id="success-card"
+                title={title}
+                summary={summary}
+                date={date}
+                tags={tags}
+                canWrite={false}
               />
 
-              <Button
-                type='secondary'
-                linkTo='/memories'
-                content='View Memories'
-                cy='button-view-memories'
-              />
-            </ButtonWrapper>
+              <p style={{ marginBottom: '1rem', marginTop: '2rem' }}>
+                Add additional memories, or see your new memory with the rest of the bunch.
+              </p>
+
+              <ButtonWrapper>
+                <Button type="primary" linkTo="/addmemory" cy="button-add-another">
+                  Add Another Memory
+                </Button>
+
+                <Button type="secondary" linkTo="/memories" cy="button-view-memories">
+                  View Memories
+                </Button>
+              </ButtonWrapper>
+            </CardContent>
           </Card>
         </MaxWidth>
-      </Content>
-    </div>
+      </PageContent>
+    </>
   )
 }
 
-export default withRouter( AddMemorySuccessPage )
+export default withRouter(AddMemorySuccessPage)

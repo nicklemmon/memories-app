@@ -1,16 +1,15 @@
-import React from 'react';
-import classNames from 'classnames';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa';
-import Parse from 'parse';
-import enhanceWithClickOutside from 'react-click-outside';
-
-import './HeaderNav.css';
+import React from 'react'
+import classNames from 'classnames'
+import { Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
+import Parse from 'parse'
+import enhanceWithClickOutside from 'react-click-outside'
+import './HeaderNav.css'
 
 class HeaderNav extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isOpen: false,
@@ -18,28 +17,28 @@ class HeaderNav extends React.Component {
       isSignedIn: false,
       canRead: false,
       canWrite: false,
-    };
+    }
 
-    this.toggle = this.toggle.bind(this);
-    this.close = this.close.bind(this);
-    this.logout = this.logout.bind(this);
-    this.fetchUser = this.fetchUser.bind(this);
+    this.toggle = this.toggle.bind(this)
+    this.close = this.close.bind(this)
+    this.logout = this.logout.bind(this)
+    this.fetchUser = this.fetchUser.bind(this)
   }
 
   handleClickOutside() {
-    this.close();
+    this.close()
   }
 
   handleKeyup(e) {
     if (e.keyCode === 27) {
-      this.close();
+      this.close()
     }
   }
 
   close() {
     this.setState({
       isOpen: false,
-    });
+    })
   }
 
   toggle() {
@@ -47,15 +46,15 @@ class HeaderNav extends React.Component {
       this.setState(prevState => ({
         isOpen: !prevState.isOpen,
       })),
-    );
+    )
   }
 
   fetchUser(callback) {
-    const User = Parse.User.current();
+    const User = Parse.User.current()
 
     if (User) {
-      const userId = User.id;
-      const Permissions = User.attributes.ACL.permissionsById[userId];
+      const userId = User.id
+      const Permissions = User.attributes.ACL.permissionsById[userId]
 
       this.setState(
         {
@@ -64,13 +63,13 @@ class HeaderNav extends React.Component {
           canWrite: Permissions.write,
         },
         () => callback,
-      );
+      )
     }
   }
 
   logout() {
     Parse.User.logOut().then(() => {
-      this.close();
+      this.close()
 
       this.setState(
         {
@@ -78,15 +77,15 @@ class HeaderNav extends React.Component {
           isSignedIn: false,
         },
         () => {
-          this.setState({ redirect: false });
+          this.setState({ redirect: false })
         },
-      );
-    });
+      )
+    })
   }
 
   render() {
-    const { className } = this.props;
-    const { isOpen, redirect, isSignedIn, canRead, canWrite } = this.state;
+    const { className } = this.props
+    const { isOpen, redirect, isSignedIn, canRead, canWrite } = this.state
 
     return (
       <React.Fragment>
@@ -118,7 +117,7 @@ class HeaderNav extends React.Component {
               aria-label="site"
             >
               {!isSignedIn && (
-                <Link
+                <NavLink
                   to="login"
                   className="HeaderNav-item"
                   onKeyUp={this.handleKeyup}
@@ -126,11 +125,11 @@ class HeaderNav extends React.Component {
                 >
                   <FaSignInAlt className="HeaderNav-itemIcon" />
                   Log In
-                </Link>
+                </NavLink>
               )}
 
               {isSignedIn && canRead && (
-                <Link
+                <NavLink
                   to="memories"
                   className="HeaderNav-item"
                   onKeyUp={this.handleKeyup}
@@ -138,11 +137,11 @@ class HeaderNav extends React.Component {
                 >
                   <FaCloud className="HeaderNav-itemIcon" />
                   View Memories
-                </Link>
+                </NavLink>
               )}
 
               {isSignedIn && canWrite && (
-                <Link
+                <NavLink
                   to="addmemory"
                   className="HeaderNav-item"
                   onKeyUp={this.handleKeyup}
@@ -150,7 +149,7 @@ class HeaderNav extends React.Component {
                 >
                   <FaPlusCircle className="HeaderNav-itemIcon" />
                   Add Memory
-                </Link>
+                </NavLink>
               )}
 
               {isSignedIn && (
@@ -163,8 +162,8 @@ class HeaderNav extends React.Component {
           </div>
         )}
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default enhanceWithClickOutside(HeaderNav);
+export default enhanceWithClickOutside(HeaderNav)

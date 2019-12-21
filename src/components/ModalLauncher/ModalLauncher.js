@@ -7,60 +7,60 @@ import ButtonWrapper from '../ButtonWrapper'
 import Button from '../Button'
 
 class ModalButton extends React.Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.state = {
-      isOpen: false
+      isOpen: false,
     }
 
     this.modalElement = React.createRef()
 
-    this.open = this.open.bind( this )
-    this.close = this.close.bind( this )
-    this.handleKeyup = this.handleKeyup.bind( this )
-    this.primaryButtonHandleClick = this.primaryButtonHandleClick.bind( this )
-    this.secondaryButtonHandleClick = this.secondaryButtonHandleClick.bind( this )
+    this.open = this.open.bind(this)
+    this.close = this.close.bind(this)
+    this.handleKeyup = this.handleKeyup.bind(this)
+    this.primaryButtonHandleClick = this.primaryButtonHandleClick.bind(this)
+    this.secondaryButtonHandleClick = this.secondaryButtonHandleClick.bind(this)
   }
 
   open() {
     this.setState({
-      isOpen: true
+      isOpen: true,
     })
 
-    window.addEventListener( 'keyup', this.handleKeyup, false )
-    document.querySelector( 'html' ).setAttribute( 'style', 'overflow-y: hidden; height: 100vh;' )
+    window.addEventListener('keyup', this.handleKeyup, false)
+    document.querySelector('html').setAttribute('style', 'overflow-y: hidden; height: 100vh;')
   }
 
   close() {
     this.setState({
-      isOpen: false 
+      isOpen: false,
     })
 
-    window.removeEventListener( 'keyup', this.handleKeyUp, false )
-    document.querySelector( 'html' ).setAttribute( 'style', '' )
+    window.removeEventListener('keyup', this.handleKeyUp, false)
+    document.querySelector('html').setAttribute('style', '')
   }
 
-  handleKeyup( e ) {
-    if ( e.keyCode === 27 ) this.close()
+  handleKeyup(e) {
+    if (e.keyCode === 27) this.close()
   }
 
-  primaryButtonHandleClick( e ) {
+  primaryButtonHandleClick(e) {
     const primaryButtonCloses = this.props.primaryButtonCloses
     const primaryButtonOnClick = this.props.primaryButtonOnClick
 
-    if ( primaryButtonCloses ) this.close()
+    if (primaryButtonCloses) this.close()
 
-    if ( primaryButtonOnClick ) primaryButtonOnClick.call()
+    if (primaryButtonOnClick) primaryButtonOnClick.call()
   }
-  
-  secondaryButtonHandleClick( e ) {
+
+  secondaryButtonHandleClick(e) {
     const secondaryButtonCloses = this.props.secondaryButtonCloses
     const secondaryButtonOnClick = this.props.secondaryButtonOnClick
 
-    if ( secondaryButtonCloses ) this.close()
+    if (secondaryButtonCloses) this.close()
 
-    if ( secondaryButtonOnClick ) secondaryButtonOnClick.call()
+    if (secondaryButtonOnClick) secondaryButtonOnClick.call()
   }
 
   render() {
@@ -73,7 +73,7 @@ class ModalButton extends React.Component {
       primaryButtonContent,
       primaryButtonLinkTo,
       secondaryButtonContent,
-      secondaryButtonLinkTo
+      secondaryButtonLinkTo,
     } = this.props
 
     const isOpen = this.state.isOpen
@@ -81,54 +81,50 @@ class ModalButton extends React.Component {
     return (
       <React.Fragment>
         <button
-          className={ classNames( 'Modal-button', className ) }
-          title='Opens a dialog'
-          onClick={ this.open }
+          className={classNames('Modal-button', className)}
+          title="Opens a dialog"
+          onClick={this.open}
         >
-          { content }
+          {content}
         </button>
 
-        { this.state.isOpen &&
-          <Modal
-            id={ id }
-            heading={ heading }
-            modalRef={ this.modalElement }
-          >
-            { this.props.children }
+        {this.state.isOpen && (
+          <Modal id={id} heading={heading} modalRef={this.modalElement}>
+            {this.props.children}
 
-            { hasCTAs &&
+            {hasCTAs && (
               <ButtonWrapper>
-                { primaryButtonContent &&
+                {primaryButtonContent && (
                   <Button
-                    type='primary'
-                    content={ primaryButtonContent }
-                    onClick={ this.primaryButtonHandleClick }
-                    linkTo={ primaryButtonLinkTo }
-                  />
-                }
+                    type="primary"
+                    onClick={this.primaryButtonHandleClick}
+                    linkTo={primaryButtonLinkTo}
+                  >
+                    {primaryButtonContent}
+                  </Button>
+                )}
 
-                { secondaryButtonContent &&
+                {secondaryButtonContent && (
                   <Button
-                    type='secondary'
-                    content={ secondaryButtonContent }
-                    onClick={ this.secondaryButtonHandleClick }
-                    linkTo={ secondaryButtonLinkTo }
-                  />
-                }
+                    type="secondary"
+                    onClick={this.secondaryButtonHandleClick}
+                    linkTo={secondaryButtonLinkTo}
+                  >
+                    {secondaryButtonContent}
+                  </Button>
+                )}
               </ButtonWrapper>
-            }
+            )}
 
-            <button className='Modal-close' aria-label='Close dialog' onClick={ this.close }>
-              <span aria-hidden='true'>
-                <FaTimes/>
+            <button className="Modal-close" aria-label="Close dialog" onClick={this.close}>
+              <span aria-hidden="true">
+                <FaTimes />
               </span>
             </button>
           </Modal>
-        }
+        )}
 
-        { isOpen &&
-          <div className='Modal-overlay' onClick={ this.close }/>
-        }
+        {isOpen && <div className="Modal-overlay" onClick={this.close} />}
       </React.Fragment>
     )
   }
