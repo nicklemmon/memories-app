@@ -5,7 +5,7 @@ import './Modal.css'
 
 export default function Modal(props) {
   const [isHidden, setIsHidden] = useState(true)
-  const { id, heading } = props
+  const { id, heading, children } = props
   const PosedDiv = posed.div({
     visible: {
       translateX: '-50%',
@@ -32,13 +32,15 @@ export default function Modal(props) {
       role="dialog"
       pose={isHidden ? 'hidden' : 'visible'}
     >
-      <FocusLock className="Modal-content">
-        <div className="Modal-heading" id={`${id}-heading`} ref={this.modalHeading} tabIndex="-1">
-          {heading}
-        </div>
+      <div>
+        <FocusLock className="Modal-content">
+          <div className="Modal-heading" id={`${id}-heading`} tabIndex="-1">
+            {heading}
+          </div>
 
-        {this.props.children}
-      </FocusLock>
+          {children}
+        </FocusLock>
+      </div>
     </PosedDiv>
   )
 }

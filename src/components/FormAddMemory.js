@@ -80,14 +80,9 @@ class FormAddMemory extends React.Component {
 
     NewMemory.save()
       .then(res => {
-        console.log('res', res)
         this.setState({ redirect: true })
       })
-      .catch(error => {
-        console.log(error)
-
-        this.setState({ errorMsg: true })
-      })
+      .catch(error => this.setState({ errorMsg: true }))
       .then(() => {
         AppStore.unsetLoading()
       })
