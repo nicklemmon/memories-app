@@ -1,24 +1,11 @@
 import React from 'react'
 import Parse from 'parse'
-import posed, { PoseGroup } from 'react-pose'
-
 import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
 import AppStore from '../stores/AppStore'
 
 import './MemoryGrid.css'
-
-const Parent = posed.div({
-  enter: {
-    delayChildren: 50,
-    staggerChildren: 33,
-  },
-})
-const Child = posed.div({
-  enter: { y: 0, opacity: 1 },
-  exit: { y: 25, opacity: 0 },
-})
 
 export default class MemoryGrid extends React.Component {
   constructor(props) {
@@ -73,7 +60,7 @@ export default class MemoryGrid extends React.Component {
           memories: JSON.parse(JSON.stringify(res)), // There has *got* to be a better way to handle this 😓
         })
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
           errorMessage: true,
         })
@@ -172,9 +159,9 @@ export default class MemoryGrid extends React.Component {
           </MaxWidth>
         )}
 
-        <PoseGroup>
+        <>
           {!loading && (
-            <Parent className="MemoryGrid" key="grid">
+            <div className="MemoryGrid" key="grid">
               {memories
                 .sort(function(a, b) {
                   return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
@@ -185,7 +172,7 @@ export default class MemoryGrid extends React.Component {
                     : null
 
                   return (
-                    <Child className="MemoryGrid-cardWrapper" key={memory.objectId}>
+                    <div className="MemoryGrid-cardWrapper" key={memory.objectId}>
                       <MemoryCard
                         rawId={memory.objectId}
                         id={`memory-card-${memory.objectId}`}
@@ -201,12 +188,12 @@ export default class MemoryGrid extends React.Component {
                         editModalOpen={false}
                         {...this.props}
                       />
-                    </Child>
+                    </div>
                   )
                 })}
-            </Parent>
+            </div>
           )}
-        </PoseGroup>
+        </>
       </React.Fragment>
     )
   }

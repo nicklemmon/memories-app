@@ -79,15 +79,10 @@ class FormAddMemory extends React.Component {
     AppStore.setLoading()
 
     NewMemory.save()
-      .then(res => {
-        console.log('res', res)
+      .then(() => {
         this.setState({ redirect: true })
       })
-      .catch(error => {
-        console.log(error)
-
-        this.setState({ errorMsg: true })
-      })
+      .catch(() => this.setState({ errorMsg: true }))
       .then(() => {
         AppStore.unsetLoading()
       })
@@ -120,7 +115,6 @@ class FormAddMemory extends React.Component {
 
   render() {
     const { tags, tagMaxReached, errorMsg, redirect } = this.state
-    console.log('tags', tags)
 
     let hasAlert
     let alertType

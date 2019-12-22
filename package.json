@@ -17,7 +17,6 @@
     "react-focus-lock": "^1.19.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.0.5",
-    "react-pose": "^3.3.6",
     "react-scripts": "3.3.0",
     "reset-css": "^3.0.0",
     "react-router-dom": "^5.1.2"
@@ -34,11 +33,17 @@
     "test:cy:ci": "npm start & wait-on http://localhost:3000 && npm run test:cy:run"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
     "cypress": "^3.8.0",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-testing-library": "^1.3.4",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "react-test-renderer": "^16.8.3",
     "wait-on": "^3.3.0"
   },
