@@ -42,7 +42,7 @@ describe('the memories page', () => {
 
     cy.findByText('Edit Memory').should('be.visible')
     cy.findByLabelText('Title').should('have.value', 'Memory 1')
-    cy.findByLabelText('Memory Date').should('have.value', '02/08/2019')
+    cy.findByLabelText('Memory Date').should('have.value', '02/09/2019')
     cy.findByLabelText('Summary').should('have.value', 'Memory 1 summary')
   })
 
