@@ -13,6 +13,8 @@ describe('the memories page', () => {
     }).as('memoriesGet')
 
     cy.visit('/memories')
+
+    cy.wait('@memoriesGet')
   })
 
   it('renders requested memories, some with missing data', () => {
