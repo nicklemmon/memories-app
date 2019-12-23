@@ -1,0 +1,48 @@
+{
+  "results": [
+    {
+      "objectId": "abc",
+      "title": "Memory 1",
+      "createdAt": "2019-02-09T02:34:36.161Z",
+      "updatedAt": "2019-03-15T02:24:47.164Z",
+      "summary": "Memory 1 summary",
+      "tags": [{ "name": "memory 1 tag" }],
+      "recordedDate": { "__type": "Date", "iso": "2019-02-09T02:24:00.000Z" }
+    },
+    {
+      "objectId": "def",
+      "title": "Memory 2",
+      "createdAt": "2019-02-09T02:39:07.170Z",
+      "updatedAt": "2019-02-09T02:58:14.864Z",
+      "summary": "Memory 2 summary",
+      "tags": [{ "name": "memory 2 tag" }],
+      "recordedDate": { "__type": "Date", "iso": "2018-11-01T00:00:00.000Z" }
+    },
+    {
+      "objectId": "ghi",
+      "title": "Memory 3",
+      "createdAt": "2019-02-09T02:40:53.332Z",
+      "updatedAt": "2019-02-09T02:46:53.396Z",
+      "summary": "Memory 3 summary",
+      "tags": [{ "name": "memory 3 tag" }, { "name": "memory 3 tag" }],
+      "recordedDate": { "__type": "Date", "iso": "2017-04-28T02:46:00.000Z" }
+    },
+    {
+      "objectId": "jkl",
+      "title": "Memory 4",
+      "createdAt": "2019-02-09T02:40:53.332Z",
+      "updatedAt": "2019-02-09T02:46:53.396Z",
+      "summary": "Memory 4 summary",
+      "tags": [],
+      "recordedDate": { "__type": "Date", "iso": "2016-04-28T02:46:00.000Z" }
+    },
+    {
+      "objectId": "mno",
+      "title": "Memory 5",
+      "createdAt": "2019-02-09T02:40:53.332Z",
+      "updatedAt": "2019-02-09T02:46:53.396Z",
+      "tags": [{ "name": "memory 5 tag" }],
+      "recordedDate": { "__type": "Date", "iso": "2016-04-28T02:46:00.000Z" }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import Parse, { Query } from 'parse'
 import { FaPencilAlt } from 'react-icons/fa'
 import ModalLauncher from './ModalLauncher'
 import FormGroup from './FormGroup'
+import ScreenReaderOnly from './ScreenReaderOnly'
 
 class FormEditMemory extends React.Component {
   constructor(props) {
@@ -40,10 +41,10 @@ class FormEditMemory extends React.Component {
       object.set('title', title)
       object.set('summary', summary)
       object.save().then(
-        response => {
+        () => {
           this.setState({ modalIsOpen: false }, () => successCallback())
         },
-        error => {
+        () => {
           this.setState({ hasErrorMessage: true })
         },
       )
@@ -57,7 +58,12 @@ class FormEditMemory extends React.Component {
     return (
       <ModalLauncher
         className="MemoryCard-action"
-        content={<FaPencilAlt className="MemoryCard-actionIcon" role="img" aria-label="Edit" />}
+        content={
+          <>
+            <FaPencilAlt className="MemoryCard-actionIcon" aria-hidden="true" />
+            <ScreenReaderOnly>Edit</ScreenReaderOnly>
+          </>
+        }
         id={`edit-memory-${id}`}
         heading="Edit Memory"
         hasCTAs
