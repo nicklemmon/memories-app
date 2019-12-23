@@ -11,6 +11,13 @@ cache:
     - npm ci
 
 addons:
+  artifacts:
+    debug: true
+    baseDirectory: cypress
+    files:
+      - '**/*.png'
+      - '**/*.mp4'
+
   apt:
     packages:
       # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
