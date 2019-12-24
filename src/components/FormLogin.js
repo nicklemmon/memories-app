@@ -36,10 +36,10 @@ class FormLogin extends React.Component {
 
   signIn() {
     Parse.User.logIn(this.state.username, this.state.password)
-      .then(user => {
+      .then(() => {
         this.setState({ redirect: true })
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({ errorMsg: true })
       })
   }

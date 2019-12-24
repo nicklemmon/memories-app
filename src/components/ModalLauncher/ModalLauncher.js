@@ -45,7 +45,7 @@ class ModalButton extends React.Component {
     if (e.keyCode === 27) this.close()
   }
 
-  primaryButtonHandleClick(e) {
+  primaryButtonHandleClick() {
     const primaryButtonCloses = this.props.primaryButtonCloses
     const primaryButtonOnClick = this.props.primaryButtonOnClick
 
@@ -54,7 +54,7 @@ class ModalButton extends React.Component {
     if (primaryButtonOnClick) primaryButtonOnClick.call()
   }
 
-  secondaryButtonHandleClick(e) {
+  secondaryButtonHandleClick() {
     const secondaryButtonCloses = this.props.secondaryButtonCloses
     const secondaryButtonOnClick = this.props.secondaryButtonOnClick
 
@@ -99,6 +99,7 @@ class ModalButton extends React.Component {
                     type="primary"
                     onClick={this.primaryButtonHandleClick}
                     linkTo={primaryButtonLinkTo}
+                    cy="modal-btn-primary"
                   >
                     {primaryButtonContent}
                   </Button>
@@ -109,6 +110,7 @@ class ModalButton extends React.Component {
                     type="secondary"
                     onClick={this.secondaryButtonHandleClick}
                     linkTo={secondaryButtonLinkTo}
+                    cy="modal-btn-secondary"
                   >
                     {secondaryButtonContent}
                   </Button>

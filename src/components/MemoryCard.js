@@ -6,6 +6,7 @@ import { Card, CardHeader, CardHeading, CardContent, CardFooter } from './Card'
 import Tag from './Tag'
 import ModalLauncher from './ModalLauncher'
 import ModalLauncherEditMemory from './ModalLauncherEditMemory'
+import ScreenReaderOnly from './ScreenReaderOnly'
 
 import './MemoryCard.css'
 
@@ -78,7 +79,11 @@ class MemoryCard extends React.Component {
               <ModalLauncher
                 className="MemoryCard-action"
                 content={
-                  <FaTrashAlt className="MemoryCard-actionIcon" role="img" aria-label="Delete" />
+                  <>
+                    <FaTrashAlt className="MemoryCard-actionIcon" aria-hidden="true" />
+
+                    <ScreenReaderOnly>Delete</ScreenReaderOnly>
+                  </>
                 }
                 id={`delete-memory-${id}`}
                 heading={`Delete "${title}"?`}
