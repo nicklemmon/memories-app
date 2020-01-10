@@ -10,6 +10,7 @@ import './MemoryGrid.css'
 
 export default function MemoryGrid() {
   const [state, dispatch] = useMemories()
+
   const [userState] = useUser()
   const [canWrite, setCanWrite] = useState(false)
   const [hasEditSuccessMessage, setHasEditSuccessMessage] = useState(false)
