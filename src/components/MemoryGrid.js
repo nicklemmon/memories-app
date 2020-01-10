@@ -99,34 +99,35 @@ export default function MemoryGrid() {
       )}
 
       <div className="MemoryGrid">
-        {memories
-          .sort(function(a, b) {
-            return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
-          })
-          .map(memory => {
-            const date = memory.recordedDate
-              ? new Date(memory.recordedDate.iso).toLocaleDateString()
-              : null
+        {memories &&
+          memories
+            .sort(function(a, b) {
+              return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
+            })
+            .map(memory => {
+              const date = memory.recordedDate
+                ? new Date(memory.recordedDate.iso).toLocaleDateString()
+                : null
 
-            return (
-              <div className="MemoryGrid-cardWrapper" key={memory.objectId}>
-                <MemoryCard
-                  rawId={memory.objectId}
-                  id={`memory-card-${memory.objectId}`}
-                  className="MemoryGrid-card"
-                  title={memory.title}
-                  summary={memory.summary}
-                  date={date}
-                  tags={memory.tags}
-                  canWrite={canWrite}
-                  handleDelete={() => deleteMemory(memory.objectId)}
-                  editSuccessCallback={handleSuccessEdit}
-                  editFailureCallback={handleFailedEdit}
-                  editModalOpen={false}
-                />
-              </div>
-            )
-          })}
+              return (
+                <div className="MemoryGrid-cardWrapper" key={memory.objectId}>
+                  <MemoryCard
+                    rawId={memory.objectId}
+                    id={`memory-card-${memory.objectId}`}
+                    className="MemoryGrid-card"
+                    title={memory.title}
+                    summary={memory.summary}
+                    date={date}
+                    tags={memory.tags}
+                    canWrite={canWrite}
+                    handleDelete={() => deleteMemory(memory.objectId)}
+                    editSuccessCallback={handleSuccessEdit}
+                    editFailureCallback={handleFailedEdit}
+                    editModalOpen={false}
+                  />
+                </div>
+              )
+            })}
       </div>
     </>
   )

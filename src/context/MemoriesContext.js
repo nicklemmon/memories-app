@@ -23,7 +23,7 @@ function memoriesReducer(state, action) {
 }
 
 function MemoriesProvider(props) {
-  const [state, dispatch] = useReducer(memoriesReducer, { isLoading: false, payload: [] })
+  const [state, dispatch] = useReducer(memoriesReducer, { isLoading: false, payload: undefined })
 
   return (
     <MemoriesStateContext.Provider value={state}>
