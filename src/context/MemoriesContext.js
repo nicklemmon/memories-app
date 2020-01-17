@@ -5,6 +5,11 @@ import React, { createContext, useReducer, useContext } from 'react'
 const MemoriesStateContext = createContext()
 const MemoriesDispatchContext = createContext()
 
+const initialState = {
+  isLoading: false,
+  payload: undefined,
+}
+
 function memoriesReducer(state, action) {
   switch (action.type) {
     case 'LOADING': {
@@ -23,7 +28,7 @@ function memoriesReducer(state, action) {
 }
 
 function MemoriesProvider(props) {
-  const [state, dispatch] = useReducer(memoriesReducer, { isLoading: false, payload: undefined })
+  const [state, dispatch] = useReducer(memoriesReducer, initialState)
 
   return (
     <MemoriesStateContext.Provider value={state}>

@@ -1,126 +1,87 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Parse from 'parse'
 import { Redirect } from 'react-router-dom'
-
 import FormWrapper from './FormWrapper'
 import FormGroup from './FormGroup'
 import ButtonWrapper from './ButtonWrapper'
 import Button from './Button'
+import PageLoader from './PageLoader'
 import ActionLink from './ActionLink'
+import { useUser } from '../context'
 
-class FormLogin extends React.Component {
-  constructor(props) {
-    super(props)
+export default function FormLogin() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [userState, userDispatch] = useUser()
+  const { isLoggedIn, isLoading } = userState
 
-    this.state = {
-      hasAlert: false,
-      alertType: null,
-      alertContent: null,
-      username: null,
-      password: null,
-      redirect: false,
-    }
-
-    this.handleFormGroupChange = this.handleFormGroupChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleFormGroupChange(e) {
-    const target = e.target
-    const { value, name } = target
-
-    this.setState({
-      [name]: value,
-    })
-  }
-
-  signIn() {
-    Parse.User.logIn(this.state.username, this.state.password)
-      .then(() => {
-        this.setState({ redirect: true })
-      })
-      .catch(() => {
-        this.setState({ errorMsg: true })
-      })
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    this.signIn()
+    userDispatch({ type: 'LOADING' })
+
+    Parse.User.logIn(username, password)
+      .then(() => {
+        const user = Parse.User.current()
+        const permissions = user.attributes.ACL.permissionsById[user.id]
+
+        userDispatch({
+          type: 'LOG_IN',
+          user,
+          permissions,
+        })
+      })
+      .catch(() => userDispatch({ type: 'LOG_IN_ERROR' }))
   }
 
-  render() {
-    const { errorMsg, redirect } = this.state
+  if (isLoading) return <PageLoader />
 
-    let hasAlert
-    let alertType
-    let alertContent
-
-    if (errorMsg) {
-      hasAlert = true
-      alertType = 'error'
-      alertContent = 'Invalid username or password.'
-    }
-
-    return (
-      <React.Fragment>
-        {redirect && (
-          <Redirect
-            to={{
-              pathname: '/',
-              state: {
-                hasSuccessMessage: true,
-                userName: this.state.username,
-              },
-            }}
+  return (
+    <>
+      {isLoggedIn ? (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: {
+              hasSuccessMessage: true,
+              userName: username,
+            },
+          }}
+        />
+      ) : (
+        <FormWrapper
+          handleSubmit={handleSubmit}
+          footerContent={
+            <ActionLink cy="link-sign-up" style={{ float: 'right' }} to="/signup">
+              Sign Up
+            </ActionLink>
+          }
+        >
+          <FormGroup
+            label="Username"
+            type="text"
+            id="username"
+            cy="form-group-username"
+            handleChange={e => setUsername(e.target.value)}
+            value={username}
           />
-        )}
 
-        {!redirect && (
-          <FormWrapper
-            hasAlert={hasAlert}
-            alertType={alertType}
-            alertContent={alertContent}
-            footerContent={
-              <ActionLink cy="link-sign-up" style={{ float: 'right' }} to="/signup">
-                Sign Up
-              </ActionLink>
-            }
-          >
-            <FormGroup
-              label="Username"
-              type="text"
-              id="username"
-              cy="form-group-username"
-              handleChange={this.handleFormGroupChange}
-              value={this.state.username}
-            />
+          <FormGroup
+            label="Password"
+            type="password"
+            id="password"
+            cy="form-group-password"
+            handleChange={e => setPassword(e.target.value)}
+            value={password}
+          />
 
-            <FormGroup
-              label="Password"
-              type="password"
-              id="password"
-              cy="form-group-password"
-              handleChange={this.handleFormGroupChange}
-              value={this.state.password}
-            />
-
-            <ButtonWrapper>
-              <Button
-                type="primary"
-                fullWidth="true"
-                cy="button-log-in"
-                onClick={this.handleSubmit}
-              >
-                Log In
-              </Button>
-            </ButtonWrapper>
-          </FormWrapper>
-        )}
-      </React.Fragment>
-    )
-  }
+          <ButtonWrapper>
+            <Button type="primary" fullWidth="true" cy="button-log-in">
+              Log In
+            </Button>
+          </ButtonWrapper>
+        </FormWrapper>
+      )}
+    </>
+  )
 }
-
-export default FormLogin

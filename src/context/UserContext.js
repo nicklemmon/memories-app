@@ -5,13 +5,32 @@ import React, { createContext, useReducer, useContext } from 'react'
 const UserStateContext = createContext()
 const UserDispatchContext = createContext()
 
+const initialState = {
+  isLoading: false,
+  isLoggedIn: false,
+  user: null,
+  permissions: {},
+}
+
 function userReducer(state, action) {
   switch (action.type) {
-    case 'LOGGED_IN': {
-      return { isLoggedIn: true, user: action.user, permissions: action.permissions }
+    case 'LOADING': {
+      return { isLoading: true }
     }
-    case 'LOGGED_OUT': {
-      return { isLoggedIn: false }
+    case 'LOG_IN': {
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        user: action.user,
+        permissions: action.permissions,
+      }
+    }
+    case 'LOG_OUT': {
+      return { ...state, isLoading: false, isLoggedIn: false, user: null, permissions: {} }
+    }
+    case 'ERROR': {
+      return { ...state, isLoading: false, hasError: true }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -20,7 +39,7 @@ function userReducer(state, action) {
 }
 
 function UserProvider(props) {
-  const [state, dispatch] = useReducer(userReducer, { isLoggedIn: false })
+  const [state, dispatch] = useReducer(userReducer, initialState)
 
   return (
     <UserStateContext.Provider value={state}>
