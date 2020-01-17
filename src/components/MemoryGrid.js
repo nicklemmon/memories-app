@@ -4,27 +4,20 @@ import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
 import PageLoader from './PageLoader'
-import { useMemories } from '../context/MemoriesContext'
-import { useUser } from '../context/UserContext'
+import { useMemories, useUser } from '../context'
 import './MemoryGrid.css'
 
 export default function MemoryGrid() {
   const [state, dispatch] = useMemories()
-
   const [userState] = useUser()
-  const [canWrite, setCanWrite] = useState(false)
   const [hasEditSuccessMessage, setHasEditSuccessMessage] = useState(false)
   const [hasEditFailedMessage, setHasEditFailedMessage] = useState(false)
   const { isLoading, hasErrorMessage, payload: memories } = state
+  const { permissions = {} } = userState
+  const { write: canWrite } = permissions
 
   // eslint-disable-next-line
   useEffect(() => getMemories(), [])
-
-  useEffect(() => {
-    if (userState.permissions) {
-      setCanWrite(userState.permissions.write)
-    }
-  }, [userState, setCanWrite])
 
   function getMemories() {
     const Memory = Parse.Object.extend('memory')
