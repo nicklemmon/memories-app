@@ -32,18 +32,6 @@
   background: var(--white);
   box-shadow: var(--box-shadow-xl);
   border-radius: var(--border-radius);
-  visibility: hidden;
-  opacity: 0;
-  transform-origin: top right;
-  transform: scaleY(0.75) scaleX(0.9) translateZ(0);
-  transition: transform var(--anim-speed) var(--anim-easing),
-    opacity var(--anim-speed) var(--anim-easing), visibility var(--anim-speed) var(--anim-easing);
-}
-
-.HeaderNav-list.isOpen {
-  visibility: visible;
-  opacity: 1;
-  transform: scaleY(1) scaleX(1) translateZ(0);
 }
 
 @media (min-width: 736px) {

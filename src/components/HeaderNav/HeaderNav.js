@@ -47,50 +47,47 @@ export default function HeaderNav({ className }) {
           <FaBars className="HeaderNav-buttonIcon" />
         </button>
 
-        <div
-          id="HeaderNav-list"
-          className={classNames('HeaderNav-list', isOpen ? 'isOpen' : '')}
-          role="navigation"
-          aria-label="site"
-        >
-          {!isLoggedIn && (
-            <NavLink to="login" className="HeaderNav-item" onKeyUp={handleKeyUp} onClick={toggle}>
-              <FaSignInAlt className="HeaderNav-itemIcon" />
-              Log In
-            </NavLink>
-          )}
+        {isOpen && (
+          <div id="HeaderNav-list" className="HeaderNav-list" role="navigation" aria-label="site">
+            {!isLoggedIn && (
+              <NavLink to="login" className="HeaderNav-item" onKeyUp={handleKeyUp} onClick={toggle}>
+                <FaSignInAlt className="HeaderNav-itemIcon" />
+                Log In
+              </NavLink>
+            )}
 
-          {isLoggedIn && canRead && (
-            <NavLink
-              to="memories"
-              className="HeaderNav-item"
-              onKeyUp={handleKeyUp}
-              onClick={toggle}
-            >
-              <FaCloud className="HeaderNav-itemIcon" />
-              View Memories
-            </NavLink>
-          )}
+            {isLoggedIn && canRead && (
+              <NavLink
+                to="memories"
+                className="HeaderNav-item"
+                onKeyUp={handleKeyUp}
+                onClick={toggle}
+              >
+                <FaCloud className="HeaderNav-itemIcon" />
+                View Memories
+              </NavLink>
+            )}
 
-          {isLoggedIn && canWrite && (
-            <NavLink
-              to="addmemory"
-              className="HeaderNav-item"
-              onKeyUp={handleKeyUp}
-              onClick={toggle}
-            >
-              <FaPlusCircle className="HeaderNav-itemIcon" />
-              Add Memory
-            </NavLink>
-          )}
+            {isLoggedIn && canWrite && (
+              <NavLink
+                to="addmemory"
+                className="HeaderNav-item"
+                onKeyUp={handleKeyUp}
+                onClick={toggle}
+              >
+                <FaPlusCircle className="HeaderNav-itemIcon" />
+                Add Memory
+              </NavLink>
+            )}
 
-          {isLoggedIn && (
-            <button className="HeaderNav-item" onClick={handleLogoutClick}>
-              <FaSignOutAlt className="HeaderNav-itemIcon" />
-              Log Out
-            </button>
-          )}
-        </div>
+            {isLoggedIn && (
+              <button className="HeaderNav-item" onClick={handleLogoutClick}>
+                <FaSignOutAlt className="HeaderNav-itemIcon" />
+                Log Out
+              </button>
+            )}
+          </div>
+        )}
       </OutsideClickHandler>
     </div>
   )
