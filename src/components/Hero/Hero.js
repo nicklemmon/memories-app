@@ -1,101 +1,56 @@
 import React from 'react'
-import Parse from 'parse'
-
 import Button from '../Button'
 import Heading from '../Heading'
-import Alert from '../Alert'
-
 import backgroundImage from '../../images/feet.png'
+import { useUser } from '../../context'
 import './Hero.css'
 
-class Hero extends React.Component {
-  constructor(props) {
-    super(props)
+export default function Hero() {
+  const [userState] = useUser()
+  const { isLoggedIn, permissions = {} } = userState
+  const { read: canRead, write: canWrite } = permissions
 
-    this.state = {
-      isSignedIn: false,
-      canRead: false,
-      canWrite: false,
-    }
+  return (
+    <div className="Hero">
+      <div className="Hero-wrapper">
+        <Heading level="1" content="Welcome to Eva&rsquo;s Memories" className="Hero-heading" />
 
-    this.fetchUser = this.fetchUser.bind(this)
-    this.hero = React.createRef()
-  }
+        <p className="Hero-subheading">
+          A collection of quotes and other notes from Eva's childhood.
+        </p>
 
-  fetchUser() {
-    const User = Parse.User.current()
+        <div className="Hero-content">
+          {!isLoggedIn && (
+            <React.Fragment>
+              <Button type="primary" linkTo="/login" cy="button-log-in">
+                Log In
+              </Button>
 
-    if (User) {
-      const userId = User.id
-      const Permissions = User.attributes.ACL.permissionsById[userId]
+              <Button type="tertiary" linkTo="/signup" cy="button-sign-up">
+                Sign Up
+              </Button>
+            </React.Fragment>
+          )}
 
-      this.setState({
-        isSignedIn: true,
-        canRead: Permissions.read,
-        canWrite: Permissions.write,
-      })
-    }
-  }
-
-  componentDidMount() {
-    this.fetchUser()
-    this.hero.current.focus()
-  }
-
-  render() {
-    const { isSignedIn, canRead, canWrite } = this.state
-    const { hasSuccessMessage, userName } = this.props
-
-    return (
-      <div className="Hero" ref={this.hero} tabIndex="-1">
-        <div className="Hero-wrapper">
-          <Heading level="1" content="Welcome to Eva&rsquo;s Memories" className="Hero-heading" />
-
-          <p className="Hero-subheading">
-            A collection of quotes and other notes from Eva's childhood.
-          </p>
-
-          <div className="Hero-content">
-            {hasSuccessMessage && (
-              <Alert type="success" className="Hero-successMsg">
-                <p>{`Success! Logged in as ${userName}.`}</p>
-              </Alert>
-            )}
-
-            {!isSignedIn && (
-              <React.Fragment>
-                <Button type="primary" linkTo="/login" cy="button-log-in">
-                  Log In
+          {isLoggedIn && (
+            <React.Fragment>
+              {canWrite && (
+                <Button type="primary" linkTo="/addmemory">
+                  Add Memory
                 </Button>
+              )}
 
-                <Button type="tertiary" linkTo="/signup" cy="button-sign-up">
-                  Sign Up
+              {canRead && (
+                <Button type="tertiary" linkTo="/memories">
+                  View Memories
                 </Button>
-              </React.Fragment>
-            )}
-
-            {isSignedIn && (
-              <React.Fragment>
-                {canWrite && (
-                  <Button type="primary" linkTo="/addmemory">
-                    Add Memory
-                  </Button>
-                )}
-
-                {canRead && (
-                  <Button type="tertiary" linkTo="/memories">
-                    View Memories
-                  </Button>
-                )}
-              </React.Fragment>
-            )}
-          </div>
-
-          <img className="Hero-background" src={backgroundImage} alt="" aria-hidden="true" />
+              )}
+            </React.Fragment>
+          )}
         </div>
-      </div>
-    )
-  }
-}
 
-export default Hero
+        <img className="Hero-background" src={backgroundImage} alt="" aria-hidden="true" />
+      </div>
+    </div>
+  )
+}

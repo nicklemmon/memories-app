@@ -8,13 +8,13 @@ import { Card, CardAlert, CardContent } from '../components/Card'
 import MemoryCard from '../components/MemoryCard'
 import ButtonWrapper from '../components/ButtonWrapper'
 import Button from '../components/Button'
-import LoggedInPage from '../layouts/LoggedInPage'
+import PageLayout from '../layouts/PageLayout'
 
 function AddMemorySuccessPage(props) {
   const { title, summary, date, tags } = props.location.state
 
   return (
-    <LoggedInPage>
+    <PageLayout>
       <Helmet title="Memory Added" />
 
       <PageHeading>Memory Added</PageHeading>
@@ -53,7 +53,7 @@ function AddMemorySuccessPage(props) {
           </Card>
         </MaxWidth>
       </PageContent>
-    </LoggedInPage>
+    </PageLayout>
   )
 }
 

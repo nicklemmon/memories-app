@@ -3,11 +3,11 @@ import Helmet from 'react-helmet'
 import PageContent from '../components/PageContent'
 import PageHeading from '../components/PageHeading'
 import FormAddMemory from '../components/FormAddMemory'
-import LoggedInPage from '../layouts/LoggedInPage'
+import PageLayout from '../layouts/PageLayout'
 
 export default function AddMemoryPage() {
   return (
-    <LoggedInPage>
+    <PageLayout>
       <Helmet title="Add a Memory" />
 
       <PageHeading>Add a Memory</PageHeading>
@@ -15,6 +15,6 @@ export default function AddMemoryPage() {
       <PageContent>
         <FormAddMemory />
       </PageContent>
-    </LoggedInPage>
+    </PageLayout>
   )
 }
