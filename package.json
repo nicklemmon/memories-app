@@ -7,8 +7,6 @@
     "classnames": "^2.2.6",
     "date-fns": "^1.30.1",
     "history": "^4.7.2",
-    "mobx": "^5.9.4",
-    "mobx-react": "^5.4.4",
     "parse": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
