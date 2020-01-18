@@ -1,36 +1,51 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import Parse from 'parse'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import IndexPage from '../pages/index'
-import NotFoundPage from '../pages/404'
-import MemoriesPage from '../pages/memories'
-import AddMemoryPage from '../pages/addmemory'
-import AddMemorySuccessPage from '../pages/addmemorysuccess'
-import LoginPage from '../pages/login'
-import SignupPage from '../pages/signup'
+import ProtectedRoute from '../components/ProtectedRoute'
+import IndexPage from '../pages/IndexPage'
+import NotFoundPage from '../pages/NotFoundPage'
+import MemoriesPage from '../pages/MemoriesPage'
+import AddMemoryPage from '../pages/AddMemoryPage'
+import AddMemorySuccessPage from '../pages/AddMemorySuccessPage'
+import LoginPage from '../pages/LoginPage'
+import SignupPage from '../pages/SignupPage'
+import { useUser } from '../context'
 import './DefaultLayout.css'
 
-function DefaultLayout(props) {
+function DefaultLayout() {
+  // eslint-disable-next-line
+  const [userState, userDispatch] = useUser()
+  const user = Parse.User.current()
+
+  useEffect(() => {
+    if (user) userDispatch({ type: 'LOGGED_IN' })
+  }, [user, userDispatch])
+
   return (
     <div className="Layout">
       <Header classNames="Layout-header" />
 
       <main className="Layout-main">
-        {props.children}
-
         <Switch>
           <Route exact path="/" component={IndexPage} />
 
-          <Route path="/memories" component={MemoriesPage} />
-
           <Route path="/signup" component={SignupPage} />
 
-          <Route path="/addmemory" component={AddMemoryPage} />
-
-          <Route path="/addmemorysuccess" component={AddMemorySuccessPage} />
-
           <Route path="/login" component={LoginPage} />
+
+          <ProtectedRoute path="/memories">
+            <MemoriesPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/addmemory">
+            <AddMemoryPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/addmemorysuccess">
+            <AddMemorySuccessPage />
+          </ProtectedRoute>
 
           <Route path="*" component={NotFoundPage} />
         </Switch>

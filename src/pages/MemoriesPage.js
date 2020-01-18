@@ -3,12 +3,12 @@ import Helmet from 'react-helmet'
 import PageContent from '../components/PageContent'
 import PageHeading from '../components/PageHeading'
 import MemoryGrid from '../components/MemoryGrid'
-import LoggedInPage from '../layouts/LoggedInPage'
+import PageLayout from '../layouts/PageLayout'
 import { MemoriesProvider } from '../context/MemoriesContext'
 
 export default function MemoriesPage() {
   return (
-    <LoggedInPage>
+    <PageLayout>
       <Helmet title="Memories" />
 
       <PageHeading>Memories</PageHeading>
@@ -18,6 +18,6 @@ export default function MemoriesPage() {
           <MemoryGrid />
         </MemoriesProvider>
       </PageContent>
-    </LoggedInPage>
+    </PageLayout>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function LoggedOutPage(props) {
+export default function PageLayout(props) {
   return <>{props.children}</>
 }

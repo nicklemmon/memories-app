@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import Parse from 'parse'
 import classNames from 'classnames'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
 import { useUser } from '../../context'
 import './HeaderNav.css'
 
 export default function HeaderNav({ className }) {
+  const history = useHistory()
   const [isOpen, setIsOpen] = useState(false)
   const [userState, userDispatch] = useUser()
   const { isLoggedIn, permissions = {} } = userState
@@ -21,7 +23,10 @@ export default function HeaderNav({ className }) {
   }
 
   function handleLogoutClick() {
-    userDispatch({ type: 'LOG_OUT' })
+    Parse.User.logOut()
+    toggle()
+    userDispatch({ type: 'LOGGED_OUT' })
+    history.push('/')
   }
 
   function toggle() {

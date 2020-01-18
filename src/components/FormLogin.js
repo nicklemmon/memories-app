@@ -14,6 +14,7 @@ export default function FormLogin() {
   const [password, setPassword] = useState('')
   const [userState, userDispatch] = useUser()
   const { isLoggedIn, isLoading } = userState
+  console.log('userState', userState)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -21,17 +22,8 @@ export default function FormLogin() {
     userDispatch({ type: 'LOADING' })
 
     Parse.User.logIn(username, password)
-      .then(() => {
-        const user = Parse.User.current()
-        const permissions = user.attributes.ACL.permissionsById[user.id]
-
-        userDispatch({
-          type: 'LOG_IN',
-          user,
-          permissions,
-        })
-      })
-      .catch(() => userDispatch({ type: 'LOG_IN_ERROR' }))
+      .then(() => userDispatch({ type: 'LOGGED_IN' }))
+      .catch(() => userDispatch({ type: 'ERROR' }))
   }
 
   if (isLoading) return <PageLoader />

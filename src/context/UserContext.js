@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext } from 'react'
+import Parse from 'parse'
 
 // See: https://kentcdodds.com/blog/how-to-use-react-context-effectively
 
@@ -8,25 +9,27 @@ const UserDispatchContext = createContext()
 const initialState = {
   isLoading: false,
   isLoggedIn: false,
-  user: null,
+  user: undefined,
   permissions: {},
 }
 
 function userReducer(state, action) {
+  const user = Parse.User.current()
+
   switch (action.type) {
     case 'LOADING': {
       return { isLoading: true }
     }
-    case 'LOG_IN': {
+    case 'LOGGED_IN': {
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        user: action.user,
-        permissions: action.permissions,
+        user,
+        permissions: user.attributes.ACL.permissionsById[user.id],
       }
     }
-    case 'LOG_OUT': {
+    case 'LOGGED_OUT': {
       return { ...state, isLoading: false, isLoggedIn: false, user: null, permissions: {} }
     }
     case 'ERROR': {
