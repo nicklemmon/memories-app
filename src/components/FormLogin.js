@@ -14,7 +14,6 @@ export default function FormLogin() {
   const [password, setPassword] = useState('')
   const [userState, userDispatch] = useUser()
   const { isLoggedIn, isLoading } = userState
-  console.log('userState', userState)
 
   const handleSubmit = e => {
     e.preventDefault()
