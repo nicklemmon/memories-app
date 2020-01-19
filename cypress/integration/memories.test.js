@@ -80,4 +80,36 @@ describe('the memories page', () => {
 
     cy.queryByText('Delete "Memory 1"?').should('not.be.visible')
   })
+
+  it('renders an error boundary when the server returns a malformed response', () => {
+    // See: https://docs.cypress.io/api/events/catalog-of-events.html#Examples
+    // this event will automatically be unbound when this
+    // test ends because it's attached to 'cy'
+    cy.on('uncaught:exception', () => {
+      // using mocha's async done callback to finish
+      // this test so we prove that an uncaught exception
+      // was thrown
+      done()
+
+      // return false to prevent the error from
+      // failing this test
+      return false
+    })
+
+    cy.fixture('memory.malformed.json').as('memoriesGetRes')
+    cy.route({
+      url: 'https://parseapi.back4app.com/classes/memory',
+      method: 'POST',
+      response: '@memoriesGetRes',
+    }).as('memoriesGet')
+
+    cy.visit('/memories')
+
+    cy.wait('@memoriesGet')
+
+    cy.findByText('Unfortunately, something went wrong with our app. Please try again.').should(
+      'be.visible',
+    )
+    cy.findByText("Eva's Memories").should('be.visible') // Checks that the header still exists
+  })
 })
