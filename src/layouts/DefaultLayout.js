@@ -4,6 +4,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import ProtectedRoute from '../components/ProtectedRoute'
+import ErrorBoundary from '../components/ErrorBoundary'
 import IndexPage from '../pages/IndexPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import MemoriesPage from '../pages/MemoriesPage'
@@ -28,27 +29,29 @@ function DefaultLayout() {
       <Header classNames="Layout-header" />
 
       <main className="Layout-main">
-        <Switch>
-          <Route exact path="/" component={IndexPage} />
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={IndexPage} />
 
-          <Route path="/signup" component={SignupPage} />
+            <Route path="/signup" component={SignupPage} />
 
-          <Route path="/login" component={LoginPage} />
+            <Route path="/login" component={LoginPage} />
 
-          <ProtectedRoute path="/memories">
-            <MemoriesPage />
-          </ProtectedRoute>
+            <ProtectedRoute path="/memories">
+              <MemoriesPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute path="/addmemory">
-            <AddMemoryPage />
-          </ProtectedRoute>
+            <ProtectedRoute path="/addmemory">
+              <AddMemoryPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute path="/addmemorysuccess">
-            <AddMemorySuccessPage />
-          </ProtectedRoute>
+            <ProtectedRoute path="/addmemorysuccess">
+              <AddMemorySuccessPage />
+            </ProtectedRoute>
 
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
+            <Route path="*" component={NotFoundPage} />
+          </Switch>
+        </ErrorBoundary>
       </main>
 
       <Footer classNames="Layout-footer" />
