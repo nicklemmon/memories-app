@@ -54,7 +54,6 @@ describe('the memories page', () => {
   })
 
   it('deletes a memory when clicking on the delete button', () => {
-    cy.server()
     cy.fixture('delete-memory.json').as('deleteMemoryRes')
     cy.route({
       method: 'POST',
@@ -69,6 +68,31 @@ describe('the memories page', () => {
     cy.get('[data-cy="modal-btn-primary"]').click()
 
     cy.queryByText('Delete "Memory 1"?').should('not.be.visible')
+  })
+
+  it('edits a memory when clicking on the edit button', () => {
+    cy.fixture('edit-memory.json').as('editMemoryRes')
+    cy.fixture('edited-memory.json').as('editedMemoryRes')
+
+    cy.route({
+      method: 'POST',
+      url: 'https://parseapi.back4app.com/classes/memory/abc',
+      response: '@editMemoryRes',
+    })
+
+    cy.route({
+      url: 'https://parseapi.back4app.com/classes/memory',
+      method: 'POST',
+      response: '@editedMemoryRes',
+    })
+
+    cy.queryAllByText('Edit')
+      .first()
+      .click({ force: true })
+
+    cy.get('[data-cy="modal-btn-primary"]').click()
+
+    cy.findByText('Edited Memory!').should('be.visible')
   })
 
   it('closes the cancel modal when the user clicks "Cancel"', () => {

@@ -1,0 +1,13 @@
+{
+  "results": [
+    {
+      "objectId": "abc",
+      "title": "Edited Memory!",
+      "createdAt": "2019-02-09T02:34:36.161Z",
+      "updatedAt": "2019-03-15T02:24:47.164Z",
+      "summary": "Memory 1 summary",
+      "tags": [{ "name": "memory 1 tag" }],
+      "recordedDate": { "__type": "Date", "iso": "2019-02-09T02:24:00.000Z" }
+    }
+  ]
+}
