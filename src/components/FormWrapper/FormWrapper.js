@@ -18,7 +18,7 @@ export default function FormWrapper(props) {
         </form>
       </CardContent>
 
-      <CardFooter>{footerContent}</CardFooter>
+      {footerContent && <CardFooter>{footerContent}</CardFooter>}
     </Card>
   )
 }

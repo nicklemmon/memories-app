@@ -50,6 +50,7 @@ export default function MemoryGrid() {
 
   function handleSuccessEdit() {
     setHasEditSuccessMessage(true)
+    getMemories()
   }
 
   function handleFailedEdit() {
