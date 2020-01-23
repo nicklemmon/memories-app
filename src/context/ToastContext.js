@@ -13,7 +13,10 @@ function toastReducer(state, action) {
       return { toasts: [...state.toasts, { message: action.message, variant: action.variant }] }
     }
     case 'REMOVE_TOAST': {
-      return { toasts: state.toasts.filter((toast, index) => index !== action.index) }
+      const nextToasts = state.toasts
+      delete nextToasts[action.index]
+
+      return { toasts: nextToasts.filter(Boolean) }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)

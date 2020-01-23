@@ -48,17 +48,9 @@ export default function ToastList() {
         {toasts.map((toast, index) => (
           <motion.div
             key={`toast-${index}`}
-            transition={{ duration: 0.3 }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 15 }}
+            exit={{}}
+            layoutTransition
             className="ToastList-itemWrapper"
-            layoutTransition={{
-              type: 'spring',
-              damping: 25,
-              stiffness: 400,
-              velocity: 5,
-            }}
           >
             <ToastItem
               variant={toast.variant}

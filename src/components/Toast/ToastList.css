@@ -51,6 +51,6 @@
   border-color: var(--error);
 }
 
-.ToastItem--warning {
-  border-color: var(--warning);
+.ToastItem--attention {
+  border-color: var(--attention);
 }
