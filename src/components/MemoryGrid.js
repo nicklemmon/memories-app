@@ -4,6 +4,7 @@ import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
 import PageLoader from './PageLoader'
+import { Toast } from './Toast'
 import { useMemories, useUser } from '../context'
 import './MemoryGrid.css'
 
@@ -61,6 +62,8 @@ export default function MemoryGrid() {
 
   return (
     <>
+      {hasEditSuccessMessage && <Toast variant="success">Memory successfully edited</Toast>}
+
       {hasErrorMessage && (
         <MaxWidth size="md">
           <Alert type="error">
@@ -77,13 +80,13 @@ export default function MemoryGrid() {
         </MaxWidth>
       )}
 
-      {hasEditSuccessMessage && (
+      {/* {hasEditSuccessMessage && (
         <MaxWidth size="md">
           <Alert type="success">
             <p>Memory successfully edited.</p>
           </Alert>
         </MaxWidth>
-      )}
+      )} */}
 
       {hasEditFailedMessage && (
         <MaxWidth size="md">

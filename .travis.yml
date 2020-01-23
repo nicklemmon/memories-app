@@ -20,9 +20,3 @@ script:
   - npm run test
   - npm run build
   - npm run test:cy:ci
-
-before_deploy:
-  - rm -rf build
-  - npm i
-  - npm install netlify-cli -g
-  - npm run build
