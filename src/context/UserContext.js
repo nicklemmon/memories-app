@@ -25,15 +25,23 @@ function userReducer(state, action) {
         ...state,
         isLoading: false,
         isLoggedIn: true,
+        justLoggedOut: false,
         user,
         permissions: user.attributes.ACL.permissionsById[user.id],
       }
     }
     case 'LOGGED_OUT': {
-      return { ...state, isLoading: false, isLoggedIn: false, user: null, permissions: {} }
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        justLoggedOut: true,
+        user: null,
+        permissions: {},
+      }
     }
     case 'ERROR': {
-      return { ...state, isLoading: false, hasError: true }
+      return { ...state, isLoading: false, justLoggedOut: false, hasError: true }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)

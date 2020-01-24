@@ -1,0 +1,56 @@
+.ToastList {
+  position: fixed;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-index-xxxl);
+  margin: 0 var(--spacing-sm);
+}
+
+.ToastList-itemWrapper + .ToastList-itemWrapper {
+  margin-top: var(--spacing-sm);
+}
+
+.ToastItem {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  padding: var(--spacing-md);
+  color: var(--white);
+  background-color: var(--darker-gray);
+  border-radius: var(--border-radius);
+  border-left: var(--spacing-sm) solid var(--gray);
+  box-shadow: var(--box-shadow-sm);
+  width: 325px;
+}
+
+.ToastItem-closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: var(--spacing-xs);
+  font-size: var(--font-size-md);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.ToastItem-icon {
+  font-size: var(--spacing-md);
+}
+
+.ToastItem--success {
+  border-color: var(--success);
+}
+
+.ToastItem--error {
+  border-color: var(--error);
+}
+
+.ToastItem--attention {
+  border-color: var(--attention);
+}

@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import ProtectedRoute from '../components/ProtectedRoute'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { ToastPortal, ToastList } from '../components/Toast'
 import IndexPage from '../pages/IndexPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import MemoriesPage from '../pages/MemoriesPage'
@@ -55,6 +56,10 @@ function DefaultLayout() {
       </main>
 
       <Footer classNames="Layout-footer" />
+
+      <ToastPortal>
+        <ToastList />
+      </ToastPortal>
     </div>
   )
 }
