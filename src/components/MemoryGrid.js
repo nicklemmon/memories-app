@@ -11,6 +11,7 @@ import './MemoryGrid.css'
 export default function MemoryGrid() {
   const [state, dispatch] = useMemories()
   const [userState] = useUser()
+  const [hasDeleteSuccessMessage, setHasDeleteSuccessMessage] = useState(false)
   const [hasEditSuccessMessage, setHasEditSuccessMessage] = useState(false)
   const [hasEditFailedMessage, setHasEditFailedMessage] = useState(false)
   const { isLoading, hasErrorMessage, payload: memories } = state
@@ -44,8 +45,12 @@ export default function MemoryGrid() {
     const query = new Parse.Query(Memory)
 
     query.get(memoryID).then(obj => {
-      obj.destroy()
-      getMemories()
+      obj
+        .destroy()
+        .then(() => {
+          return getMemories()
+        })
+        .then(() => setHasDeleteSuccessMessage(true))
     })
   }
 
@@ -64,34 +69,16 @@ export default function MemoryGrid() {
     <>
       {hasEditSuccessMessage && <Toast variant="success">Memory successfully edited</Toast>}
 
-      {hasErrorMessage && (
-        <MaxWidth size="md">
-          <Alert type="error">
-            <p>Whoops! Failed to retrieve memories. Try again later.</p>
-          </Alert>
-        </MaxWidth>
-      )}
+      {hasDeleteSuccessMessage && <Toast variant="success">Memory successfully deleted</Toast>}
+
+      {hasEditFailedMessage && <Toast type="error">Memory failed to be edited</Toast>}
+
+      {hasErrorMessage && <Toast variant="error">Sorry! Something went wrong</Toast>}
 
       {memories && memories.length === 0 && (
         <MaxWidth size="md">
           <Alert type="attention">
             <p>Sorry! No memories available. Please try again later.</p>
-          </Alert>
-        </MaxWidth>
-      )}
-
-      {/* {hasEditSuccessMessage && (
-        <MaxWidth size="md">
-          <Alert type="success">
-            <p>Memory successfully edited.</p>
-          </Alert>
-        </MaxWidth>
-      )} */}
-
-      {hasEditFailedMessage && (
-        <MaxWidth size="md">
-          <Alert type="error">
-            <p>Memory failed to be edited. Try again!</p>
           </Alert>
         </MaxWidth>
       )}
