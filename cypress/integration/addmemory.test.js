@@ -41,7 +41,7 @@ describe('The add memory page', () => {
     cy.findByText('Add Memory').click()
 
     cy.title().should('include', 'Memory Added')
-    cy.findByText('Memory successfully added').should('be.visible')
+    cy.findAllByText('Memory successfully added').should('have.length', 2)
     cy.findByText('This is a fake title')
     cy.findByText('This is a fake summary')
     cy.findByText('01/02/2020').should('be.visible')
