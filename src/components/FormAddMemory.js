@@ -117,12 +117,12 @@ class FormAddMemory extends React.Component {
     const { tags, tagMaxReached, errorMsg, redirect } = this.state
 
     let hasAlert
-    let alertType
+    let alertVariant
     let alertContent
 
     if (errorMsg) {
       hasAlert = true
-      alertType = 'error'
+      alertVariant = 'error'
       alertContent = 'Whoops! Memory failed to be added. Try again.'
     }
 
@@ -146,7 +146,7 @@ class FormAddMemory extends React.Component {
           <FormWrapper
             handleSubmit={this.handleSubmit}
             hasAlert={hasAlert}
-            alertType={alertType}
+            alertVariant={alertVariant}
             alertContent={alertContent}
           >
             <FormGroup
@@ -189,14 +189,14 @@ class FormAddMemory extends React.Component {
               {tagMaxReached ? (
                 <p>Maximum of 3 tags per memory.</p>
               ) : (
-                <Button type="tertiary" onClick={this.handleAddTagClick} fullWidth={true}>
+                <Button variant="tertiary" onClick={this.handleAddTagClick} fullWidth={true}>
                   {tags.length > 0 ? 'Add Another Tag' : 'Add Tag'}
                 </Button>
               )}
             </ButtonWrapper>
 
             <ButtonWrapper>
-              <Button type="primary" fullWidth onClick={this.handleFormSubmit}>
+              <Button variant="primary" fullWidth onClick={this.handleFormSubmit}>
                 Add Memory
               </Button>
             </ButtonWrapper>

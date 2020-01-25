@@ -77,7 +77,7 @@ export default function MemoryGrid() {
 
       {memories && memories.length === 0 && (
         <MaxWidth size="md">
-          <Alert type="attention">
+          <Alert variant="attention">
             <p>Sorry! No memories available. Please try again later.</p>
           </Alert>
         </MaxWidth>

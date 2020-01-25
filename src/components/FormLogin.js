@@ -67,7 +67,7 @@ export default function FormLogin() {
           />
 
           <ButtonWrapper>
-            <Button type="primary" fullWidth="true" cy="button-log-in">
+            <Button variant="primary" fullWidth="true" cy="button-log-in">
               Log In
             </Button>
           </ButtonWrapper>

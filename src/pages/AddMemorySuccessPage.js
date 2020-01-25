@@ -24,7 +24,7 @@ function AddMemorySuccessPage(props) {
         <MaxWidth size="xs">
           <Card isBrokenOut={true}>
             <CardContent>
-              <CardAlert type="success" cy="alert-success">
+              <CardAlert variant="success" cy="alert-success">
                 <p>Memory successfully added</p>
               </CardAlert>
 
@@ -44,11 +44,11 @@ function AddMemorySuccessPage(props) {
               </p>
 
               <ButtonWrapper>
-                <Button type="primary" linkTo="/addmemory" cy="button-add-another">
+                <Button variant="primary" linkTo="/addmemory" cy="button-add-another">
                   Add Another Memory
                 </Button>
 
-                <Button type="secondary" linkTo="/memories" cy="button-view-memories">
+                <Button variant="secondary" linkTo="/memories" cy="button-view-memories">
                   View Memories
                 </Button>
               </ButtonWrapper>

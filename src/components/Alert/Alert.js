@@ -10,18 +10,18 @@ import {
 import './Alert.css'
 
 export default function Alert(props) {
-  const { type, children, className, cy } = props
+  const { variant, children, className, cy } = props
 
   return (
-    <div role="alert" className={classNames(`Alert Alert--${type}`, className)} data-cy={cy}>
+    <div role="alert" className={classNames(`Alert Alert--${variant}`, className)} data-cy={cy}>
       <div className="Alert-pre">
-        {type === 'error' && <FaExclamationCircle className="Alert-icon" />}
+        {variant === 'error' && <FaExclamationCircle className="Alert-icon" />}
 
-        {type === 'success' && <FaCheckCircle className="Alert-icon" />}
+        {variant === 'success' && <FaCheckCircle className="Alert-icon" />}
 
-        {type === 'attention' && <FaExclamationTriangle className="Alert-icon" />}
+        {variant === 'attention' && <FaExclamationTriangle className="Alert-icon" />}
 
-        {type === 'info' && <FaInfoCircle className="Alert-icon" />}
+        {variant === 'info' && <FaInfoCircle className="Alert-icon" />}
       </div>
 
       <div className="Alert-content">{children}</div>
@@ -30,6 +30,6 @@ export default function Alert(props) {
 }
 
 Alert.propTypes = {
-  type: PropTypes.oneOf(['error', 'success', 'attention', 'info']),
+  variant: PropTypes.oneOf(['error', 'success', 'attention', 'info']),
   className: PropTypes.string,
 }

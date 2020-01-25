@@ -2,13 +2,21 @@ import React from 'react'
 import { Card, CardAlert, CardContent, CardFooter } from '../Card'
 
 export default function FormWrapper(props) {
-  const { method, hasAlert, alertType, alertContent, children, footerContent, handleSubmit } = props
+  const {
+    method,
+    hasAlert,
+    alertVariant,
+    alertContent,
+    children,
+    footerContent,
+    handleSubmit,
+  } = props
 
   return (
     <Card className="FormWrapper" isBrokenOut={true}>
       <CardContent>
         {hasAlert && (
-          <CardAlert type={alertType}>
+          <CardAlert variant={alertVariant}>
             <p>{alertContent}</p>
           </CardAlert>
         )}

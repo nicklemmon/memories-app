@@ -24,7 +24,7 @@ export default class ErrorBoundary extends React.Component {
 
           <PageContent>
             <MaxWidth size="md">
-              <Alert type="attention">
+              <Alert variant="attention">
                 <p>Unfortunately, something went wrong with our app. Please try again.</p>
               </Alert>
             </MaxWidth>
