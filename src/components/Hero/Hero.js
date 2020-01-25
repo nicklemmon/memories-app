@@ -22,11 +22,11 @@ export default function Hero() {
         <div className="Hero-content">
           {!isLoggedIn && (
             <React.Fragment>
-              <Button type="primary" linkTo="/login" cy="button-log-in">
+              <Button variant="primary" linkTo="/login" cy="button-log-in">
                 Log In
               </Button>
 
-              <Button type="tertiary" linkTo="/signup" cy="button-sign-up">
+              <Button variant="tertiary" linkTo="/signup" cy="button-sign-up">
                 Sign Up
               </Button>
             </React.Fragment>
@@ -35,13 +35,13 @@ export default function Hero() {
           {isLoggedIn && (
             <React.Fragment>
               {canWrite && (
-                <Button type="primary" linkTo="/addmemory">
+                <Button variant="primary" linkTo="/addmemory">
                   Add Memory
                 </Button>
               )}
 
               {canRead && (
-                <Button type="tertiary" linkTo="/memories">
+                <Button variant="tertiary" linkTo="/memories">
                   View Memories
                 </Button>
               )}

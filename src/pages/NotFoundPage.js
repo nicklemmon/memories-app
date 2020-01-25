@@ -13,7 +13,7 @@ export default function NotFoundPage() {
       <PageHeading>{'404 :('}</PageHeading>
 
       <PageContent maxWidth="sm">
-        <Alert type="attention">
+        <Alert variant="attention">
           <p>D'oh! No page for this URL.</p>
         </Alert>
       </PageContent>

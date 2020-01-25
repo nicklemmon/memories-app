@@ -12,7 +12,7 @@ class FormSignup extends React.Component {
 
     this.state = {
       hasAlert: false,
-      alertType: null,
+      alertVariant: null,
       alertContent: null,
       username: null,
       email: null,
@@ -54,18 +54,18 @@ class FormSignup extends React.Component {
 
     user
       .signUp()
-      .then(user => {
+      .then(() => {
         this.resetForm()
         this.setState({ successMsg: true })
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({ errorMsg: true })
       })
   }
 
   render() {
     let hasAlert
-    let alertType
+    let alertVariant
     let alertContent
 
     if (this.state.successMsg || this.state.errorMsg) {
@@ -73,12 +73,12 @@ class FormSignup extends React.Component {
     }
 
     if (this.state.successMsg) {
-      alertType = 'success'
+      alertVariant = 'success'
       alertContent = 'Success! User added.'
     }
 
     if (this.state.errorMsg) {
-      alertType = 'error'
+      alertVariant = 'error'
       alertContent = 'Whoops! Something went wrong when signing up. Try again.'
     }
 
@@ -86,7 +86,7 @@ class FormSignup extends React.Component {
       <FormWrapper
         handleSubmit={this.handleSubmit}
         hasAlert={hasAlert}
-        alertType={alertType}
+        alertVariant={alertVariant}
         alertContent={alertContent}
       >
         <FormGroup
@@ -118,7 +118,7 @@ class FormSignup extends React.Component {
 
         <ButtonWrapper>
           <Button
-            type="primary"
+            variant="primary"
             content="Sign Up!"
             cy="button-sign-up"
             onClick={this.handleFormSubmit}
@@ -126,7 +126,7 @@ class FormSignup extends React.Component {
             Sign Up!
           </Button>
 
-          <Button type="secondary" content="Cancel" cy="button-cancel" linkTo="/">
+          <Button variant="secondary" content="Cancel" cy="button-cancel" linkTo="/">
             Cancel
           </Button>
         </ButtonWrapper>

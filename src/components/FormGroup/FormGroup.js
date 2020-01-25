@@ -59,7 +59,7 @@ class FormGroup extends React.Component {
           {buttonContent && (
             <Button
               className="Button--small FormGroup-button"
-              type="tertiary"
+              variant="tertiary"
               onClick={buttonOnClick}
             >
               {buttonContent}

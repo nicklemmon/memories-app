@@ -95,7 +95,7 @@ class ModalButton extends React.Component {
               <ButtonWrapper>
                 {primaryButtonContent && (
                   <Button
-                    type="primary"
+                    variant="primary"
                     onClick={this.primaryButtonHandleClick}
                     linkTo={primaryButtonLinkTo}
                     cy="modal-btn-primary"
@@ -106,7 +106,7 @@ class ModalButton extends React.Component {
 
                 {secondaryButtonContent && (
                   <Button
-                    type="secondary"
+                    variant="secondary"
                     onClick={this.secondaryButtonHandleClick}
                     linkTo={secondaryButtonLinkTo}
                     cy="modal-btn-secondary"

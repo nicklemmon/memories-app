@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom'
 import './Button.css'
 
 export default function Button(props) {
-  const { type, className, linkTo, fullWidth, onClick, cy, children } = props
-  const calculatedClassNames = classNames(`Button Button--${type}`, className)
+  const { variant, className, linkTo, fullWidth, onClick, cy, children } = props
+  const calculatedClassNames = classNames(`Button Button--${variant}`, className)
   const styles = { width: fullWidth ? '100%' : '' }
 
   return (
