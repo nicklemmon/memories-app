@@ -20,8 +20,9 @@
 
 .Loading-spinnerWrapper,
 .Loading-spinner {
-  width: 4rem;
-  height: 4rem;
+  width: 85px;
+  height: 85px;
+  display: flex;
   border-radius: 50%;
 }
 
@@ -31,11 +32,12 @@
 }
 
 .Loading-spinner {
-  border-top: 5px solid var(--purple);
-  border-right: 5px solid var(--purple);
-  border-bottom: 5px solid var(--purple);
-  border-left: 5px solid var(--white);
+  border-top: 0.25rem solid var(--purple);
+  border-right: 0.25rem solid var(--purple);
+  border-bottom: 0.25rem solid var(--purple);
+  border-left: 0.25rem solid var(--white);
   overflow: hidden;
+  transform: rotate(45deg);
   animation: spinBabySpin 0.85s linear infinite;
 }
 
