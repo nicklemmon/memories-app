@@ -1,4 +1,4 @@
-name: Cypress with server
+name: Cypress with server 1
 on: [push]
 jobs:
   cypress-run:
