@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import Parse from 'parse'
+import { useMachine } from '@xstate/react'
+import { memoriesMachine } from '../state-machines'
 import MaxWidth from './MaxWidth'
 import MemoryCard from './MemoryCard'
 import Alert from './Alert'
@@ -9,73 +11,37 @@ import { useMemories, useUser } from '../context'
 import './MemoryGrid.css'
 
 export default function MemoryGrid() {
-  const [state, dispatch] = useMemories()
+  const [current, send] = useMachine(memoriesMachine)
   const [userState] = useUser()
-  const [hasDeleteSuccessMessage, setHasDeleteSuccessMessage] = useState(false)
-  const [hasEditSuccessMessage, setHasEditSuccessMessage] = useState(false)
-  const [hasEditFailedMessage, setHasEditFailedMessage] = useState(false)
-  const { isLoading, hasErrorMessage, payload: memories } = state
+  const { context, value: currentState } = current
+  const { memories, toast } = context
   const { permissions = {} } = userState
   const { write: canWrite } = permissions
 
-  // eslint-disable-next-line
-  useEffect(() => getMemories(), [])
-
-  function getMemories() {
-    const Memory = Parse.Object.extend('memory')
-    const query = new Parse.Query(Memory)
-
-    query.limit(1000)
-
-    dispatch({ type: 'LOADING' })
-
-    query
-      .find()
-      .then(res => {
-        dispatch({
-          type: 'SUCCESS',
-          payload: JSON.parse(JSON.stringify(res)),
-        })
-      })
-      .catch(err => dispatch({ type: 'ERROR', payload: err }))
-  }
-
-  function deleteMemory(memoryID) {
-    const Memory = Parse.Object.extend('memory')
-    const query = new Parse.Query(Memory)
-
-    query.get(memoryID).then(obj => {
-      obj
-        .destroy()
-        .then(() => {
-          return getMemories()
-        })
-        .then(() => setHasDeleteSuccessMessage(true))
-    })
-  }
+  useEffect(() => {
+    send('GET_MEMORIES')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function handleSuccessEdit() {
-    setHasEditSuccessMessage(true)
-    getMemories()
+    send('EDIT_MEMORY_SUCCEEDED')
   }
 
   function handleFailedEdit() {
-    setHasEditFailedMessage(true)
+    send('EDIT_MEMORY_FAILED')
   }
 
-  if (isLoading) return <PageLoader />
+  console.log('current', current)
+  console.log('currentState', currentState)
+  console.log('context', context)
+
+  if (currentState === 'loading') return <PageLoader />
 
   return (
     <>
-      {hasEditSuccessMessage && <Toast variant="success">Memory successfully edited</Toast>}
+      {toast && <Toast variant={toast.variant}>{toast.content}</Toast>}
 
-      {hasDeleteSuccessMessage && <Toast variant="success">Memory successfully deleted</Toast>}
-
-      {hasEditFailedMessage && <Toast type="error">Memory failed to be edited</Toast>}
-
-      {hasErrorMessage && <Toast variant="error">Sorry! Something went wrong</Toast>}
-
-      {memories && memories.length === 0 && (
+      {currentState === 'idle' && memories.length === 0 && (
         <MaxWidth size="md">
           <Alert variant="attention">
             <p>Sorry! No memories available. Please try again later.</p>
@@ -83,37 +49,39 @@ export default function MemoryGrid() {
         </MaxWidth>
       )}
 
-      <div className="MemoryGrid">
-        {memories &&
-          memories
-            .sort(function(a, b) {
-              return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
-            })
-            .map(memory => {
-              const date = memory.recordedDate
-                ? new Date(memory.recordedDate.iso).toLocaleDateString()
-                : null
+      {currentState === 'idle' && (
+        <div className="MemoryGrid">
+          {memories &&
+            memories
+              .sort(function(a, b) {
+                return new Date(b.recordedDate.iso) - new Date(a.recordedDate.iso)
+              })
+              .map(memory => {
+                const date = memory.recordedDate
+                  ? new Date(memory.recordedDate.iso).toLocaleDateString()
+                  : null
 
-              return (
-                <div className="MemoryGrid-cardWrapper" key={memory.objectId}>
-                  <MemoryCard
-                    rawId={memory.objectId}
-                    id={`memory-card-${memory.objectId}`}
-                    className="MemoryGrid-card"
-                    title={memory.title}
-                    summary={memory.summary}
-                    date={date}
-                    tags={memory.tags}
-                    canWrite={canWrite}
-                    handleDelete={() => deleteMemory(memory.objectId)}
-                    editSuccessCallback={handleSuccessEdit}
-                    editFailureCallback={handleFailedEdit}
-                    editModalOpen={false}
-                  />
-                </div>
-              )
-            })}
-      </div>
+                return (
+                  <div className="MemoryGrid-cardWrapper" key={memory.objectId}>
+                    <MemoryCard
+                      rawId={memory.objectId}
+                      id={`memory-card-${memory.objectId}`}
+                      className="MemoryGrid-card"
+                      title={memory.title}
+                      summary={memory.summary}
+                      date={date}
+                      tags={memory.tags}
+                      canWrite={canWrite}
+                      handleDelete={() => send({ type: 'DELETE_MEMORY', data: memory.objectId })}
+                      editSuccessCallback={handleSuccessEdit}
+                      editFailureCallback={handleFailedEdit}
+                      editModalOpen={false}
+                    />
+                  </div>
+                )
+              })}
+        </div>
+      )}
     </>
   )
 }
