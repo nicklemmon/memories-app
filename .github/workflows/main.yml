@@ -1,12 +1,17 @@
 name: Cypress with server 1
-on: [push]
+on: [push, pull_request]
 jobs:
   cypress-run:
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Cypress run
+      - name: Unit tests
+        shell: bash
+        run: |
+          npm install
+          npm run test
+      - name: Integration testing
         uses: cypress-io/github-action@v1
         env:
           CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
