@@ -1,4 +1,4 @@
-name: Cypress with server 1
+name: Main
 on: [push, pull_request]
 jobs:
   cypress-run:
@@ -26,5 +26,6 @@ jobs:
           start: npm start
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
+        with:
           name: cypress-videos
           path: /home/runner/work/memories-app/memories-app/cypress/videos
