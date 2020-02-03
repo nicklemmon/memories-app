@@ -6,11 +6,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Unit tests
-        shell: bash
-        run: |
-          npm install
-          npm run test
+      # - name: Unit tests
+      #   shell: bash
+      #   run: |
+      #     npm install
+      #     npm run test
       - name: Integration testing
         uses: cypress-io/github-action@v1
         env:
