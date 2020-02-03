@@ -24,3 +24,7 @@ jobs:
           REACT_APP_SESSION_TOKEN: ${{ secrets.REACT_APP_SESSION_TOKEN }}
         with:
           start: npm start
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+          name: cypress-videos
+          path: /home/runner/work/memories-app/memories-app/cypress/videos
