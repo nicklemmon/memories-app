@@ -6,10 +6,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
       - name: Integration testing
         uses: cypress-io/github-action@v1
         env:
