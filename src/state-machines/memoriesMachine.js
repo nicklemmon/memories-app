@@ -13,11 +13,7 @@ const memoriesMachine = Machine({
     idle: {
       on: {
         GET_MEMORIES: 'loading',
-        DELETE_MEMORY: {
-          target: 'loading',
-          actions: {},
-        },
-        DELETE_MEMORY_SUCCEEDED: {},
+        DELETE_MEMORY: 'deleting',
         EDIT_MEMORY_SUCCEEDED: {
           target: 'loading',
           actions: assign({
@@ -33,13 +29,35 @@ const memoriesMachine = Machine({
         },
       },
     },
+    deleting: {
+      invoke: {
+        id: 'deleteMemory',
+        src: (ctx, event) => {
+          return deleteMemory(event.data)
+        },
+        onDone: {
+          target: 'loading',
+          actions: assign({ toast: { variant: 'success', content: 'Memory deleted.' } }),
+        },
+        onError: {
+          target: 'loading',
+          actions: assign({ toast: { variant: 'error', content: 'Memory failed to delete.' } }),
+        },
+      },
+    },
     loading: {
       invoke: {
         id: 'getMemories',
-        src: () => getMemories(),
+        src: () => {
+          return getMemories()
+        },
         onDone: {
           target: 'idle',
-          actions: assign({ memories: (ctx, event) => JSON.parse(JSON.stringify(event.data)) }),
+          actions: assign({
+            memories: (ctx, event) => {
+              return JSON.parse(JSON.stringify(event.data))
+            },
+          }),
         },
         onError: {
           target: 'error',
@@ -67,7 +85,7 @@ function deleteMemory(memoryID) {
   const query = new Parse.Query(Memory)
 
   return query.get(memoryID).then(obj => {
-    obj.destroy()
+    return obj.destroy()
   })
 }
 

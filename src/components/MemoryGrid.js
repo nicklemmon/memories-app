@@ -31,10 +31,6 @@ export default function MemoryGrid() {
     send('EDIT_MEMORY_FAILED')
   }
 
-  console.log('current', current)
-  console.log('currentState', currentState)
-  console.log('context', context)
-
   if (currentState === 'loading') return <PageLoader />
 
   return (
