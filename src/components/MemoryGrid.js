@@ -37,6 +37,14 @@ export default function MemoryGrid() {
     <>
       {toast && <Toast variant={toast.variant}>{toast.content}</Toast>}
 
+      {currentState === 'error' && (
+        <MaxWidth size="md">
+          <Alert variant="attention">
+            <p>Unfortunately, something went wrong with our app. Please try again.</p>
+          </Alert>
+        </MaxWidth>
+      )}
+
       {currentState === 'idle' && memories.length === 0 && (
         <MaxWidth size="md">
           <Alert variant="attention">
