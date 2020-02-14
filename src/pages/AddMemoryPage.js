@@ -8,7 +8,7 @@ import PageLayout from '../layouts/PageLayout'
 export default function AddMemoryPage() {
   return (
     <PageLayout>
-      <Helmet title="Add a Memory" />
+      <Helmet title="Add a Memory" defer={false} />
 
       <PageHeading>Add a Memory</PageHeading>
 

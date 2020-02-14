@@ -17,7 +17,7 @@ export default function App() {
   return (
     <UserProvider>
       <ToastProvider>
-        <Helmet defaultTitle="Memories App" titleTemplate="%s | Memories App" />
+        <Helmet defaultTitle="Memories App" titleTemplate="%s | Memories App" defer={false} />
 
         <Router>
           <DefaultLayout />

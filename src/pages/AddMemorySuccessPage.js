@@ -16,7 +16,7 @@ function AddMemorySuccessPage(props) {
 
   return (
     <PageLayout>
-      <Helmet title="Memory Added" />
+      <Helmet title="Memory Added" defer={false} />
 
       <PageHeading>Memory Added</PageHeading>
 

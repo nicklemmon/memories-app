@@ -9,7 +9,7 @@ import { MemoriesProvider } from '../context/MemoriesContext'
 export default function MemoriesPage() {
   return (
     <PageLayout>
-      <Helmet title="Memories" />
+      <Helmet title="Memories" defer={false} />
 
       <PageHeading>Memories</PageHeading>
 

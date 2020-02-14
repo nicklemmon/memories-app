@@ -8,7 +8,7 @@ import PageLayout from '../layouts/PageLayout'
 export default function SignupPage() {
   return (
     <PageLayout>
-      <Helmet title="Sign Up" />
+      <Helmet title="Sign Up" defer={false} />
 
       <PageHeading>Sign Up</PageHeading>
 

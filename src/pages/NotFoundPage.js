@@ -8,7 +8,7 @@ import PageLayout from '../layouts/PageLayout'
 export default function NotFoundPage() {
   return (
     <PageLayout>
-      <Helmet title="404 Page Not Found" />
+      <Helmet title="404 Page Not Found" defer={false} />
 
       <PageHeading>{'404 :('}</PageHeading>
 

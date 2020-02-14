@@ -8,7 +8,7 @@ import PageLayout from '../layouts/PageLayout'
 export default function LoginPage() {
   return (
     <PageLayout>
-      <Helmet title="Log In" />
+      <Helmet title="Log In" defer={false} />
 
       <PageHeading cy="heading-log-in">Log In</PageHeading>
 
