@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nicklemmon/memories-app.svg?branch=master)](https://travis-ci.org/nicklemmon/memories-app)
+![Build and test](https://github.com/nicklemmon/memories-app/workflows/Build%20and%20test/badge.svg)
 
 # Memories App
 
