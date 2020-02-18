@@ -24,7 +24,7 @@ jobs:
           REACT_APP_MASTER_KEY: ${{ secrets.REACT_APP_MASTER_KEY }}
           REACT_APP_SESSION_TOKEN: ${{ secrets.REACT_APP_SESSION_TOKEN }}
         with:
-          # record: true
+          record: false
           # parallel: true
           group: 'Integration tests'
           start: npm start
