@@ -17,6 +17,8 @@ function IndexPage(props) {
   return (
     <PageLayout>
       <Hero hasSuccessMessage={successMsg} userName={userName} />
+
+      <p>Boo</p>
     </PageLayout>
   )
 }
