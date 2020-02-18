@@ -12,12 +12,14 @@ jobs:
           CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
           CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_APPLICATION_ID: ${{ secrets.REACT_APP_APPLICATION_ID }}
           REACT_APP_MASTER_KEY: ${{ secrets.REACT_APP_MASTER_KEY }}
           REACT_APP_SESSION_TOKEN: ${{ secrets.REACT_APP_SESSION_TOKEN }}
         with:
+          record: true
           start: npm start
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
