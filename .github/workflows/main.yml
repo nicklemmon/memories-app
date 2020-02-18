@@ -26,6 +26,7 @@ jobs:
         with:
           record: true
           parallel: true
+          group: 'Integration tests'
           start: npm start
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
