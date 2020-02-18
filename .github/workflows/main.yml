@@ -30,6 +30,7 @@ jobs:
           start: npm start
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
+        if: failed()
         with:
           name: cypress-videos
           path: /home/runner/work/memories-app/memories-app/cypress/videos
