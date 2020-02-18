@@ -18,7 +18,7 @@ describe('The add memory page', () => {
 
   it('renders with a relevant page title', () => {
     cy.title().should('include', 'Add a Memory')
-    cy.findByText('Add a Memory').should('be.visible')
+    cy.findByText('Add a Memory!').should('be.visible')
   })
 
   it('renders with a title, date, and summary fields', () => {
