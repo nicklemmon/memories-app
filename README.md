@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/nicklemmon/memories-app.svg?branch=master)](https://travis-ci.org/nicklemmon/memories-app)
 
-# Memories App
+# Memories App!
 
 1. Create a `.env` file with relevant auth values,
 
