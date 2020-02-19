@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v1
         # if: failure()
         with:
-          name: cypress-videos
+          name: cypress-videos-${{ matrix.ci_node_index }}
           path: /home/runner/work/memories-app/memories-app/cypress/videos
