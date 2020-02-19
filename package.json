@@ -30,9 +30,10 @@
     "test:cy:ci": "npm start & wait-on http://localhost:3000 && npm run test:cy:run"
   },
   "devDependencies": {
-    "@testing-library/react": "^9.4.0",
+    "@knapsack-pro/cypress": "^1.7.0",
     "@testing-library/cypress": "^5.0.2",
     "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
     "cypress": "^3.8.2",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",

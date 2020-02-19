@@ -1,36 +1,53 @@
 name: Build and test
+
 on: [push]
+
 jobs:
   test:
     runs-on: ubuntu-16.04
-    # strategy:
-    #   matrix:
-    #     # run 3 copies of the current job in parallel
-    #     containers: [1, 2, 3]
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [10.x]
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [2]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0, 1]
     timeout-minutes: 20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Integration testing
-        uses: cypress-io/github-action@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Start app
         env:
-          CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
-          CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
-          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_APPLICATION_ID: ${{ secrets.REACT_APP_APPLICATION_ID }}
           REACT_APP_MASTER_KEY: ${{ secrets.REACT_APP_MASTER_KEY }}
           REACT_APP_SESSION_TOKEN: ${{ secrets.REACT_APP_SESSION_TOKEN }}
-        with:
-          # record: false
-          # parallel: true
-          # group: 'Integration tests'
-          start: npm start
+        run: npm start &
+      - name: Integration testing
+        env:
+          CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
+          CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+          KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS:
+            ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
+          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+        run: |
+          $(npm bin)/knapsack-pro-cypress
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
-        if: failure()
+        # if: failure()
         with:
           name: cypress-videos
           path: /home/runner/work/memories-app/memories-app/cypress/videos
