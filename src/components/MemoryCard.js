@@ -1,104 +1,83 @@
 import React from 'react'
 import classNames from 'classnames'
-import { FaTrashAlt } from 'react-icons/fa'
+import { useService } from '@xstate/react'
+import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import { format } from 'date-fns'
 import { Card, CardHeader, CardHeading, CardContent, CardFooter } from './Card'
+import ButtonWrapper from './ButtonWrapper'
+import Button from './Button'
 import Tag from './Tag'
-import ModalLauncher from './ModalLauncher'
-import ModalLauncherEditMemory from './ModalLauncherEditMemory'
+import Loading from './Loading'
+import Modal from './Modal'
+import { Toast } from './Toast'
 import ScreenReaderOnly from './ScreenReaderOnly'
-
+// import EditMemoryModal from './EditMemoryModal'
 import './MemoryCard.css'
 
-class MemoryCard extends React.Component {
-  constructor(props) {
-    super(props)
+export default function MemoryCard(props) {
+  const { id, tags, title, date, summary, canWrite, className, memoryRef } = props
+  const [state, send] = useService(memoryRef)
+  const { value: currentState } = state
 
-    this.state = {
-      title: null,
-      date: null,
-      summary: null,
-    }
+  console.log('currentState', currentState)
 
-    this.handleFormGroupChange = this.handleFormGroupChange.bind(this)
-  }
+  return (
+    <>
+      {currentState === 'deleteSuccess' && <Toast variant="success">Memory deleted</Toast>}
 
-  handleFormGroupChange(e) {
-    const target = e.target
-    const value = target.value
-    const name = target.name
-
-    this.setState({
-      [name]: value,
-    })
-  }
-
-  render() {
-    const {
-      rawId,
-      id,
-      title,
-      tags,
-      summary,
-      canWrite,
-      editSuccessCallback,
-      editFailureCallback,
-      editModalOpen,
-      handleDelete,
-      className,
-      date,
-    } = this.props
-
-    let formattedDate
-
-    if (date) {
-      formattedDate = format(date, 'MM/DD/YYYY')
-    }
-
-    return (
       <Card className={classNames('MemoryCard', className)} headingLevel="3">
-        <CardHeader metaContent={formattedDate}>
+        <CardHeader metaContent={date ? format(date, 'MM/DD/YYYY') : undefined}>
           <CardHeading>{title}</CardHeading>
         </CardHeader>
+
         <CardContent>
           <p>{summary}</p>
 
           {canWrite && (
             <div className="MemoryCard-actions">
-              <ModalLauncherEditMemory
-                rawId={rawId}
-                id={id}
-                title={title}
-                date={formattedDate}
-                summary={summary}
-                editSuccessCallback={editSuccessCallback}
-                editFailureCallback={editFailureCallback}
-                modalIsOpen={editModalOpen}
-              />
+              <button className="MemoryCard-action" onClick={() => send('OPEN_EDIT_MODAL')}>
+                <FaPencilAlt className="MemoryCard-actionIcon" aria-hidden="true" />
 
-              <ModalLauncher
-                className="MemoryCard-action"
-                content={
-                  <>
-                    <FaTrashAlt className="MemoryCard-actionIcon" aria-hidden="true" />
+                <ScreenReaderOnly>Edit</ScreenReaderOnly>
+              </button>
 
-                    <ScreenReaderOnly>Delete</ScreenReaderOnly>
-                  </>
-                }
-                id={`delete-memory-${id}`}
-                heading={`Delete "${title}"?`}
-                hasCTAs={true}
-                primaryButtonContent="Delete"
-                primaryButtonOnClick={handleDelete}
-                primaryButtonCloses={true}
-                secondaryButtonContent="Cancel"
-                secondaryButtonCloses={true}
-              >
-                <p>Are you sure you want to delete this memory?</p>
-              </ModalLauncher>
+              {/* <EditMemoryModal
+                id={rawId}
+                onSubmit={handleEditSubmit}
+                onClose={() => send('CLOSE_MODAL')}
+              /> */}
+
+              <button className="MemoryCard-action" onClick={() => send('OPEN_DELETE_MODAL')}>
+                <FaTrashAlt className="MemoryCard-actionIcon" aria-hidden="true" />
+
+                <ScreenReaderOnly>Delete</ScreenReaderOnly>
+              </button>
+
+              {currentState === 'deleting' && (
+                <Modal id={`delete-memory-${id}`} heading={`Delete ${title}?`}>
+                  <Loading />
+                </Modal>
+              )}
+
+              {currentState === 'deleteModalOpen' && (
+                <Modal id={`delete-memory-${id}`} heading={`Delete ${title}?`}>
+                  <p>Are you sure you want to delete this memory? This cannot be undone.</p>
+
+                  <ButtonWrapper>
+                    <Button onClick={() => send('DELETE_MEMORY')} variant="primary">
+                      Delete
+                    </Button>
+
+                    <Button onClick={() => send('CLOSE_MODAL')} variant="secondary">
+                      Cancel
+                    </Button>
+                  </ButtonWrapper>
+                </Modal>
+              )}
             </div>
           )}
         </CardContent>
+
         <CardFooter>
           {tags && tags.length > 0 && (
             <>
@@ -109,8 +88,6 @@ class MemoryCard extends React.Component {
           )}
         </CardFooter>
       </Card>
-    )
-  }
+    </>
+  )
 }
-
-export default MemoryCard

@@ -15,8 +15,9 @@
   height: 35px;
   padding: 10px;
   border: 0;
+  cursor: pointer;
   transition: transform var(--anim-speed) var(--anim-easing),
-              box-shadow var(--anim-speed) var(--anim-easing);
+    box-shadow var(--anim-speed) var(--anim-easing);
 }
 
 .MemoryCard-action:hover,

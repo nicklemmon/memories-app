@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useMachine } from '@xstate/react'
 import { memoriesMachine } from '../state-machines'
 import MaxWidth from './MaxWidth'
@@ -7,12 +6,12 @@ import MemoryCard from './MemoryCard'
 import Alert from './Alert'
 import PageLoader from './PageLoader'
 import { Toast } from './Toast'
-import { useMemories, useUser } from '../context'
+import { useUser } from '../context'
 import './MemoryGrid.css'
 
 export default function MemoryGrid() {
-  const [current, send] = useMachine(memoriesMachine)
   const [userState] = useUser()
+  const [current, send, service] = useMachine(memoriesMachine)
   const { context, value: currentState } = current
   const { memories, toast } = context
   const { permissions = {} } = userState
@@ -23,15 +22,20 @@ export default function MemoryGrid() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleSuccessEdit() {
-    send('EDIT_MEMORY_SUCCEEDED')
+  function handleEditSubmit(e, { id, content }) {
+    e.preventDefault()
+
+    send({ type: 'EDIT_MEMORY', data: { id, content } })
   }
 
-  function handleFailedEdit() {
-    send('EDIT_MEMORY_FAILED')
+  function handleDelete(id) {
+    send({ type: 'DELETE_MEMORY', data: id })
   }
 
-  if (currentState === 'loading') return <PageLoader />
+  console.log('MemoryGrid currentState', currentState)
+
+  if (currentState === 'loading' || currentState === 'deleting' || currentState === 'editing')
+    return <PageLoader />
 
   return (
     <>
@@ -76,10 +80,18 @@ export default function MemoryGrid() {
                       date={date}
                       tags={memory.tags}
                       canWrite={canWrite}
-                      handleDelete={() => send({ type: 'DELETE_MEMORY', data: memory.objectId })}
-                      editSuccessCallback={handleSuccessEdit}
-                      editFailureCallback={handleFailedEdit}
-                      editModalOpen={false}
+                      onEditSubmit={handleEditSubmit}
+                      onOpenDeleteModal={() =>
+                        send({ type: 'OPEN_DELETE_MODAL', data: { id: memory.objectId } })
+                      }
+                      onOpenEditModal={() =>
+                        send({ type: 'OPEN_EDIT_MODAL', data: { id: memory.objectId } })
+                      }
+                      onCloseModal={() => send('CLOSE_MODAL')}
+                      onDelete={handleDelete}
+                      service={service}
+                      currentState={current}
+                      memoryRef={memory.ref}
                     />
                   </div>
                 )

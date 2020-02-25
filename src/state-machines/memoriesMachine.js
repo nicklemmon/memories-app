@@ -1,31 +1,79 @@
-/* eslint-disable */
-import { Machine, assign } from 'xstate'
+import { Machine, assign, spawn } from 'xstate'
 import Parse from 'parse'
+import memoryMachine from './memoryMachine'
 
 const memoriesMachine = Machine({
   id: 'memories',
   initial: 'idle',
   context: {
     memories: [],
+    memoryToEdit: {},
     toast: undefined,
   },
   states: {
     idle: {
       on: {
         GET_MEMORIES: 'loading',
+        MEMORY_EDITED: 'loading',
         DELETE_MEMORY: 'deleting',
-        EDIT_MEMORY_SUCCEEDED: {
+        OPEN_DELETE_MODAL: 'deleteModalOpen',
+        OPEN_EDIT_MODAL: 'editModalOpen',
+        MEMORY_DELETED: {
           target: 'loading',
-          actions: assign({
-            toast: {
-              variant: 'success',
-              content: 'Memory successfully updated.',
-            },
-          }),
+          actions: assign({ toast: { variant: 'success', content: 'Memory deleted.' } }),
         },
-        EDIT_MEMORY_FAILED: {
-          target: 'idle',
-          actions: assign({ toast: { variant: 'error', content: 'Memory failed to be updated.' } }),
+      },
+    },
+    editModalOpen: {
+      initial: 'loading',
+      on: {
+        CLOSE_MODAL: 'idle',
+        EDIT_MEMORY: 'editing',
+      },
+      states: {
+        idle: {},
+        error: {},
+        loading: {
+          invoke: {
+            id: 'getMemory',
+            src: (ctx, event) => {
+              return getMemory(event.data.id)
+            },
+            onDone: {
+              target: 'idle',
+              actions: assign({
+                memoryToEdit: (ctx, event) => JSON.parse(JSON.stringify(event.data)),
+              }),
+            },
+            onError: {
+              target: 'error',
+            },
+          },
+        },
+      },
+    },
+    deleteModalOpen: {
+      on: {
+        CLOSE_MODAL: 'idle',
+        DELETE_MEMORY: 'deleting',
+      },
+    },
+    editing: {
+      invoke: {
+        id: 'editMemory',
+        src: (ctx, event) => {
+          const { data } = event
+          const { id, content } = data
+
+          return editMemory(id, content)
+        },
+        onDone: {
+          target: 'loading',
+          actions: assign({ toast: { variant: 'success', content: 'Memory edited.' } }),
+        },
+        onError: {
+          target: 'loading',
+          actions: assign({ toast: { variant: 'error', content: 'Editing memory failed.' } }),
         },
       },
     },
@@ -55,7 +103,12 @@ const memoriesMachine = Machine({
           target: 'idle',
           actions: assign({
             memories: (ctx, event) => {
-              return JSON.parse(JSON.stringify(event.data))
+              const memories = JSON.parse(JSON.stringify(event.data))
+
+              return memories.map(memory => ({
+                ...memory,
+                ref: spawn(memoryMachine.withContext(memory)),
+              }))
             },
           }),
         },
@@ -80,12 +133,32 @@ function getMemories() {
   return query.find()
 }
 
+function getMemory(memoryID) {
+  const Memory = Parse.Object.extend('memory')
+  const query = new Parse.Query(Memory)
+
+  return query.get(memoryID)
+}
+
 function deleteMemory(memoryID) {
   const Memory = Parse.Object.extend('memory')
   const query = new Parse.Query(Memory)
 
   return query.get(memoryID).then(obj => {
     return obj.destroy()
+  })
+}
+
+function editMemory(memoryID, content) {
+  const { title, summary } = content
+  const Memory = Parse.Object.extend('memory')
+  const query = new Parse.Query(Memory)
+
+  return query.get(memoryID).then(object => {
+    object.set('title', title)
+    object.set('summary', summary)
+
+    return object.save()
   })
 }
 
