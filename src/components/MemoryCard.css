@@ -9,6 +9,8 @@
 }
 
 .MemoryCard-action {
+  display: inline-flex;
+  align-items: center;
   border-radius: 50%;
   background: transparent; /* overrides default button background color */
   width: 35px;
@@ -16,7 +18,7 @@
   padding: 10px;
   border: 0;
   transition: transform var(--anim-speed) var(--anim-easing),
-              box-shadow var(--anim-speed) var(--anim-easing);
+    box-shadow var(--anim-speed) var(--anim-easing);
 }
 
 .MemoryCard-action:hover,
