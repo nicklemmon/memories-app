@@ -5,7 +5,7 @@ import PageContent from '../components/PageContent'
 import PageHeading from '../components/PageHeading'
 import MaxWidth from '../components/MaxWidth'
 import { Toast } from '../components/Toast'
-import { Card, CardAlert, CardContent } from '../components/Card'
+import { Card, CardContent } from '../components/Card'
 import MemoryCard from '../components/MemoryCard'
 import ButtonWrapper from '../components/ButtonWrapper'
 import Button from '../components/Button'
@@ -24,10 +24,6 @@ function AddMemorySuccessPage(props) {
         <MaxWidth size="xs">
           <Card isBrokenOut={true}>
             <CardContent>
-              <CardAlert variant="success" cy="alert-success">
-                <p>Memory successfully added</p>
-              </CardAlert>
-
               <Toast variant="success">Memory successfully added</Toast>
 
               <MemoryCard
