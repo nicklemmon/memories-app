@@ -1,10 +1,22 @@
 import Parse from 'parse'
 
-export function signUp() {}
+export function signUp({ username, email, password }) {
+  const user = new Parse.User()
 
-export function logIn() {}
+  user.set('username', username)
+  user.set('email', email)
+  user.set('password', password)
 
-export function logOut() {}
+  return user.signUp()
+}
+
+export function logIn({ username, password }) {
+  return Parse.User.logIn(username, password)
+}
+
+export function logOut() {
+  return Parse.User.logOut()
+}
 
 export function getUser() {}
 

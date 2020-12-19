@@ -76,16 +76,11 @@ class FormAddMemory extends React.Component {
     NewMemory.set('tags', filteredTags)
     NewMemory.set('recordedDate', new Date(date))
 
-    // AppStore.setLoading()
-
     NewMemory.save()
       .then(() => {
         this.setState({ redirect: true })
       })
       .catch(() => this.setState({ errorMsg: true }))
-      .then(() => {
-        // AppStore.unsetLoading()
-      })
   }
 
   handleAddTagClick(e) {
