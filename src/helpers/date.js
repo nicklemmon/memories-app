@@ -2,6 +2,7 @@
  * Converts date to value that can be consumed by input[type="date"]
  *
  * @param {Object} dateObj
+ *
  */
 export function dateToValue(dateObj) {
   return dateObj.iso.substr(0, 10)
@@ -11,18 +12,22 @@ export function dateToValue(dateObj) {
  * Converts date object to printable/renderable string
  *
  * @param {Object} dateObj
+ *
  */
-
 export function dateToString(dateObj) {
-  return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York' }).format(
-    new Date(dateObj.iso),
-  )
+  return new Date(dateObj.iso).toLocaleDateString('en-us', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'utc',
+  })
 }
 
 /**
  *  Converts string date value to date object used by API
  *
  * @param {Object} dateObj
+ *
  */
 export function valueToDate(dateValue) {
   return new Date(dateValue.iso)
