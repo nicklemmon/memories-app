@@ -42,6 +42,7 @@ class FormGroup extends React.Component {
               type={type}
               placeholder={placeholder}
               onChange={this.props.handleChange || this.handleChange}
+              defaultValue={this.props.defaultValue}
               value={this.props.value || this.state.value}
             ></textarea>
           ) : (
@@ -52,6 +53,7 @@ class FormGroup extends React.Component {
               type={type}
               placeholder={placeholder}
               onChange={this.props.handleChange || this.handleChange}
+              defaultValue={this.props.defaultValue}
               value={this.props.value || this.state.value}
             />
           )}

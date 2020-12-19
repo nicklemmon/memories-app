@@ -5,14 +5,12 @@ import OutsideClickHandler from 'react-outside-click-handler'
 import { NavLink } from 'react-router-dom'
 import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
 import { Toast } from '../Toast'
-import { useUser, useToast } from '../../context'
+import { useUser } from '../../context'
 import './HeaderNav.css'
 
 export default function HeaderNav({ className }) {
   const [isOpen, setIsOpen] = useState(false)
   const [userState, userDispatch] = useUser()
-  // eslint-disable-next-line
-  const [toastState, toastDispatch] = useToast()
   const { isLoggedIn, justLoggedOut, hasError, permissions = {} } = userState
   const { read: canRead, write: canWrite } = permissions
 
