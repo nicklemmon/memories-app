@@ -1,7 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from 'react-query'
-import FocusLock from 'react-focus-lock'
-import { FaPencilAlt, FaTimes, FaTrashAlt } from 'react-icons/fa'
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
 import { getMemories, deleteMemory, updateMemory } from 'src/helpers/api'
 import { formatMemories } from 'src/helpers/memories'
 import { dateToValue, valueToDate } from 'src/helpers/date'
@@ -9,11 +8,12 @@ import MaxWidth from './MaxWidth'
 import { Card, CardHeader, CardHeading, CardContent, CardFooter } from './Card'
 import Alert from './Alert'
 import PageLoader from './PageLoader'
-import ScreenReaderOnly from './ScreenReaderOnly'
 import FormGroup from './FormGroup'
 import Button from './Button'
 import ButtonWrapper from './ButtonWrapper'
 import Tag from './Tag'
+import { Modal, ModalHeading } from './Modal'
+import ScreenReaderOnly from './ScreenReaderOnly'
 import { useUser, useToast } from 'src/context'
 import './MemoryGrid.css'
 import './Modal/Modal.css'
@@ -279,58 +279,4 @@ function DeleteModal({ memory, onClose }) {
       </ButtonWrapper>
     </Modal>
   )
-}
-
-// TODO: Replace the global Modal with this one eventually
-function Modal({ children, hasCloseButton, onClose }) {
-  function handleKeyup(e) {
-    if (e.keyCode === 27) onClose()
-  }
-
-  /*
-    On mount:
-    1. Add escape key listener
-    2. Set overflow hidden on the html element
-  */
-  React.useEffect(() => {
-    window.addEventListener('keyup', handleKeyup, false)
-    document.querySelector('html').setAttribute('style', 'overflow-y: hidden; height: 100vh;')
-    // eslint-disable-next-line
-  }, [])
-
-  /*
-    On unmount:
-    1. Remove escape keyup listener
-    2. Set overflow to initial on the html element
-  */
-  React.useEffect(() => {
-    return () => {
-      document.querySelector('html').setAttribute('style', 'overflow: unset')
-      window.removeEventListener('keyup', handleKeyup, false)
-    }
-    // eslint-disable-next-line
-  }, [])
-
-  return (
-    <>
-      <div className="Modal" role="dialog" aria-modal="true">
-        <FocusLock className="Modal-content">
-          {children}
-
-          {hasCloseButton ? (
-            <button className="Modal-close" onClick={onClose}>
-              <FaTimes aria-hidden="true" />
-              <ScreenReaderOnly>Close Dialog</ScreenReaderOnly>
-            </button>
-          ) : null}
-        </FocusLock>
-      </div>
-
-      <div className="Modal-overlay" onClick={onClose} />
-    </>
-  )
-}
-
-function ModalHeading({ children }) {
-  return <h3 className="Modal-heading">{children}</h3>
 }
