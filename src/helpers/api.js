@@ -31,7 +31,17 @@ export function getMemories() {
     .catch(err => err)
 }
 
-export function getMemory() {}
+export function getMemory(id) {
+  const Memory = Parse.Object.extend('memory')
+  const query = new Parse.Query(Memory)
+
+  query.equalTo('objectId', id)
+
+  return query
+    .first()
+    .then(res => parseResponse(res))
+    .catch(err => err)
+}
 
 export function updateMemory(memory) {
   const { title, summary, recordedDate, tags } = memory
@@ -51,7 +61,18 @@ export function updateMemory(memory) {
   })
 }
 
-export function createMemory() {}
+export function createMemory(memory) {
+  const { title, summary, tags, recordedDate } = memory
+  const Memory = Parse.Object.extend('memory')
+  const object = new Memory()
+
+  object.set('title', title)
+  object.set('summary', summary)
+  object.set('tags', tags)
+  object.set('recordedDate', recordedDate)
+
+  return object.save()
+}
 
 export function deleteMemory(memoryId) {
   const Memory = Parse.Object.extend('memory')

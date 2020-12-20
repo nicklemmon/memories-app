@@ -169,13 +169,12 @@ function EditModal({ memory, onClose }) {
   const [title, setTitle] = React.useState(memory.title)
   const [recordedDate, setRecordedDate] = React.useState(memory.recordedDate)
   const [summary, setSummary] = React.useState(memory.summary)
-
   const [handleUpdate, { status }] = useMutation(
     () =>
       updateMemory({
         title,
         summary,
-        recordedDate: valueToDate(recordedDate),
+        recordedDate: valueToDate(recordedDate.iso),
         objectId,
       }),
     {
@@ -200,7 +199,7 @@ function EditModal({ memory, onClose }) {
 
   return (
     <Modal hasCloseButton onClose={onClose}>
-      <ModalHeading>Edit Modal</ModalHeading>
+      <ModalHeading>Edit Memory</ModalHeading>
 
       <form onSubmit={handleSubmit}>
         <FormGroup
@@ -262,7 +261,7 @@ function DeleteModal({ memory, onClose }) {
 
   return (
     <Modal hasCloseButton onClose={onClose}>
-      <ModalHeading>Delete Modal</ModalHeading>
+      <ModalHeading>Delete Memory</ModalHeading>
 
       <p>
         Are you sure you want to delete the memory <strong>{memory.title}</strong>?

@@ -26,9 +26,9 @@ export function dateToString(dateObj) {
 /**
  *  Converts string date value to date object used by API
  *
- * @param {Object} dateObj
+ * @param {string} dateValue - date string
  *
  */
 export function valueToDate(dateValue) {
-  return new Date(dateValue.iso)
+  return new Date(dateValue)
 }

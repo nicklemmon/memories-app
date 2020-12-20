@@ -46,7 +46,7 @@ function DefaultLayout() {
               <AddMemoryPage />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/addmemorysuccess">
+            <ProtectedRoute path="/addmemorysuccess/:id">
               <AddMemorySuccessPage />
             </ProtectedRoute>
 

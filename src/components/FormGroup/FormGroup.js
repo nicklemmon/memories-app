@@ -23,7 +23,17 @@ class FormGroup extends React.Component {
   }
 
   render() {
-    const { id, label, type, placeholder, buttonContent, buttonOnClick, className, cy } = this.props
+    const {
+      id,
+      label,
+      type,
+      placeholder,
+      buttonContent,
+      buttonOnClick,
+      className,
+      cy,
+      disabled,
+    } = this.props
 
     const inputClassName = classNames(`FormGroup-input FormGroup-input--${type}`, className)
 
@@ -44,6 +54,7 @@ class FormGroup extends React.Component {
               onChange={this.props.handleChange || this.handleChange}
               defaultValue={this.props.defaultValue}
               value={this.props.value || this.state.value}
+              disabled={disabled}
             ></textarea>
           ) : (
             <input
@@ -55,6 +66,7 @@ class FormGroup extends React.Component {
               onChange={this.props.handleChange || this.handleChange}
               defaultValue={this.props.defaultValue}
               value={this.props.value || this.state.value}
+              disabled={disabled}
             />
           )}
 
