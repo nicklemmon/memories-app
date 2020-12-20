@@ -77,7 +77,6 @@ export default function AddMemoryForm() {
       }),
     {
       onSuccess: data => {
-        console.log('data', data)
         history.push(`/addmemorysuccess/${data.id}`)
         toastDispatch({ type: 'ADD_TOAST', variant: 'success', message: 'Memory added' })
       },
@@ -91,14 +90,14 @@ export default function AddMemoryForm() {
     },
   )
 
+  function handleChange(e) {
+    return dispatch({ type: 'VALUE_CHANGE', name: e.target.name, value: e.target.value })
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
 
     return handleAdd()
-  }
-
-  function handleChange(e) {
-    return dispatch({ type: 'VALUE_CHANGE', name: e.target.name, value: e.target.value })
   }
 
   return (
