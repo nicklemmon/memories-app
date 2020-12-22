@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
-import Parse from 'parse'
+import { useMutation } from 'react-query'
+import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
 import classNames from 'classnames'
 import OutsideClickHandler from 'react-outside-click-handler'
 import { NavLink } from 'react-router-dom'
-import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
-import { Toast } from '../Toast'
-import { useUser } from '../../context'
+import { logOut } from 'src/helpers/api'
+import { Toast } from 'src/components/Toast'
+import { useUser } from 'src/context'
 import './HeaderNav.css'
+import PageLoader from 'src/components/PageLoader'
 
 export default function HeaderNav({ className }) {
+  const [handleLogout, { status }] = useMutation(logOut, {
+    onSuccess: () => {},
+    onError: () => {},
+  })
   const [isOpen, setIsOpen] = useState(false)
-  const [userState, userDispatch] = useUser()
+  const [userState] = useUser()
   const { isLoggedIn, justLoggedOut, hasError, permissions = {} } = userState
   const { read: canRead, write: canWrite } = permissions
 
@@ -23,21 +29,14 @@ export default function HeaderNav({ className }) {
   }
 
   function handleLogoutClick() {
-    userDispatch({ type: 'LOADING' })
-
-    Parse.User.logOut()
-      .then(() => {
-        toggle()
-        userDispatch({ type: 'LOGGED_OUT' })
-      })
-      .catch(() => {
-        userDispatch({ type: 'ERROR' })
-      })
+    return handleLogout()
   }
 
   function toggle() {
     setIsOpen(!isOpen)
   }
+
+  if (status === 'loading') return <PageLoader />
 
   return (
     <>
