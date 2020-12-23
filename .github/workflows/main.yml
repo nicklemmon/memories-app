@@ -3,30 +3,22 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-16.04
-    # strategy:
-    #   matrix:
-    #     # run 3 copies of the current job in parallel
-    #     containers: [1, 2, 3]
     timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Integration testing
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         env:
           CYPRESS_EMAIL: ${{ secrets.CYPRESS_EMAIL }}
           CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_APPLICATION_ID: ${{ secrets.REACT_APP_APPLICATION_ID }}
           REACT_APP_MASTER_KEY: ${{ secrets.REACT_APP_MASTER_KEY }}
           REACT_APP_SESSION_TOKEN: ${{ secrets.REACT_APP_SESSION_TOKEN }}
         with:
-          # record: false
-          # parallel: true
-          # group: 'Integration tests'
           start: npm start
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
