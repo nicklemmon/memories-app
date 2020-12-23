@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Button.css'
 
-export default function Button(props) {
+export function Button(props) {
   const {
     variant,
     className,
@@ -21,7 +21,7 @@ export default function Button(props) {
   return (
     <>
       {linkTo ? (
-        <NavLink
+        <Link
           aria-disabled={disabled}
           className={calculatedClassNames}
           style={styles}
@@ -29,7 +29,7 @@ export default function Button(props) {
           data-cy={cy}
         >
           {children}
-        </NavLink>
+        </Link>
       ) : (
         <button
           disabled={disabled}

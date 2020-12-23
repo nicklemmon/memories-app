@@ -1,7 +1,7 @@
 import React from 'react'
 import './Loading.css'
 
-function Loading(props) {
+export function Loading(props) {
   const { description } = props
 
   return (
@@ -14,5 +14,3 @@ function Loading(props) {
     </div>
   )
 }
-
-export default Loading

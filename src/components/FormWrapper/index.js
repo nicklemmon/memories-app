@@ -1,3 +1,1 @@
-import FormWrapper from './FormWrapper'
-
-export default FormWrapper
+export { FormWrapper } from './FormWrapper'

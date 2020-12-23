@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import './Heading.css'
 
-export default function Heading(props) {
+export function Heading(props) {
   const { level, children, alignment, className } = props
 
   return (

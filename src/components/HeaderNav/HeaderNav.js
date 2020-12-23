@@ -5,12 +5,11 @@ import classNames from 'classnames'
 import OutsideClickHandler from 'react-outside-click-handler'
 import { NavLink } from 'react-router-dom'
 import { logOut } from 'src/helpers/api'
-import { Toast } from 'src/components/Toast'
+import { PageLoader, Toast } from 'src/components'
 import { useUser } from 'src/context'
 import './HeaderNav.css'
-import PageLoader from 'src/components/PageLoader'
 
-export default function HeaderNav({ className }) {
+export function HeaderNav({ className }) {
   const [handleLogout, { status }] = useMutation(logOut, {
     onSuccess: () => {},
     onError: () => {},

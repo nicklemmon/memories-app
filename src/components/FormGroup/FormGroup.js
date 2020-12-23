@@ -1,11 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
-
-import Button from '../Button'
-
+import { Button } from 'src/components'
 import './FormGroup.css'
 
-class FormGroup extends React.Component {
+export class FormGroup extends React.Component {
   constructor(props) {
     super(props)
 
@@ -84,5 +82,3 @@ class FormGroup extends React.Component {
     )
   }
 }
-
-export default FormGroup

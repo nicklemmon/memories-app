@@ -1,12 +1,9 @@
 import React from 'react'
-import Alert from '../Alert'
-import PageLayout from '../../layouts/PageLayout'
-import PageHeading from '../PageHeading'
-import PageContent from '../PageContent'
-import MaxWidth from '../MaxWidth'
+import { PageLayout } from 'src/layouts'
+import { Alert, MaxWidth, PageHeading, PageContent } from 'src/components'
 
 // See: https://reactjs.org/docs/error-boundaries.html
-export default class ErrorBoundary extends React.Component {
+export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
     this.state = { hasError: false }

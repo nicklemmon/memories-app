@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function PageLayout(props) {
+export function PageLayout(props) {
   return <>{props.children}</>
 }

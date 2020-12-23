@@ -4,16 +4,23 @@ import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
 import { getMemories, deleteMemory, updateMemory } from 'src/helpers/api'
 import { formatMemories } from 'src/helpers/memories'
 import { dateToValue, valueToDate } from 'src/helpers/date'
-import MaxWidth from './MaxWidth'
-import { Card, CardHeader, CardHeading, CardContent, CardFooter } from './Card'
-import Alert from './Alert'
-import PageLoader from './PageLoader'
-import FormGroup from './FormGroup'
-import Button from './Button'
-import ButtonWrapper from './ButtonWrapper'
-import Tag from './Tag'
-import { Modal, ModalHeading } from './Modal'
-import ScreenReaderOnly from './ScreenReaderOnly'
+import {
+  Card,
+  CardHeader,
+  CardHeading,
+  CardContent,
+  CardFooter,
+  MaxWidth,
+  Alert,
+  PageLoader,
+  FormGroup,
+  Button,
+  ButtonWrapper,
+  Tag,
+  Modal,
+  ModalHeading,
+  ScreenReaderOnly,
+} from 'src/components'
 import { useUser, useToast } from 'src/context'
 import './MemoryGrid.css'
 import './Modal/Modal.css'
@@ -57,7 +64,7 @@ function reducer(state, action) {
   }
 }
 
-export default function MemoryGrid() {
+export function MemoryGrid() {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   const { status, data } = useQuery('getMemories', getMemories, {
     enabled: state.status === 'idle' ? true : false, // TODO: Might need to be tied to an effect -  Refetch memories when hitting the 'idle' UI state

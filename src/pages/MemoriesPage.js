@@ -1,10 +1,9 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import PageContent from '../components/PageContent'
-import PageHeading from '../components/PageHeading'
-import MemoryGrid from '../components/MemoryGrid'
-import PageLayout from '../layouts/PageLayout'
-import { MemoriesProvider } from '../context/MemoriesContext'
+import { PageContent, PageHeading } from 'src/components'
+import { MemoryGrid } from 'src/components/MemoryGrid'
+import { PageLayout } from 'src/layouts'
+import { MemoriesProvider } from 'src/context/MemoriesContext'
 
 export default function MemoriesPage() {
   return (

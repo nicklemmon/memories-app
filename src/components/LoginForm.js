@@ -2,12 +2,8 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { useHistory } from 'react-router-dom'
 import { logIn } from 'src/helpers/api'
-import { Card, CardContent } from 'src/components/Card'
-import FormGroup from 'src/components/FormGroup'
-import ButtonWrapper from 'src/components/ButtonWrapper'
-import Button from 'src/components/Button'
-import PageLoader from 'src/components/PageLoader'
 import { useToast } from 'src/context'
+import { Card, CardContent, Button, ButtonWrapper, FormGroup, PageLoader } from 'src/components'
 
 const initialState = {
   username: '',
@@ -31,7 +27,7 @@ function reducer(state, action) {
   }
 }
 
-export default function LoginForm() {
+export function LoginForm() {
   const history = useHistory()
   const [state, dispatch] = React.useReducer(reducer, initialState)
   // eslint-disable-next-line

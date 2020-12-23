@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
 
-export default function ToastPortal({ children }) {
+export function ToastPortal({ children }) {
   return ReactDOM.createPortal(children, document.getElementById('toast-portal'))
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import './PageContent.css'
 
-export default function PageContent(props) {
+export function PageContent(props) {
   const { maxWidth, className, children } = props
 
   return (

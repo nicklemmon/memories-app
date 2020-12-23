@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, CardAlert, CardContent, CardFooter } from '../Card'
+import { Card, CardAlert, CardContent, CardFooter } from 'src/components'
 
-export default function FormWrapper(props) {
+export function FormWrapper(props) {
   const {
     method,
     hasAlert,

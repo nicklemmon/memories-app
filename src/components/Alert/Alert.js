@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa'
 import './Alert.css'
 
-export default function Alert(props) {
+export function Alert(props) {
   const { variant, children, className, cy } = props
 
   return (

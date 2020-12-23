@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react'
-import Heading from '../Heading'
-import backgroundImage from '../../images/blanket.png'
+import { Heading } from 'src/components'
+import backgroundImage from 'src/images/blanket.png'
 import './PageHeading.css'
 
-export default function PageHeading(props) {
+export function PageHeading(props) {
   const el = useRef(null)
   const { children, cy } = props
 

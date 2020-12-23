@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import './Footer.css'
 
-export default function Footer(props) {
+export function Footer(props) {
   const { className } = props
   const currentYear = new Date().getFullYear()
 
