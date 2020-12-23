@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useToast } from '../../context'
+import { useToast } from 'src/context'
 
-export default function Toast({ variant, children }) {
+export function Toast({ variant, children }) {
   // eslint-disable-next-line
   const [state, dispatch] = useToast()
 

@@ -1,10 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Card, CardContent } from 'src/components/Card'
-import PageContent from '../components/PageContent'
-import PageHeading from '../components/PageHeading'
-import AddMemoryForm from '../components/AddMemoryForm'
-import PageLayout from '../layouts/PageLayout'
+import { Card, CardContent, PageContent, PageHeading } from 'src/components'
+import { AddMemoryForm } from 'src/components/AddMemoryForm'
+import { PageLayout } from 'src/layouts'
 
 export default function AddMemoryPage() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
-import Alert from '../Alert'
+import { Alert } from 'src/components'
 
-export default function CardAlert(props) {
+export function CardAlert(props) {
   const { variant, children, cy } = props
 
   return (

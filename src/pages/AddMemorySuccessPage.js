@@ -5,15 +5,21 @@ import { useQuery } from 'react-query'
 import { withRouter } from 'react-router-dom'
 import { getMemory } from 'src/helpers/api'
 import { dateToString } from 'src/helpers/date'
-import PageContent from '../components/PageContent'
-import PageHeading from '../components/PageHeading'
-import PageLoader from 'src/components/PageLoader'
-import MaxWidth from '../components/MaxWidth'
-import { Card, CardHeader, CardContent, CardFooter, CardHeading } from '../components/Card'
-import ButtonWrapper from '../components/ButtonWrapper'
-import Button from '../components/Button'
-import Tag from '../components/Tag'
-import PageLayout from '../layouts/PageLayout'
+import {
+  Button,
+  ButtonWrapper,
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardHeading,
+  MaxWidth,
+  PageContent,
+  PageHeading,
+  PageLoader,
+  Tag,
+} from 'src/components'
+import { PageLayout } from 'src/layouts'
 
 function AddMemorySuccessPage() {
   const { id } = useParams()

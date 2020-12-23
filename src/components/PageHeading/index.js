@@ -1,3 +1,1 @@
-import PageHeading from './PageHeading'
-
-export default PageHeading
+export { PageHeading } from './PageHeading'

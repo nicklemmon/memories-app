@@ -1,8 +1,8 @@
 import React from 'react'
 import './ScreenReaderOnly.css'
 
-export default function ScreenReaderOnly(props) {
-  const { children } = props
+export function ScreenReaderOnly({ children, as = 'span' }) {
+  const Component = as
 
-  return <span className="ScreenReaderOnly">{children}</span>
+  return <Component className="ScreenReaderOnly">{children}</Component>
 }

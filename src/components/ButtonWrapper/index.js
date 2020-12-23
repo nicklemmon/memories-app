@@ -1,3 +1,1 @@
-import ButtonWrapper from './ButtonWrapper'
-
-export default ButtonWrapper
+export { ButtonWrapper } from './ButtonWrapper'

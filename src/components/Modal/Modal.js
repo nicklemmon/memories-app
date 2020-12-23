@@ -1,7 +1,7 @@
 import React from 'react'
 import FocusLock from 'react-focus-lock'
 import { FaTimes } from 'react-icons/fa'
-import ScreenReaderOnly from 'src/components/ScreenReaderOnly'
+import { ScreenReaderOnly } from 'src/components'
 
 export function Modal({ children, hasCloseButton, onClose }) {
   function handleKeyup(e) {

@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaCheckCircle, FaExclamationCircle, FaExclamationTriangle, FaTimes } from 'react-icons/fa'
-import { useToast } from '../../context'
-import ScreenReaderOnly from '../ScreenReaderOnly'
+import { useToast } from 'src/context'
+import { ScreenReaderOnly } from 'src/components'
 import './ToastList.css'
 
 function ToastItem(props) {
@@ -30,7 +30,7 @@ function ToastItem(props) {
   )
 }
 
-export default function ToastList() {
+export function ToastList() {
   const [state, dispatch] = useToast()
   const { toasts } = state
 

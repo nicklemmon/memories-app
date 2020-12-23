@@ -1,9 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import PageHeading from '../components/PageHeading'
-import PageContent from '../components/PageContent'
-import LoginForm from '../components/LoginForm'
-import PageLayout from '../layouts/PageLayout'
+import { PageContent, PageHeading } from 'src/components'
+import { LoginForm } from 'src/components/LoginForm'
+import { PageLayout } from 'src/layouts'
 
 export default function LoginPage() {
   return (

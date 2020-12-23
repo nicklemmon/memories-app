@@ -1,3 +1,1 @@
-import ActionLink from './ActionLink'
-
-export default ActionLink
+export { ActionLink } from './ActionLink'

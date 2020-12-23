@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
+import { HeaderNav } from 'src/components'
 import './Header.css'
-import HeaderNav from '../HeaderNav'
 
-export default function Header(props) {
+export function Header(props) {
   const { className, user } = props
 
   return (

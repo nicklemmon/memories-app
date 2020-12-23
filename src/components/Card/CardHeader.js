@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CardHeader(props) {
+export function CardHeader(props) {
   const { children, metaContent } = props
 
   return (

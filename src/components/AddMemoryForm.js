@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { createMemory } from 'src/helpers/api'
 import { valueToDate } from 'src/helpers/date'
 import { useToast } from 'src/context'
-import FormGroup from './FormGroup'
-import ButtonWrapper from './ButtonWrapper'
-import Button from './Button'
+import { Button, ButtonWrapper, FormGroup } from 'src/components'
 
 const MAX_TAGS = 3
 
@@ -62,7 +60,7 @@ function reducer(state, action) {
   }
 }
 
-export default function AddMemoryForm() {
+export function AddMemoryForm() {
   const history = useHistory()
   const [state, dispatch] = React.useReducer(reducer, initialState)
   // eslint-disable-next-line

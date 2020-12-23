@@ -1,3 +1,1 @@
-import MaxWidth from './MaxWidth'
-
-export default MaxWidth
+export { MaxWidth } from './MaxWidth'

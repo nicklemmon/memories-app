@@ -3,8 +3,8 @@ import Parse from 'parse'
 import { QueryCache, ReactQueryCacheProvider } from 'react-query'
 import Helmet from 'react-helmet'
 import { BrowserRouter as Router } from 'react-router-dom'
-import DefaultLayout from './layouts/DefaultLayout'
-import { UserProvider, ToastProvider } from './context'
+import { DefaultLayout } from 'src/layouts'
+import { UserProvider, ToastProvider } from 'src/context'
 
 Parse.initialize(
   process.env.REACT_APP_APPLICATION_ID,

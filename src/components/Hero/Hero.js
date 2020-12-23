@@ -1,11 +1,10 @@
 import React from 'react'
-import Button from '../Button'
-import Heading from '../Heading'
-import backgroundImage from '../../images/feet.png'
-import { useUser } from '../../context'
+import { Button, Heading } from 'src/components'
+import backgroundImage from 'src/images/feet.png'
+import { useUser } from 'src/context'
 import './Hero.css'
 
-export default function Hero() {
+export function Hero() {
   const [userState] = useUser()
   const { isLoggedIn, permissions = {} } = userState
   const { read: canRead, write: canWrite } = permissions

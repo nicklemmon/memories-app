@@ -1,6 +1,6 @@
 import React from 'react'
-import PageLayout from '../layouts/PageLayout'
-import Hero from '../components/Hero'
+import { PageLayout } from 'src/layouts'
+import { Hero } from 'src/components'
 
 function IndexPage() {
   return (

@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react'
 import Parse from 'parse'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import ProtectedRoute from '../components/ProtectedRoute'
-import ErrorBoundary from '../components/ErrorBoundary'
-import { ToastPortal, ToastList } from '../components/Toast'
-import IndexPage from '../pages/IndexPage'
-import NotFoundPage from '../pages/NotFoundPage'
-import MemoriesPage from '../pages/MemoriesPage'
-import AddMemoryPage from '../pages/AddMemoryPage'
-import AddMemorySuccessPage from '../pages/AddMemorySuccessPage'
-import LoginPage from '../pages/LoginPage'
-import { useUser } from '../context'
+import {
+  Header,
+  Footer,
+  ProtectedRoute,
+  ErrorBoundary,
+  ToastPortal,
+  ToastList,
+} from 'src/components'
+import {
+  IndexPage,
+  NotFoundPage,
+  MemoriesPage,
+  AddMemoryPage,
+  AddMemorySuccessPage,
+  LoginPage,
+} from 'src/pages'
+import { useUser } from 'src/context'
 import './DefaultLayout.css'
 
 function DefaultLayout() {
