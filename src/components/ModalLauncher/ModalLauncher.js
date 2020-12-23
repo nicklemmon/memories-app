@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { FaTimes } from 'react-icons/fa'
-import Modal from '../Modal'
+import { Modal } from '../Modal'
 import ButtonWrapper from '../ButtonWrapper'
 import Button from '../Button'
 

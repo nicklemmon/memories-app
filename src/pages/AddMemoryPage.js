@@ -1,8 +1,9 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import { Card, CardContent } from 'src/components/Card'
 import PageContent from '../components/PageContent'
 import PageHeading from '../components/PageHeading'
-import FormAddMemory from '../components/FormAddMemory'
+import AddMemoryForm from '../components/AddMemoryForm'
 import PageLayout from '../layouts/PageLayout'
 
 export default function AddMemoryPage() {
@@ -13,7 +14,11 @@ export default function AddMemoryPage() {
       <PageHeading>Add a Memory</PageHeading>
 
       <PageContent>
-        <FormAddMemory />
+        <Card isBrokenOut>
+          <CardContent>
+            <AddMemoryForm />
+          </CardContent>
+        </Card>
       </PageContent>
     </PageLayout>
   )

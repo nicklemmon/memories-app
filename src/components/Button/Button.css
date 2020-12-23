@@ -18,8 +18,15 @@
   width: 100%;
   text-decoration: none;
   transition: border-color var(--anim-speed) var(--anim-easing),
-              background-color var(--anim-speed) var(--anim-easing),
-              box-shadow var(--anim-speed) var(--anim-easing);
+    background-color var(--anim-speed) var(--anim-easing),
+    box-shadow var(--anim-speed) var(--anim-easing);
+}
+
+.Button:disabled,
+.Button[aria-disabled='true'] {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .Button:hover,

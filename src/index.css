@@ -5,10 +5,10 @@
 :root {
   --white: #fff;
   --dark-white: #ececec;
-  --darker-gray: #292929;
-  --dark-gray: #4d4d4d;
-  --gray: #8f8f8f;
   --light-gray: #e3e3e3;
+  --gray: #8f8f8f;
+  --dark-gray: #4d4d4d;
+  --darker-gray: #292929;
   --blue: #2c60eb;
   --dark-blue: #232ff5;
   --darker-blue: #222fe4;
@@ -107,6 +107,10 @@
   }
 }
 
+p {
+  line-height: 1.5 !important; /* TODO: Figure out why reset-css is appending to the bottom of styles */
+}
+
 a {
   text-decoration: none;
   color: var(--blue);
@@ -118,6 +122,10 @@ button:focus,
 [tabindex='0']:focus {
   outline: 1px dashed currentColor;
   transition: outline var(--anim-speed) var(--anim-easing);
+}
+
+strong {
+  font-weight: 700 !important; /* TODO: Figure out why reset-css is appending to the bottom of styles */
 }
 
 [tabindex='-1']:focus {

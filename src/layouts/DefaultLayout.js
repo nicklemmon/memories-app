@@ -12,7 +12,6 @@ import MemoriesPage from '../pages/MemoriesPage'
 import AddMemoryPage from '../pages/AddMemoryPage'
 import AddMemorySuccessPage from '../pages/AddMemorySuccessPage'
 import LoginPage from '../pages/LoginPage'
-import SignupPage from '../pages/SignupPage'
 import { useUser } from '../context'
 import './DefaultLayout.css'
 
@@ -32,11 +31,13 @@ function DefaultLayout() {
       <main className="Layout-main">
         <ErrorBoundary>
           <Switch>
-            <Route exact path="/" component={IndexPage} />
+            <Route exact path="/">
+              <IndexPage />
+            </Route>
 
-            <Route path="/signup" component={SignupPage} />
-
-            <Route path="/login" component={LoginPage} />
+            <Route path="/login">
+              <LoginPage />
+            </Route>
 
             <ProtectedRoute path="/memories">
               <MemoriesPage />
@@ -46,7 +47,7 @@ function DefaultLayout() {
               <AddMemoryPage />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/addmemorysuccess">
+            <ProtectedRoute path="/addmemorysuccess/:id">
               <AddMemorySuccessPage />
             </ProtectedRoute>
 

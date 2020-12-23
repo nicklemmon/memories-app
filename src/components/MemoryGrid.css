@@ -19,3 +19,41 @@
     grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
   }
 }
+
+.MemoryCard {
+  position: relative; /* allows absolute positioning within */
+  height: 100%;
+}
+
+.MemoryCard-actions {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  right: var(--spacing-sm);
+}
+
+.MemoryCard-action {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  background: transparent; /* overrides default button background color */
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  border: 0;
+  cursor: pointer;
+  transition: transform var(--anim-speed) var(--anim-easing),
+    box-shadow var(--anim-speed) var(--anim-easing);
+}
+
+.MemoryCard-action:hover,
+.MemoryCard-action:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.125);
+}
+
+.MemoryCard-actionIcon {
+  color: var(--blue);
+  background-color: var(--white);
+  width: 1.5em;
+  height: 1.5em;
+}
