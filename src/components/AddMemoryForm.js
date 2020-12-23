@@ -136,7 +136,7 @@ export default function AddMemoryForm() {
           <FormGroup
             key={`tag-field-${tagIndex}`}
             id={`tag-field-${tagIndex}`}
-            label="Tag"
+            label={`Tag ${tagIndex + 1}`}
             handleChange={e =>
               dispatch({ type: 'TAG_VALUE_CHANGE', value: e.target.value, tagIndex })
             }
@@ -158,7 +158,7 @@ export default function AddMemoryForm() {
             fullWidth
             disabled={status === 'loading'}
           >
-            Add Tag
+            {state.tags.length >= 1 ? 'Add Another Tag' : 'Add Tag'}
           </Button>
         )}
       </ButtonWrapper>

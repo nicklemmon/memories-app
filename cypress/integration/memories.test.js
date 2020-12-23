@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('the memories page', () => {
   beforeEach(() => {
     cy.login()
@@ -29,14 +27,14 @@ describe('the memories page', () => {
     cy.findAllByText('memory 3 tag').should('have.length', 2)
     cy.findByText('Memory 4').should('be.visible')
     cy.findByText('Memory 4 summary').should('be.visible')
-    cy.queryByText('memory 4 tag').should('not.be.visible')
+    cy.findByText('memory 4 tag').should('not.exist')
     cy.findByText('Memory 5').should('be.visible')
-    cy.queryByText('Memory 5 summary').should('not.be.visible')
+    cy.findByText('Memory 5 summary').should('not.exist')
     cy.findByText('memory 5 tag').should('be.visible')
   })
 
   it("renders an edit modal when the user clicks on a memory's edit button", () => {
-    cy.queryAllByText('Edit')
+    cy.findAllByText('Edit')
       .first()
       .click({ force: true })
 
@@ -46,11 +44,11 @@ describe('the memories page', () => {
   })
 
   it("renders an delete modal when the user clicks on a memory's delete button", () => {
-    cy.queryAllByText('Delete')
+    cy.findAllByText('Delete')
       .first()
       .click({ force: true })
 
-    cy.findByText('Delete "Memory 1"?').should('be.visible')
+    cy.findByText('Delete Memory').should('be.visible')
   })
 
   it('deletes a memory when clicking on the delete button', () => {
@@ -59,15 +57,19 @@ describe('the memories page', () => {
       method: 'POST',
       url: 'https://parseapi.back4app.com/classes/memory/abc',
       response: '@deleteMemoryRes',
-    })
+    }).as('deleteMemoryReq')
 
-    cy.queryAllByText('Delete')
+    cy.findAllByText('Delete')
       .first()
       .click({ force: true })
 
-    cy.get('[data-cy="modal-btn-primary"]').click()
+    cy.findByRole('dialog').within(() => {
+      cy.findByRole('button', { name: 'Delete' }).click()
+    })
 
-    cy.queryByText('Delete "Memory 1"?').should('not.be.visible')
+    cy.wait('@deleteMemoryReq')
+
+    cy.findByRole('dialog').should('not.exist')
   })
 
   it('edits a memory when clicking on the edit button', () => {
@@ -78,31 +80,38 @@ describe('the memories page', () => {
       method: 'POST',
       url: 'https://parseapi.back4app.com/classes/memory/abc',
       response: '@editMemoryRes',
-    })
+    }).as('editMemoryReq')
 
     cy.route({
       url: 'https://parseapi.back4app.com/classes/memory',
       method: 'POST',
       response: '@editedMemoryRes',
-    })
+    }).as('editedMemoryReq')
 
-    cy.queryAllByText('Edit')
+    cy.findAllByText('Edit')
       .first()
       .click({ force: true })
 
-    cy.get('[data-cy="modal-btn-primary"]').click()
+    cy.findByRole('dialog').within(() => {
+      cy.findByRole('button', { name: 'Save' }).click()
+    })
 
-    cy.findByText('Edited Memory!').should('be.visible')
+    cy.wait(['@editMemoryReq', '@editedMemoryReq'])
+
+    cy.findByRole('dialog').should('not.exist')
+    cy.findByRole('alert').within(() => {
+      cy.findByText('Memory updated').should('be.visible')
+    })
   })
 
   it('closes the cancel modal when the user clicks "Cancel"', () => {
-    cy.queryAllByText('Delete')
+    cy.findAllByText('Delete')
       .first()
       .click({ force: true })
 
     cy.findByText('Cancel').click()
 
-    cy.queryByText('Delete "Memory 1"?').should('not.be.visible')
+    cy.findByRole('dialog').should('not.exist')
   })
 
   it('renders an error boundary when the server returns a malformed response', () => {
