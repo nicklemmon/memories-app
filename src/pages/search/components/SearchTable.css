@@ -1,0 +1,19 @@
+.Table {
+  border: 0;
+  padding: 2px;
+}
+
+.Table-row {
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.Table-headCell {
+  font-weight: 700;
+}
+
+.Table-headCell,
+.Table-cell {
+  text-align: left;
+  background-color: var(--white);
+  padding: var(--spacing-md) var(--spacing-sm);
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from 'react-query'
-import { FaBars, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
+import { FaBars, FaSearch, FaSignInAlt, FaSignOutAlt, FaCloud, FaPlusCircle } from 'react-icons/fa'
 import classNames from 'classnames'
 import OutsideClickHandler from 'react-outside-click-handler'
 import { NavLink } from 'react-router-dom'
@@ -60,7 +60,7 @@ export function HeaderNav({ className }) {
             <div id="HeaderNav-list" className="HeaderNav-list" role="navigation" aria-label="site">
               {!isLoggedIn && (
                 <NavLink
-                  to="login"
+                  to="/login"
                   className="HeaderNav-item"
                   onKeyUp={handleKeyUp}
                   onClick={toggle}
@@ -72,7 +72,7 @@ export function HeaderNav({ className }) {
 
               {isLoggedIn && canRead && (
                 <NavLink
-                  to="memories"
+                  to="/memories"
                   className="HeaderNav-item"
                   onKeyUp={handleKeyUp}
                   onClick={toggle}
@@ -82,9 +82,21 @@ export function HeaderNav({ className }) {
                 </NavLink>
               )}
 
+              {isLoggedIn && canRead && (
+                <NavLink
+                  to="/search"
+                  className="HeaderNav-item"
+                  onKeyUp={handleKeyUp}
+                  onClick={toggle}
+                >
+                  <FaSearch className="HeaderNav-itemIcon" />
+                  Search Memories
+                </NavLink>
+              )}
+
               {isLoggedIn && canWrite && (
                 <NavLink
-                  to="addmemory"
+                  to="/addmemory"
                   className="HeaderNav-item"
                   onKeyUp={handleKeyUp}
                   onClick={toggle}
