@@ -16,4 +16,5 @@
   text-align: left;
   background-color: var(--white);
   padding: var(--spacing-md) var(--spacing-sm);
+  line-height: 1.66;
 }
