@@ -16,6 +16,16 @@
   font-weight: 700;
 }
 
+.Table-sortButton {
+  /* reset button styles */
+  appearance: none;
+  background: none;
+  border: 0;
+  /* and the rest */
+  display: flex;
+  font-size: var(--font-size-md);
+}
+
 .Table-headCell,
 .Table-cell {
   text-align: left;

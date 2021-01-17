@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table'
+import { useTable, useGlobalFilter, useSortBy, useAsyncDebounce } from 'react-table'
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
 import { getMemories } from 'src/helpers/api'
 import {
   Alert,
@@ -30,6 +31,8 @@ export function SearchTable() {
       {
         Header: 'Date',
         accessor: 'date',
+        // sortType: 'datetime', // TODO: Sorting isn't working by `datetime`
+        disableSortBy: true,
       },
     ],
     [],
@@ -46,12 +49,14 @@ export function SearchTable() {
     {
       columns,
       data: memories,
+      autoResetSortBy: false,
       autoResetGlobalFilter: false,
       initialState: {
         globalFilter: '',
       },
     },
     useGlobalFilter,
+    useSortBy,
   )
   const handleFilterChange = useAsyncDebounce(value => {
     setGlobalFilter(value || undefined)
@@ -106,8 +111,30 @@ export function SearchTable() {
                   <tr className="Table-row" {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => {
                       return (
-                        <th className="Table-headCell" {...column.getHeaderProps()}>
-                          {column.render('Header')}
+                        <th
+                          className="Table-headCell"
+                          {...column.getHeaderProps(column.getSortByToggleProps())}
+                        >
+                          <button
+                            className="Table-sortButton"
+                            onClick={() => column.toggleSortBy()}
+                          >
+                            {column.render('Header')}
+
+                            {column.isSorted ? (
+                              column.isSortedDesc ? (
+                                <span aria-hidden="true">
+                                  <FaCaretDown />
+                                </span>
+                              ) : (
+                                <span aria-hidden="true">
+                                  <FaCaretUp />
+                                </span>
+                              )
+                            ) : (
+                              ''
+                            )}
+                          </button>
                         </th>
                       )
                     })}
