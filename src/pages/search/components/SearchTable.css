@@ -1,6 +1,11 @@
 .Table {
   border: 0;
-  padding: 2px;
+  width: 100%;
+}
+
+.Table-filterField {
+  margin-bottom: var(--spacing-lg);
+  max-width: var(--breakpoint-sm);
 }
 
 .Table-row {

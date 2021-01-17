@@ -23,6 +23,7 @@
 .MemoryCard {
   position: relative; /* allows absolute positioning within */
   height: 100%;
+  color: var(--gray);
 }
 
 .MemoryCard-actions {
