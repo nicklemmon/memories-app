@@ -14,6 +14,7 @@
 
 .Table-headCell {
   font-weight: 700;
+  cursor: initial !important; /* TODO: This is the result of a bug with `react-table` and how it handles sorting. I filed this issue: https://github.com/tannerlinsley/react-table/issues/2992 */
 }
 
 .Table-sortButton {
@@ -24,6 +25,13 @@
   /* and the rest */
   display: flex;
   font-size: var(--font-size-md);
+  transition: var(--anim-speed) var(--anim-easing) background-color;
+  cursor: pointer;
+}
+
+.Table-sortButton:hover,
+.Table-sortButton:focus {
+  background-color: var(--light-gray);
 }
 
 .Table-headCell,

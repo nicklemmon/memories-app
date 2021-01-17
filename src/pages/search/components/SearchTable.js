@@ -32,7 +32,6 @@ export function SearchTable() {
         Header: 'Date',
         accessor: 'date',
         // sortType: 'datetime', // TODO: Sorting isn't working by `datetime`
-        disableSortBy: true,
       },
     ],
     [],
