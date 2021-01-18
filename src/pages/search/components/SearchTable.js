@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useTable, useGlobalFilter, useSortBy, useAsyncDebounce } from 'react-table'
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
+import { FaCaretSquareDown, FaCaretSquareUp, FaRegCaretSquareDown } from 'react-icons/fa'
 import { getMemories } from 'src/helpers/api'
 import {
   Alert,
@@ -90,9 +90,9 @@ export function SearchTable() {
       <Card>
         <CardContent>
           <FormGroup
-            label="Filter"
+            label="Filter By"
             type="text"
-            id="filter"
+            id="filter-by"
             handleChange={e => {
               setFilterValue(e.target.value)
               handleFilterChange(e.target.value)
@@ -122,16 +122,12 @@ export function SearchTable() {
 
                             {column.isSorted ? (
                               column.isSortedDesc ? (
-                                <span aria-hidden="true">
-                                  <FaCaretDown />
-                                </span>
+                                <SortIcon as={FaCaretSquareDown} />
                               ) : (
-                                <span aria-hidden="true">
-                                  <FaCaretUp />
-                                </span>
+                                <SortIcon as={FaCaretSquareUp} />
                               )
                             ) : (
-                              ''
+                              <SortIcon as={FaRegCaretSquareDown} />
                             )}
                           </button>
                         </th>
@@ -172,4 +168,10 @@ export function SearchTable() {
       </Card>
     </MaxWidth>
   )
+}
+
+function SortIcon({ as }) {
+  const Component = as
+
+  return <Component aria-hidden="true" className="Table-sortIcon" />
 }
