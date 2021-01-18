@@ -10,12 +10,13 @@ import {
   ToastList,
 } from 'src/components'
 import {
-  IndexPage,
-  NotFoundPage,
-  MemoriesPage,
   AddMemoryPage,
   AddMemorySuccessPage,
+  IndexPage,
   LoginPage,
+  MemoriesPage,
+  NotFoundPage,
+  SearchPage,
 } from 'src/pages'
 import { useUser } from 'src/context'
 import './DefaultLayout.css'
@@ -46,6 +47,10 @@ function DefaultLayout() {
 
             <ProtectedRoute path="/memories">
               <MemoriesPage />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/search">
+              <SearchPage />
             </ProtectedRoute>
 
             <ProtectedRoute path="/addmemory">

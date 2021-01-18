@@ -17,12 +17,12 @@
     "react-query": "^2.26.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-table": "^7.6.3",
     "reset-css": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "start:ci": "http-server build -p 3000 -c-1 --silent --cors",
-    "start-dev": "nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

@@ -4,21 +4,21 @@
 }
 
 .MaxWidth--xs {
-  max-width: 480px;
+  max-width: var(--breakpoint-xs);
 }
 
 .MaxWidth--sm {
-  max-width: 736px;
+  max-width: var(--breakpoint-sm);
 }
 
 .MaxWidth--md {
-  max-width: 980px;
+  max-width: var(--breakpoint-md);
 }
 
 .MaxWidth--lg {
-  max-width: 1280px;
+  max-width: var(--breakpoint-lg);
 }
 
 .MaxWidth--xl {
-  max-width: 1690px;
+  max-width: var(--breakpoint-xl);
 }

@@ -1,0 +1,59 @@
+.Table {
+  border: 0;
+  width: 100%;
+}
+
+.Table-filterField {
+  margin-bottom: var(--spacing-lg);
+  max-width: var(--breakpoint-sm);
+}
+
+.Table-row {
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.Table-row:last-of-type {
+  border-bottom: 0;
+}
+
+.Table-headCell {
+  font-weight: 700;
+  cursor: initial !important; /* TODO: This is the result of a bug with `react-table` and how it handles sorting. I filed this issue: https://github.com/tannerlinsley/react-table/issues/2992 */
+  pointer-events: none; /* Disables clicking the `th` to sort - this is a bug from `react-table` */
+}
+
+.Table-sortButton {
+  /* reset button styles */
+  appearance: none;
+  background: none;
+  border: 0;
+  /* and the rest */
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-md);
+  padding: var(--spacing-sm);
+  margin-left: calc(
+    var(--spacing-sm) * -1
+  ); /* See: https://stackoverflow.com/questions/49469344/using-negative-css-custom-properties */
+  transition: var(--anim-speed) var(--anim-easing) background-color;
+  cursor: pointer;
+  pointer-events: initial; /* Re-enables pointer events for this button */
+}
+
+.Table-sortIcon {
+  margin-left: var(--spacing-sm);
+  color: var(--purple);
+}
+
+.Table-sortButton:hover,
+.Table-sortButton:focus {
+  background-color: var(--light-gray);
+}
+
+.Table-headCell,
+.Table-cell {
+  text-align: left;
+  background-color: var(--white);
+  padding: var(--spacing-md) var(--spacing-sm);
+  line-height: 1.66;
+}
