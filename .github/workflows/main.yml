@@ -6,7 +6,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Integration testing
         uses: cypress-io/github-action@v2
         env:
